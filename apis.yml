@@ -1,0 +1,32 @@
+aid: fred
+name: FRED
+description: "Economic data from the Federal Reserve Bank of St. Louis"
+url: https://fred.stlouisfed.org/docs/api/fred/
+specificationVersion: '0.20'
+created: '2026-05-28'
+modified: '2026-05-28'
+x-source: public-apis/public-apis
+x-category: "Finance"
+x-tier: 3
+x-tier-reason: bulk-registered-from-public-apis
+tags:
+  - Finance
+  - Public APIs
+apis:
+  - name: FRED
+    description: "Economic data from the Federal Reserve Bank of St. Louis"
+    humanURL: https://fred.stlouisfed.org/docs/api/fred/
+    baseURL: https://fred.stlouisfed.org/docs/api/fred/
+    tags:
+      - Finance
+    properties:
+      - type: Documentation
+        url: https://fred.stlouisfed.org/docs/api/fred/
+common:
+  - type: Website
+    url: https://fred.stlouisfed.org/docs/api/fred/
+  - type: PublicAPIsListing
+    url: https://github.com/public-apis/public-apis
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
