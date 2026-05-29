@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fred/refs/heads/main/json-structure/api-series-structure.json",
+  "name": "Series",
+  "description": "A FRED economic data series and its metadata.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "FRED series ID (e.g. UNRATE",
+      "GNPCA).": null,
+      "example": "UNRATE"
+    },
+    "realtime_start": {
+      "type": "date",
+      "example": "2026-05-28"
+    },
+    "realtime_end": {
+      "type": "date",
+      "example": "2026-05-28"
+    },
+    "title": {
+      "type": "string",
+      "description": "Display title of the series.",
+      "example": "Unemployment Rate"
+    },
+    "observation_start": {
+      "type": "date",
+      "description": "First available observation date.",
+      "example": "2026-05-28"
+    },
+    "observation_end": {
+      "type": "date",
+      "description": "Last available observation date.",
+      "example": "2026-05-28"
+    },
+    "frequency": {
+      "type": "string",
+      "description": "Display frequency (e.g. \"Monthly\").",
+      "example": "Monthly"
+    },
+    "frequency_short": {
+      "type": "string",
+      "description": "Frequency code (d",
+      "w": null,
+      "m": null,
+      "q": null,
+      "a).": null,
+      "example": "Monthly"
+    },
+    "units": {
+      "type": "string",
+      "description": "Display unit string.",
+      "example": "Percent"
+    },
+    "units_short": {
+      "type": "string",
+      "description": "Short unit string.",
+      "example": "Percent"
+    },
+    "seasonal_adjustment": {
+      "type": "string",
+      "description": "Seasonal adjustment description.",
+      "example": "Seasonally Adjusted"
+    },
+    "seasonal_adjustment_short": {
+      "type": "string",
+      "description": "Seasonal adjustment code (SA",
+      "NSA": null,
+      "SAAR": null,
+      "NSAAR": null,
+      "SSA).": null,
+      "example": "SA"
+    },
+    "last_updated": {
+      "type": "string",
+      "description": "ISO-8601 timestamp of last update.",
+      "example": "2026-05-02 07:46:10-05"
+    },
+    "popularity": {
+      "type": "int32",
+      "description": "Popularity score 0\u2013100.",
+      "example": 95
+    },
+    "group_popularity": {
+      "type": "int32",
+      "description": "Group popularity score 0\u2013100.",
+      "example": 95
+    },
+    "notes": {
+      "type": "string",
+      "description": "Editorial notes for the series.",
+      "example": "Editorial notes."
+    }
+  },
+  "required": [
+    "id",
+    "title"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fred/refs/heads/main/json-schema/api-source-list-schema.json",
+  "title": "SourceList",
+  "description": "A list of FRED sources.",
+  "type": "object",
+  "properties": {
+    "realtime_start": {
+      "type": "string",
+      "format": "date",
+      "example": "2026-05-28"
+    },
+    "realtime_end": {
+      "type": "string",
+      "format": "date",
+      "example": "2026-05-28"
+    },
+    "order_by": {
+      "type": "string",
+      "example": "example"
+    },
+    "sort_order": {
+      "type": "string",
+      "example": "example"
+    },
+    "count": {
+      "type": "integer",
+      "example": 1
+    },
+    "offset": {
+      "type": "integer",
+      "example": 0
+    },
+    "limit": {
+      "type": "integer",
+      "example": 1000
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Source"
+      }
+    }
+  },
+  "required": [
+    "sources"
+  ]
+}

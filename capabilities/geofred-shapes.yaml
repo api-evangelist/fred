@@ -1,0 +1,94 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: FRED Maps API (GeoFRED) — Shapes
+  description: 'FRED Maps API (GeoFRED) — Shapes. 1 operations. Lead operation: FRED Get GeoJSON Shape Files for a Geographic Type. Self-contained Naftiko capability covering one FRED business surface.'
+  tags:
+    - FRED
+    - FRED Maps
+    - Shapes
+  created: '2026-05-28'
+  modified: '2026-05-28'
+binds:
+  - namespace: env
+    keys:
+      FRED_API_KEY: FRED_API_KEY
+capability:
+  consumes:
+    - type: http
+      namespace: geofred-shapes
+      baseUri: https://api.stlouisfed.org/geofred
+      description: FRED Maps API (GeoFRED) — Shapes business capability. Self-contained, no shared references.
+      authentication:
+        type: apikey
+        key: api_key
+        value: '{{env.FRED_API_KEY}}'
+        placement: query
+      resources:
+        - name: shapes-file
+          path: /shapes/file
+          operations:
+            - name: getShapeFile
+              method: GET
+              description: FRED Get GeoJSON Shape Files for a Geographic Type
+              inputParameters:
+                - name: api_key
+                  in: query
+                  type: string
+                  required: true
+                  description: 32-character lower-case alphanumeric FRED API key.
+                - name: file_type
+                  in: query
+                  type: string
+                  required: false
+                  description: Response format — json or xml.
+                - name: shape
+                  in: query
+                  type: string
+                  required: true
+                  description: Geographic type — bea, msa, frb, necta, state, country, county, censusregion, censusdivision.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+  exposes:
+    - type: rest
+      namespace: geofred-shapes-rest
+      port: 8080
+      description: REST adapter for FRED Maps API (GeoFRED) — Shapes. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+      resources:
+        - path: /v1/shapes/file
+          name: shapes-file
+          description: REST surface for /shapes/file.
+          operations:
+            - method: GET
+              name: getShapeFile
+              description: FRED Get GeoJSON Shape Files for a Geographic Type
+              call: geofred-shapes.getShapeFile
+              with:
+                api_key: rest.api_key
+                file_type: rest.file_type
+                shape: rest.shape
+              outputParameters:
+                - type: object
+                  mapping: $.
+    - type: mcp
+      namespace: geofred-shapes-mcp
+      port: 9090
+      transport: http
+      description: MCP adapter for FRED Maps API (GeoFRED) — Shapes. One tool per consumed operation, routed inline through this capability's consumes block.
+      tools:
+        - name: get-geojson-shape-files-geographic
+          description: FRED Get GeoJSON Shape Files for a Geographic Type
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: geofred-shapes.getShapeFile
+          with:
+            api_key: tools.api_key
+            file_type: tools.file_type
+            shape: tools.shape
+          outputParameters:
+            - type: object
+              mapping: $.

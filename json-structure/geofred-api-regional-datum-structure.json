@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fred/refs/heads/main/json-structure/geofred-api-regional-datum-structure.json",
+  "name": "RegionalDatum",
+  "description": "A single regional data value.",
+  "type": "object",
+  "properties": {
+    "region": {
+      "type": "string",
+      "description": "Region display name.",
+      "example": "example"
+    },
+    "code": {
+      "type": "string",
+      "description": "Region code (FIPS",
+      "ISO": null,
+      "etc.).": null,
+      "example": "example"
+    },
+    "value": {
+      "type": "double",
+      "description": "Indicator value.",
+      "example": 4.0
+    },
+    "series_id": {
+      "type": "string",
+      "description": "Underlying FRED series ID.",
+      "example": "UNRATE"
+    }
+  },
+  "required": [
+    "region",
+    "value"
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fred/refs/heads/main/json-structure/geofred-api-series-group-structure.json",
+  "name": "SeriesGroup",
+  "description": "Metadata describing a regional series group.",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Display title of the series group.",
+      "example": "Unemployment Rate"
+    },
+    "region_type": {
+      "type": "string",
+      "description": "Geography type the group covers.",
+      "example": "example"
+    },
+    "series_group": {
+      "type": "string",
+      "description": "Series-group identifier.",
+      "example": "example"
+    },
+    "season": {
+      "type": "string",
+      "enum": [
+        "SA",
+        "NSA",
+        "SSA",
+        "SAAR",
+        "NSAAR"
+      ],
+      "example": "example"
+    },
+    "units": {
+      "type": "string",
+      "example": "Percent"
+    },
+    "frequency": {
+      "type": "string",
+      "example": "Monthly"
+    },
+    "min_date": {
+      "type": "date",
+      "example": "2026-05-28"
+    },
+    "max_date": {
+      "type": "date",
+      "example": "2026-05-28"
+    }
+  },
+  "required": [
+    "series_group",
+    "region_type"
+  ]
+}

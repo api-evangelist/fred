@@ -1,0 +1,92 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+
+provider: FRED (Federal Reserve Economic Data)
+providerId: fred
+
+created: '2026-05-28'
+modified: '2026-05-28'
+reconciled: true
+
+tags:
+  - Rate Limiting
+  - Finance
+  - Government
+  - Economic Data
+
+description: >-
+  FRED enforces a single, published per-key rate limit: 120 requests per
+  minute. The limit applies equally to the FRED API and the GeoFRED Maps API
+  (the same api_key is used by both). There are no separate live / sandbox
+  modes, no concurrency caps, and no per-IP throttle published. Consumers that
+  exceed the limit receive a temporary rejection; FRED recommends staying well
+  inside the cap by batching requests, caching responses, and backing off on
+  errors. Heavy users (warehouse syncs, mirror builds) are encouraged to
+  download the bulk data files published on the FRED website rather than
+  scraping the API.
+
+sources:
+  - https://fred.stlouisfed.org/docs/api/api_key.html
+  - https://fred.stlouisfed.org/docs/api/fred/overview.html
+  - https://fred.stlouisfed.org/legal/
+
+responseCodes:
+  throttled: 429
+  serviceUnavailable: 503
+
+limits:
+  - name: Requests per minute per API key
+    scope: key
+    metric: requests_per_minute
+    limit: 120
+    timeFrame: minute
+    notes: >-
+      Published cap that applies to every endpoint of the FRED API and the
+      GeoFRED Maps API. There is no separately documented per-second burst
+      ceiling — pace requests evenly across the minute and you will not be
+      throttled.
+
+  - name: Concurrent requests per API key
+    scope: key
+    metric: concurrent_requests
+    limit: 'not published — keep concurrency modest (5–10) to stay within the per-minute cap'
+    notes: >-
+      FRED does not document a hard concurrency ceiling. With a 120 req/min
+      cap, ~10 concurrent requests with average sub-second latency keeps you
+      compliant.
+
+  - name: Bulk download alternative
+    scope: account
+    metric: varies
+    limit: 'use the bulk data files at https://fred.stlouisfed.org/categories/32263'
+    notes: >-
+      When you need more than a few thousand series, fetch the bulk data
+      downloads (CSV / zipped) instead of paginating through the API. The
+      bulk files are not rate-limited.
+
+policies:
+  - name: Single shared key across APIs
+    description: >-
+      The same 32-character api_key authenticates both the FRED API and the
+      GeoFRED Maps API. Limits apply to the combined call volume.
+  - name: Cache responses
+    description: >-
+      Series metadata changes rarely. Cache series, release, source, and tag
+      responses aggressively. Observation data updates on the release
+      schedule — cache until the next scheduled release date.
+  - name: Exponential backoff on throttling
+    description: >-
+      On HTTP 429 (or 503 for transient failures) wait, jitter, and retry.
+      Don't retry tight loops — that's how a working integration becomes a
+      blocked one.
+  - name: Prefer bulk downloads for warehouse syncs
+    description: >-
+      Mirror builds, data warehouse loads, and academic dataset construction
+      should pull the bulk CSV files rather than the API. The bulk files cover
+      all series and are designed for high-volume retrieval.
+  - name: ALFRED vs FRED
+    description: >-
+      Real-time / vintage queries (realtime_start, realtime_end, vintage_dates)
+      count against the same per-minute cap. Vintage queries can be expensive
+      server-side — batch them and cache results.

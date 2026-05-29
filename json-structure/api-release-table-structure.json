@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fred/refs/heads/main/json-structure/api-release-table-structure.json",
+  "name": "ReleaseTable",
+  "description": "A release table tree node.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "example": "Unemployment Rate"
+    },
+    "element_id": {
+      "type": "int32",
+      "example": 1
+    },
+    "release_id": {
+      "type": "int32",
+      "example": 9
+    },
+    "elements": {
+      "type": "object",
+      "description": "Map of element_id \u2192 child element.",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "element_id": {
+            "type": "int32"
+          },
+          "release_id": {
+            "type": "int32"
+          },
+          "series_id": {
+            "type": "string"
+          },
+          "parent_id": {
+            "type": "int32"
+          },
+          "line": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "level": {
+            "type": "string"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "release_id",
+    "elements"
+  ]
+}

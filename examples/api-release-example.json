@@ -1,0 +1,9 @@
+{
+  "id": 1,
+  "realtime_start": "2026-05-28",
+  "realtime_end": "2026-05-28",
+  "name": "Unemployment Rate",
+  "press_release": false,
+  "link": "https://fred.stlouisfed.org/",
+  "notes": "Editorial notes."
+}

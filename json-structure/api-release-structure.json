@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fred/refs/heads/main/json-structure/api-release-structure.json",
+  "name": "Release",
+  "description": "A FRED release of economic data.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "int32",
+      "description": "Numeric release ID.",
+      "example": 1
+    },
+    "realtime_start": {
+      "type": "date",
+      "example": "2026-05-28"
+    },
+    "realtime_end": {
+      "type": "date",
+      "example": "2026-05-28"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the release.",
+      "example": "Unemployment Rate"
+    },
+    "press_release": {
+      "type": "boolean",
+      "description": "True if this release is also a press release.",
+      "example": false
+    },
+    "link": {
+      "type": "uri",
+      "description": "Provider link for the release.",
+      "example": "https://fred.stlouisfed.org/"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Editorial notes.",
+      "example": "Editorial notes."
+    }
+  },
+  "required": [
+    "id",
+    "name"
+  ]
+}

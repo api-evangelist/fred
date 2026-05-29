@@ -1,32 +1,332 @@
 aid: fred
 name: FRED
-description: "Economic data from the Federal Reserve Bank of St. Louis"
+description: >-
+  The Federal Reserve Economic Data (FRED) API is a public web service operated
+  by the Research Division of the Federal Reserve Bank of St. Louis. It provides
+  programmatic access to more than 800,000 economic time series drawn from 100+
+  data sources (BLS, BEA, OECD, World Bank, Census, Treasury, Eurostat, Federal
+  Reserve Board, and others). The API exposes five primary endpoint families —
+  Categories, Releases, Series, Sources, and Tags — plus an Observations
+  endpoint that returns the underlying data values for any series, with optional
+  frequency aggregation, unit transformations, and real-time / ALFRED vintage
+  support. A companion Maps (GeoFRED) API surfaces regional data and GeoJSON
+  shape files. All endpoints are HTTPS, return XML or JSON (CSV / Excel for
+  observations), and require a free API key.
 url: https://fred.stlouisfed.org/docs/api/fred/
+image: https://fred.stlouisfed.org/images/api/fred-square-blue.svg
 specificationVersion: '0.20'
 created: '2026-05-28'
 modified: '2026-05-28'
 x-source: public-apis/public-apis
-x-category: "Finance"
-x-tier: 3
-x-tier-reason: bulk-registered-from-public-apis
+x-type: government
+x-category: Finance
+x-tier: 1
+x-tier-reason: comprehensive-pipeline-enrichment
 tags:
   - Finance
+  - Government
+  - Economic Data
+  - Federal Reserve
+  - Time Series
+  - Open Data
   - Public APIs
+
 apis:
-  - name: FRED
-    description: "Economic data from the Federal Reserve Bank of St. Louis"
+
+  - name: FRED API
+    description: >-
+      Core REST API for the Federal Reserve Economic Data (FRED) database. Five
+      endpoint families — Categories, Releases, Series, Sources, Tags — plus
+      Series Observations for the underlying time-series values. Supports XML
+      and JSON response formats, real-time periods (ALFRED), frequency
+      aggregation, and unit transformations.
     humanURL: https://fred.stlouisfed.org/docs/api/fred/
-    baseURL: https://fred.stlouisfed.org/docs/api/fred/
+    baseURL: https://api.stlouisfed.org/fred
     tags:
       - Finance
+      - Economic Data
+      - Time Series
+      - Categories
+      - Releases
+      - Series
+      - Sources
+      - Tags
     properties:
       - type: Documentation
         url: https://fred.stlouisfed.org/docs/api/fred/
+      - type: Overview
+        url: https://fred.stlouisfed.org/docs/api/fred/overview.html
+      - type: APIKey
+        url: https://fred.stlouisfed.org/docs/api/api_key.html
+      - type: TermsOfService
+        url: https://fred.stlouisfed.org/legal/
+      - type: Authentication
+        url: https://fred.stlouisfed.org/docs/api/api_key.html
+      - type: RealTimePeriods
+        url: https://fred.stlouisfed.org/docs/api/fred/realtime_period.html
+      - type: OpenAPI
+        url: openapi/fred-openapi.yml
+      - type: NaftikoCapability
+        url: capabilities/fred-categories.yaml
+      - type: NaftikoCapability
+        url: capabilities/fred-releases.yaml
+      - type: NaftikoCapability
+        url: capabilities/fred-series.yaml
+      - type: NaftikoCapability
+        url: capabilities/fred-observations.yaml
+      - type: NaftikoCapability
+        url: capabilities/fred-sources.yaml
+      - type: NaftikoCapability
+        url: capabilities/fred-tags.yaml
+
+  - name: FRED Maps API (GeoFRED)
+    description: >-
+      Geographic / regional view of FRED economic data. Exposes series-group
+      metadata, regional-data lookups across geographies (state, county, MSA,
+      country, census tract, etc.), and GeoJSON shape files for cartographic
+      rendering of FRED indicators.
+    humanURL: https://fred.stlouisfed.org/docs/api/geofred/
+    baseURL: https://api.stlouisfed.org/geofred
+    tags:
+      - Finance
+      - Economic Data
+      - Geographic
+      - Maps
+      - GeoJSON
+    properties:
+      - type: Documentation
+        url: https://fred.stlouisfed.org/docs/api/geofred/
+      - type: APIKey
+        url: https://fred.stlouisfed.org/docs/api/api_key.html
+      - type: OpenAPI
+        url: openapi/fred-geofred-openapi.yml
+      - type: NaftikoCapability
+        url: capabilities/geofred-shapes.yaml
+      - type: NaftikoCapability
+        url: capabilities/geofred-series-group.yaml
+      - type: NaftikoCapability
+        url: capabilities/geofred-series-data.yaml
+      - type: NaftikoCapability
+        url: capabilities/geofred-regional-data.yaml
+
 common:
   - type: Website
+    url: https://fred.stlouisfed.org
+  - type: Documentation
     url: https://fred.stlouisfed.org/docs/api/fred/
+  - type: APIKey
+    url: https://fred.stlouisfed.org/docs/api/api_key.html
+  - type: TermsOfService
+    url: https://fred.stlouisfed.org/legal/
+  - type: PrivacyPolicy
+    url: https://www.stlouisfed.org/privacy-notice-and-terms-of-use
   - type: PublicAPIsListing
     url: https://github.com/public-apis/public-apis
+  - type: Blog
+    url: https://fredblog.stlouisfed.org/
+  - type: Twitter
+    url: https://twitter.com/stlouisfed
+  - type: GitHub
+    url: https://github.com/stlouisfed
+  - type: Tools
+    title: MCP Server (stefanoamorelli)
+    url: https://github.com/stefanoamorelli/fred-mcp-server
+  - type: Tools
+    title: MCP Server (Jaldekoa)
+    url: https://github.com/Jaldekoa/mcp-fredapi
+  - type: Tools
+    title: MCP Server (cfdude/mcp-fred)
+    url: https://github.com/cfdude/mcp-fred
+  - type: Tools
+    title: MCP Server (kablewy)
+    url: https://github.com/kablewy/fred-mcp-server
+  - type: Tools
+    title: MCP Server (shanehull, full coverage)
+    url: https://github.com/shanehull/fred-mcp
+  - type: Tools
+    title: MCP Server (QuentinCody)
+    url: https://github.com/QuentinCody/fred-mcp-server
+  - type: Tools
+    title: US Gov Open Data MCP (includes FRED)
+    url: https://github.com/lzinga/us-gov-open-data-mcp
+  - type: SDK
+    title: Python SDK (fredapi)
+    url: https://pypi.org/project/fredapi/
+  - type: SDK
+    title: Python SDK (pyfredapi)
+    url: https://pypi.org/project/pyfredapi/
+  - type: SDK
+    title: Python SDK (fred-py-api)
+    url: https://pypi.org/project/fred-py-api/
+  - type: SDK
+    title: Python SDK (pystlouisfed)
+    url: https://pypi.org/project/pystlouisfed/
+  - type: SDK
+    title: R SDK (fredr)
+    url: https://cran.r-project.org/package=fredr
+  - type: SDK
+    title: Go SDK (fred)
+    url: https://github.com/ChrisSwanson/fred
+  - type: SDK
+    title: Rust SDK (fred-rs)
+    url: https://crates.io/crates/fred-rs
+  - type: SDK
+    title: Node.js / TypeScript SDK (fred-api-client)
+    url: https://github.com/iamkanishka/fred-api-client
+  - type: SDK
+    title: .NET SDK (Xaye.Fred — archived)
+    url: https://www.nuget.org/packages/Xaye.Fred
+  - type: SDK
+    title: Elixir SDK (Fred)
+    url: https://hex.pm/packages/fred
+  - type: Rules
+    url: rules/fred-rules.yml
+  - type: Vocabulary
+    url: vocabulary/fred-vocabulary.yml
+  - type: RateLimits
+    url: rate-limits/fred-rate-limits.yml
+  - type: Plans
+    url: plans/fred-plans-pricing.yml
+  - type: JSONLD
+    title: Unified FRED + GeoFRED context
+    url: json-ld/fred-context.jsonld
+  - type: JSONLD
+    title: FRED API context
+    url: json-ld/fred-api-context.jsonld
+  - type: JSONLD
+    title: GeoFRED Maps API context
+    url: json-ld/fred-geofred-api-context.jsonld
+  - type: JSONSchema
+    title: JSON Schema directory (21 schemas)
+    url: json-schema/
+  - type: JSONStructure
+    title: JSON Structure directory (21 structures)
+    url: json-structure/
+  - type: Examples
+    title: Example payloads directory (21 examples)
+    url: examples/
+
+features:
+  - name: 800,000+ Time Series
+    description: >-
+      Programmatic access to more than 800,000 US and international economic
+      time series, sourced from 100+ data providers.
+  - name: Real-Time / ALFRED Vintages
+    description: >-
+      Every endpoint supports realtime_start and realtime_end parameters,
+      letting consumers reproduce the data as it existed on a historical date
+      (Archival FRED).
+  - name: Frequency Aggregation
+    description: >-
+      The series/observations endpoint can resample higher-frequency data
+      (daily, weekly, monthly) into lower-frequency series (quarterly, annual)
+      using average, sum, or end-of-period aggregation.
+  - name: Unit Transformations
+    description: >-
+      Built-in transformations (level, change, percent change, percent change
+      from year ago, compounded annual rate, natural log) applied at request
+      time so consumers don't have to re-derive series.
+  - name: Multiple Response Formats
+    description: >-
+      XML (default), JSON, CSV, and Excel (xlsx) responses controlled by the
+      file_type query parameter.
+  - name: Five-Family Endpoint Surface
+    description: >-
+      Discoverable taxonomy via Categories (hierarchy), Releases (publication
+      schedule), Series (indicators), Sources (originating institutions), and
+      Tags (faceted classification).
+  - name: GeoFRED Maps API
+    description: >-
+      Companion geographic API returning regional indicator values and GeoJSON
+      shape files for state, county, MSA, country, and census-tract geographies.
+  - name: Free Public API
+    description: >-
+      Single self-service tier. Consumers register a free API key, abide by the
+      rate limit (120 requests / minute / key), and operate at no cost.
+
+useCases:
+  - name: Macroeconomic Dashboards
+    description: >-
+      Build dashboards that pull GDP, CPI, unemployment, federal funds rate,
+      and related indicators on a scheduled cadence.
+  - name: Investment Research and Backtesting
+    description: >-
+      Pull historical series (Treasury yields, commodity prices, FX rates) to
+      backtest trading strategies or seed macro factor models.
+  - name: Academic and Policy Research
+    description: >-
+      Reproduce published research using point-in-time ALFRED vintages so the
+      data matches what was available when the original analysis was run.
+  - name: AI / LLM Tool Use
+    description: >-
+      Connect a FRED MCP server to Claude, Cursor, or another MCP host so an
+      agent can answer ad-hoc economic questions with authoritative data.
+  - name: Embedded Economic Charts
+    description: >-
+      Hydrate charts in news sites, fintech apps, or government dashboards
+      directly from the FRED observations endpoint.
+  - name: Regional Economic Analysis
+    description: >-
+      Use the GeoFRED API to render state-level or county-level heat maps of
+      unemployment, income, housing, and demographic indicators.
+
+integrations:
+  - name: Bureau of Labor Statistics (BLS)
+    description: >-
+      A large share of FRED series originates with BLS (CPI, employment,
+      productivity).
+  - name: Bureau of Economic Analysis (BEA)
+    description: >-
+      National-accounts series (GDP, personal income, trade balance) are
+      sourced from BEA.
+  - name: U.S. Census Bureau
+    description: >-
+      Demographic, housing, and survey series originate at Census.
+  - name: U.S. Treasury
+    description: >-
+      Daily Treasury yield curve and debt series are republished through FRED.
+  - name: Federal Reserve Board (FRB H.15)
+    description: >-
+      Interest-rate releases (H.15) and balance-sheet series (H.4.1) flow
+      through FRED.
+  - name: OECD
+    description: >-
+      International cross-country series.
+  - name: World Bank
+    description: >-
+      Global development indicators republished through FRED.
+  - name: Eurostat
+    description: >-
+      European Union economic and demographic statistics.
+  - name: International Monetary Fund (IMF)
+    description: >-
+      Cross-country financial-soundness and balance-of-payments series.
+
+solutions:
+  - name: FRED Add-In for Microsoft Excel
+    description: >-
+      Official Excel plug-in that pulls FRED series into spreadsheets without
+      writing API calls.
+  - name: FRED Mobile Apps
+    description: >-
+      Free FRED iOS and Android apps for browsing series, releases, and
+      categories on mobile devices.
+  - name: FRED Graph Embeds
+    description: >-
+      Interactive charts that can be embedded directly into web pages.
+  - name: FRASER Historical Archive
+    description: >-
+      Companion archive of historical economic data and policy documents from
+      the St. Louis Fed.
+  - name: ALFRED (Archival FRED)
+    description: >-
+      Point-in-time vintages of every FRED series, accessible through the same
+      API via realtime_start / realtime_end.
+  - name: FRED API MCP Ecosystem
+    description: >-
+      A dozen community-built MCP servers expose the FRED API to AI agents
+      (Claude Desktop, Cursor, VS Code Copilot) without writing custom code.
+
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

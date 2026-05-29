@@ -1,0 +1,899 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: FRED API — Series
+  description: 'FRED API — Series. 9 operations. Lead operation: FRED Get an Economic Data Series. Self-contained Naftiko capability covering one FRED business surface.'
+  tags:
+    - FRED
+    - FRED
+    - Series
+  created: '2026-05-28'
+  modified: '2026-05-28'
+binds:
+  - namespace: env
+    keys:
+      FRED_API_KEY: FRED_API_KEY
+capability:
+  consumes:
+    - type: http
+      namespace: fred-series
+      baseUri: https://api.stlouisfed.org/fred
+      description: FRED API — Series business capability. Self-contained, no shared references.
+      authentication:
+        type: apikey
+        key: api_key
+        value: '{{env.FRED_API_KEY}}'
+        placement: query
+      resources:
+        - name: series
+          path: /series
+          operations:
+            - name: getSeries
+              method: GET
+              description: FRED Get an Economic Data Series
+              inputParameters:
+                - name: api_key
+                  in: query
+                  type: string
+                  required: true
+                  description: 32-character lower-case alphanumeric FRED API key.
+                - name: file_type
+                  in: query
+                  type: string
+                  required: false
+                  description: Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.
+                - name: series_id
+                  in: query
+                  type: string
+                  required: true
+                  description: The FRED series ID (e.g. GNPCA
+                - name: realtime_start
+                  in: query
+                  type: string
+                  required: false
+                  description: Start of the real-time period (YYYY-MM-DD). Defaults to today.
+                - name: realtime_end
+                  in: query
+                  type: string
+                  required: false
+                  description: End of the real-time period (YYYY-MM-DD). Defaults to today.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+        - name: series-categories
+          path: /series/categories
+          operations:
+            - name: getSeriesCategories
+              method: GET
+              description: FRED Get the Categories for an Economic Data Series
+              inputParameters:
+                - name: api_key
+                  in: query
+                  type: string
+                  required: true
+                  description: 32-character lower-case alphanumeric FRED API key.
+                - name: file_type
+                  in: query
+                  type: string
+                  required: false
+                  description: Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.
+                - name: series_id
+                  in: query
+                  type: string
+                  required: true
+                  description: The FRED series ID.
+                - name: realtime_start
+                  in: query
+                  type: string
+                  required: false
+                  description: Start of the real-time period (YYYY-MM-DD). Defaults to today.
+                - name: realtime_end
+                  in: query
+                  type: string
+                  required: false
+                  description: End of the real-time period (YYYY-MM-DD). Defaults to today.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+        - name: series-release
+          path: /series/release
+          operations:
+            - name: getSeriesRelease
+              method: GET
+              description: FRED Get the Release for an Economic Data Series
+              inputParameters:
+                - name: api_key
+                  in: query
+                  type: string
+                  required: true
+                  description: 32-character lower-case alphanumeric FRED API key.
+                - name: file_type
+                  in: query
+                  type: string
+                  required: false
+                  description: Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.
+                - name: series_id
+                  in: query
+                  type: string
+                  required: true
+                  description: The FRED series ID.
+                - name: realtime_start
+                  in: query
+                  type: string
+                  required: false
+                  description: Start of the real-time period (YYYY-MM-DD). Defaults to today.
+                - name: realtime_end
+                  in: query
+                  type: string
+                  required: false
+                  description: End of the real-time period (YYYY-MM-DD). Defaults to today.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+        - name: series-search
+          path: /series/search
+          operations:
+            - name: searchSeries
+              method: GET
+              description: FRED Get Economic Data Series That Match Keywords
+              inputParameters:
+                - name: api_key
+                  in: query
+                  type: string
+                  required: true
+                  description: 32-character lower-case alphanumeric FRED API key.
+                - name: file_type
+                  in: query
+                  type: string
+                  required: false
+                  description: Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.
+                - name: search_text
+                  in: query
+                  type: string
+                  required: true
+                  description: Words to match against series IDs
+                - name: search_type
+                  in: query
+                  type: string
+                  required: false
+                  description: Type of search.
+                - name: realtime_start
+                  in: query
+                  type: string
+                  required: false
+                  description: Start of the real-time period (YYYY-MM-DD). Defaults to today.
+                - name: realtime_end
+                  in: query
+                  type: string
+                  required: false
+                  description: End of the real-time period (YYYY-MM-DD). Defaults to today.
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: Maximum number of results to return (1–1000).
+                - name: offset
+                  in: query
+                  type: integer
+                  required: false
+                  description: Non-negative integer offset into the result set for pagination.
+                - name: order_by
+                  in: query
+                  type: string
+                  required: false
+                  description: Ordering field.
+                - name: sort_order
+                  in: query
+                  type: string
+                  required: false
+                  description: Sort order. asc (ascending, default) or desc (descending).
+                - name: filter_variable
+                  in: query
+                  type: string
+                  required: false
+                  description: Attribute to filter series results by.
+                - name: filter_value
+                  in: query
+                  type: string
+                  required: false
+                  description: Value of the filter_variable attribute to match.
+                - name: tag_names
+                  in: query
+                  type: string
+                  required: false
+                  description: Semicolon-separated list of tag names to require.
+                - name: exclude_tag_names
+                  in: query
+                  type: string
+                  required: false
+                  description: Semicolon-separated list of tag names to exclude.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+        - name: series-search-tags
+          path: /series/search/tags
+          operations:
+            - name: searchSeriesTags
+              method: GET
+              description: FRED Get the Tags for a Series Search
+              inputParameters:
+                - name: api_key
+                  in: query
+                  type: string
+                  required: true
+                  description: 32-character lower-case alphanumeric FRED API key.
+                - name: file_type
+                  in: query
+                  type: string
+                  required: false
+                  description: Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.
+                - name: series_search_text
+                  in: query
+                  type: string
+                  required: true
+                  description: Words to match against series titles.
+                - name: realtime_start
+                  in: query
+                  type: string
+                  required: false
+                  description: Start of the real-time period (YYYY-MM-DD). Defaults to today.
+                - name: realtime_end
+                  in: query
+                  type: string
+                  required: false
+                  description: End of the real-time period (YYYY-MM-DD). Defaults to today.
+                - name: tag_names
+                  in: query
+                  type: string
+                  required: false
+                  description: Semicolon-separated list of tag names to require.
+                - name: tag_group_id
+                  in: query
+                  type: string
+                  required: false
+                  description: Group identifier for tags — freq, gen, geo, geot, rls, seas, src.
+                - name: tag_search_text
+                  in: query
+                  type: string
+                  required: false
+                  description: Words to match against tag names.
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: Maximum number of results to return (1–1000).
+                - name: offset
+                  in: query
+                  type: integer
+                  required: false
+                  description: Non-negative integer offset into the result set for pagination.
+                - name: order_by
+                  in: query
+                  type: string
+                  required: false
+                  description: Field to order tag results by.
+                - name: sort_order
+                  in: query
+                  type: string
+                  required: false
+                  description: Sort order. asc (ascending, default) or desc (descending).
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+        - name: series-search-related-tags
+          path: /series/search/related_tags
+          operations:
+            - name: searchSeriesRelatedTags
+              method: GET
+              description: FRED Get the Related Tags for a Series Search
+              inputParameters:
+                - name: api_key
+                  in: query
+                  type: string
+                  required: true
+                  description: 32-character lower-case alphanumeric FRED API key.
+                - name: file_type
+                  in: query
+                  type: string
+                  required: false
+                  description: Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.
+                - name: series_search_text
+                  in: query
+                  type: string
+                  required: true
+                  description: Words to match against series titles.
+                - name: realtime_start
+                  in: query
+                  type: string
+                  required: false
+                  description: Start of the real-time period (YYYY-MM-DD). Defaults to today.
+                - name: realtime_end
+                  in: query
+                  type: string
+                  required: false
+                  description: End of the real-time period (YYYY-MM-DD). Defaults to today.
+                - name: tag_names
+                  in: query
+                  type: string
+                  required: false
+                  description: Semicolon-separated list of tag names to require.
+                - name: exclude_tag_names
+                  in: query
+                  type: string
+                  required: false
+                  description: Semicolon-separated list of tag names to exclude.
+                - name: tag_group_id
+                  in: query
+                  type: string
+                  required: false
+                  description: Group identifier for tags — freq, gen, geo, geot, rls, seas, src.
+                - name: tag_search_text
+                  in: query
+                  type: string
+                  required: false
+                  description: Words to match against tag names.
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: Maximum number of results to return (1–1000).
+                - name: offset
+                  in: query
+                  type: integer
+                  required: false
+                  description: Non-negative integer offset into the result set for pagination.
+                - name: order_by
+                  in: query
+                  type: string
+                  required: false
+                  description: Field to order tag results by.
+                - name: sort_order
+                  in: query
+                  type: string
+                  required: false
+                  description: Sort order. asc (ascending, default) or desc (descending).
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+        - name: series-tags
+          path: /series/tags
+          operations:
+            - name: getSeriesTags
+              method: GET
+              description: FRED Get the Tags for an Economic Data Series
+              inputParameters:
+                - name: api_key
+                  in: query
+                  type: string
+                  required: true
+                  description: 32-character lower-case alphanumeric FRED API key.
+                - name: file_type
+                  in: query
+                  type: string
+                  required: false
+                  description: Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.
+                - name: series_id
+                  in: query
+                  type: string
+                  required: true
+                  description: The FRED series ID.
+                - name: realtime_start
+                  in: query
+                  type: string
+                  required: false
+                  description: Start of the real-time period (YYYY-MM-DD). Defaults to today.
+                - name: realtime_end
+                  in: query
+                  type: string
+                  required: false
+                  description: End of the real-time period (YYYY-MM-DD). Defaults to today.
+                - name: order_by
+                  in: query
+                  type: string
+                  required: false
+                  description: Field to order tag results by.
+                - name: sort_order
+                  in: query
+                  type: string
+                  required: false
+                  description: Sort order. asc (ascending, default) or desc (descending).
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+        - name: series-updates
+          path: /series/updates
+          operations:
+            - name: getSeriesUpdates
+              method: GET
+              description: FRED Get Economic Data Series Sorted by Last Updated Date
+              inputParameters:
+                - name: api_key
+                  in: query
+                  type: string
+                  required: true
+                  description: 32-character lower-case alphanumeric FRED API key.
+                - name: file_type
+                  in: query
+                  type: string
+                  required: false
+                  description: Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.
+                - name: realtime_start
+                  in: query
+                  type: string
+                  required: false
+                  description: Start of the real-time period (YYYY-MM-DD). Defaults to today.
+                - name: realtime_end
+                  in: query
+                  type: string
+                  required: false
+                  description: End of the real-time period (YYYY-MM-DD). Defaults to today.
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: Maximum number of results to return (1–1000).
+                - name: offset
+                  in: query
+                  type: integer
+                  required: false
+                  description: Non-negative integer offset into the result set for pagination.
+                - name: filter_value
+                  in: query
+                  type: string
+                  required: false
+                  description: Filter results by audience.
+                - name: start_time
+                  in: query
+                  type: string
+                  required: false
+                  description: Lower bound for when a series was updated (YYYYMMDDHhmm).
+                - name: end_time
+                  in: query
+                  type: string
+                  required: false
+                  description: Upper bound for when a series was updated (YYYYMMDDHhmm).
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+        - name: series-vintagedates
+          path: /series/vintagedates
+          operations:
+            - name: getSeriesVintageDates
+              method: GET
+              description: FRED Get the Dates in History When a Series Was Revised or Newly Released
+              inputParameters:
+                - name: api_key
+                  in: query
+                  type: string
+                  required: true
+                  description: 32-character lower-case alphanumeric FRED API key.
+                - name: file_type
+                  in: query
+                  type: string
+                  required: false
+                  description: Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.
+                - name: series_id
+                  in: query
+                  type: string
+                  required: true
+                  description: The FRED series ID.
+                - name: realtime_start
+                  in: query
+                  type: string
+                  required: false
+                  description: Start of the real-time period (YYYY-MM-DD). Defaults to today.
+                - name: realtime_end
+                  in: query
+                  type: string
+                  required: false
+                  description: End of the real-time period (YYYY-MM-DD). Defaults to today.
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: Maximum number of results to return (1–10000).
+                - name: offset
+                  in: query
+                  type: integer
+                  required: false
+                  description: Non-negative integer offset into the result set for pagination.
+                - name: sort_order
+                  in: query
+                  type: string
+                  required: false
+                  description: Sort by vintage_date.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+  exposes:
+    - type: rest
+      namespace: fred-series-rest
+      port: 8080
+      description: REST adapter for FRED API — Series. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+      resources:
+        - path: /v1/series
+          name: series
+          description: REST surface for /series.
+          operations:
+            - method: GET
+              name: getSeries
+              description: FRED Get an Economic Data Series
+              call: fred-series.getSeries
+              with:
+                api_key: rest.api_key
+                file_type: rest.file_type
+                series_id: rest.series_id
+                realtime_start: rest.realtime_start
+                realtime_end: rest.realtime_end
+              outputParameters:
+                - type: object
+                  mapping: $.
+        - path: /v1/series/categories
+          name: series-categories
+          description: REST surface for /series/categories.
+          operations:
+            - method: GET
+              name: getSeriesCategories
+              description: FRED Get the Categories for an Economic Data Series
+              call: fred-series.getSeriesCategories
+              with:
+                api_key: rest.api_key
+                file_type: rest.file_type
+                series_id: rest.series_id
+                realtime_start: rest.realtime_start
+                realtime_end: rest.realtime_end
+              outputParameters:
+                - type: object
+                  mapping: $.
+        - path: /v1/series/release
+          name: series-release
+          description: REST surface for /series/release.
+          operations:
+            - method: GET
+              name: getSeriesRelease
+              description: FRED Get the Release for an Economic Data Series
+              call: fred-series.getSeriesRelease
+              with:
+                api_key: rest.api_key
+                file_type: rest.file_type
+                series_id: rest.series_id
+                realtime_start: rest.realtime_start
+                realtime_end: rest.realtime_end
+              outputParameters:
+                - type: object
+                  mapping: $.
+        - path: /v1/series/search
+          name: series-search
+          description: REST surface for /series/search.
+          operations:
+            - method: GET
+              name: searchSeries
+              description: FRED Get Economic Data Series That Match Keywords
+              call: fred-series.searchSeries
+              with:
+                api_key: rest.api_key
+                file_type: rest.file_type
+                search_text: rest.search_text
+                search_type: rest.search_type
+                realtime_start: rest.realtime_start
+                realtime_end: rest.realtime_end
+                limit: rest.limit
+                offset: rest.offset
+                order_by: rest.order_by
+                sort_order: rest.sort_order
+                filter_variable: rest.filter_variable
+                filter_value: rest.filter_value
+                tag_names: rest.tag_names
+                exclude_tag_names: rest.exclude_tag_names
+              outputParameters:
+                - type: object
+                  mapping: $.
+        - path: /v1/series/search/tags
+          name: series-search-tags
+          description: REST surface for /series/search/tags.
+          operations:
+            - method: GET
+              name: searchSeriesTags
+              description: FRED Get the Tags for a Series Search
+              call: fred-series.searchSeriesTags
+              with:
+                api_key: rest.api_key
+                file_type: rest.file_type
+                series_search_text: rest.series_search_text
+                realtime_start: rest.realtime_start
+                realtime_end: rest.realtime_end
+                tag_names: rest.tag_names
+                tag_group_id: rest.tag_group_id
+                tag_search_text: rest.tag_search_text
+                limit: rest.limit
+                offset: rest.offset
+                order_by: rest.order_by
+                sort_order: rest.sort_order
+              outputParameters:
+                - type: object
+                  mapping: $.
+        - path: /v1/series/search/related-tags
+          name: series-search-related-tags
+          description: REST surface for /series/search/related_tags.
+          operations:
+            - method: GET
+              name: searchSeriesRelatedTags
+              description: FRED Get the Related Tags for a Series Search
+              call: fred-series.searchSeriesRelatedTags
+              with:
+                api_key: rest.api_key
+                file_type: rest.file_type
+                series_search_text: rest.series_search_text
+                realtime_start: rest.realtime_start
+                realtime_end: rest.realtime_end
+                tag_names: rest.tag_names
+                exclude_tag_names: rest.exclude_tag_names
+                tag_group_id: rest.tag_group_id
+                tag_search_text: rest.tag_search_text
+                limit: rest.limit
+                offset: rest.offset
+                order_by: rest.order_by
+                sort_order: rest.sort_order
+              outputParameters:
+                - type: object
+                  mapping: $.
+        - path: /v1/series/tags
+          name: series-tags
+          description: REST surface for /series/tags.
+          operations:
+            - method: GET
+              name: getSeriesTags
+              description: FRED Get the Tags for an Economic Data Series
+              call: fred-series.getSeriesTags
+              with:
+                api_key: rest.api_key
+                file_type: rest.file_type
+                series_id: rest.series_id
+                realtime_start: rest.realtime_start
+                realtime_end: rest.realtime_end
+                order_by: rest.order_by
+                sort_order: rest.sort_order
+              outputParameters:
+                - type: object
+                  mapping: $.
+        - path: /v1/series/updates
+          name: series-updates
+          description: REST surface for /series/updates.
+          operations:
+            - method: GET
+              name: getSeriesUpdates
+              description: FRED Get Economic Data Series Sorted by Last Updated Date
+              call: fred-series.getSeriesUpdates
+              with:
+                api_key: rest.api_key
+                file_type: rest.file_type
+                realtime_start: rest.realtime_start
+                realtime_end: rest.realtime_end
+                limit: rest.limit
+                offset: rest.offset
+                filter_value: rest.filter_value
+                start_time: rest.start_time
+                end_time: rest.end_time
+              outputParameters:
+                - type: object
+                  mapping: $.
+        - path: /v1/series/vintagedates
+          name: series-vintagedates
+          description: REST surface for /series/vintagedates.
+          operations:
+            - method: GET
+              name: getSeriesVintageDates
+              description: FRED Get the Dates in History When a Series Was Revised or Newly Released
+              call: fred-series.getSeriesVintageDates
+              with:
+                api_key: rest.api_key
+                file_type: rest.file_type
+                series_id: rest.series_id
+                realtime_start: rest.realtime_start
+                realtime_end: rest.realtime_end
+                limit: rest.limit
+                offset: rest.offset
+                sort_order: rest.sort_order
+              outputParameters:
+                - type: object
+                  mapping: $.
+    - type: mcp
+      namespace: fred-series-mcp
+      port: 9090
+      transport: http
+      description: MCP adapter for FRED API — Series. One tool per consumed operation, routed inline through this capability's consumes block.
+      tools:
+        - name: get-economic-data-series
+          description: FRED Get an Economic Data Series
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: fred-series.getSeries
+          with:
+            api_key: tools.api_key
+            file_type: tools.file_type
+            series_id: tools.series_id
+            realtime_start: tools.realtime_start
+            realtime_end: tools.realtime_end
+          outputParameters:
+            - type: object
+              mapping: $.
+        - name: get-categories-economic-data-series
+          description: FRED Get the Categories for an Economic Data Series
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: fred-series.getSeriesCategories
+          with:
+            api_key: tools.api_key
+            file_type: tools.file_type
+            series_id: tools.series_id
+            realtime_start: tools.realtime_start
+            realtime_end: tools.realtime_end
+          outputParameters:
+            - type: object
+              mapping: $.
+        - name: get-release-economic-data-series
+          description: FRED Get the Release for an Economic Data Series
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: fred-series.getSeriesRelease
+          with:
+            api_key: tools.api_key
+            file_type: tools.file_type
+            series_id: tools.series_id
+            realtime_start: tools.realtime_start
+            realtime_end: tools.realtime_end
+          outputParameters:
+            - type: object
+              mapping: $.
+        - name: get-economic-data-series-that
+          description: FRED Get Economic Data Series That Match Keywords
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: fred-series.searchSeries
+          with:
+            api_key: tools.api_key
+            file_type: tools.file_type
+            search_text: tools.search_text
+            search_type: tools.search_type
+            realtime_start: tools.realtime_start
+            realtime_end: tools.realtime_end
+            limit: tools.limit
+            offset: tools.offset
+            order_by: tools.order_by
+            sort_order: tools.sort_order
+            filter_variable: tools.filter_variable
+            filter_value: tools.filter_value
+            tag_names: tools.tag_names
+            exclude_tag_names: tools.exclude_tag_names
+          outputParameters:
+            - type: object
+              mapping: $.
+        - name: get-tags-series-search
+          description: FRED Get the Tags for a Series Search
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: fred-series.searchSeriesTags
+          with:
+            api_key: tools.api_key
+            file_type: tools.file_type
+            series_search_text: tools.series_search_text
+            realtime_start: tools.realtime_start
+            realtime_end: tools.realtime_end
+            tag_names: tools.tag_names
+            tag_group_id: tools.tag_group_id
+            tag_search_text: tools.tag_search_text
+            limit: tools.limit
+            offset: tools.offset
+            order_by: tools.order_by
+            sort_order: tools.sort_order
+          outputParameters:
+            - type: object
+              mapping: $.
+        - name: get-related-tags-series-search
+          description: FRED Get the Related Tags for a Series Search
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: fred-series.searchSeriesRelatedTags
+          with:
+            api_key: tools.api_key
+            file_type: tools.file_type
+            series_search_text: tools.series_search_text
+            realtime_start: tools.realtime_start
+            realtime_end: tools.realtime_end
+            tag_names: tools.tag_names
+            exclude_tag_names: tools.exclude_tag_names
+            tag_group_id: tools.tag_group_id
+            tag_search_text: tools.tag_search_text
+            limit: tools.limit
+            offset: tools.offset
+            order_by: tools.order_by
+            sort_order: tools.sort_order
+          outputParameters:
+            - type: object
+              mapping: $.
+        - name: get-tags-economic-data-series
+          description: FRED Get the Tags for an Economic Data Series
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: fred-series.getSeriesTags
+          with:
+            api_key: tools.api_key
+            file_type: tools.file_type
+            series_id: tools.series_id
+            realtime_start: tools.realtime_start
+            realtime_end: tools.realtime_end
+            order_by: tools.order_by
+            sort_order: tools.sort_order
+          outputParameters:
+            - type: object
+              mapping: $.
+        - name: get-economic-data-series-sorted
+          description: FRED Get Economic Data Series Sorted by Last Updated Date
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: fred-series.getSeriesUpdates
+          with:
+            api_key: tools.api_key
+            file_type: tools.file_type
+            realtime_start: tools.realtime_start
+            realtime_end: tools.realtime_end
+            limit: tools.limit
+            offset: tools.offset
+            filter_value: tools.filter_value
+            start_time: tools.start_time
+            end_time: tools.end_time
+          outputParameters:
+            - type: object
+              mapping: $.
+        - name: get-dates-history-when-series
+          description: FRED Get the Dates in History When a Series Was Revised or Newly Released
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: fred-series.getSeriesVintageDates
+          with:
+            api_key: tools.api_key
+            file_type: tools.file_type
+            series_id: tools.series_id
+            realtime_start: tools.realtime_start
+            realtime_end: tools.realtime_end
+            limit: tools.limit
+            offset: tools.offset
+            sort_order: tools.sort_order
+          outputParameters:
+            - type: object
+              mapping: $.

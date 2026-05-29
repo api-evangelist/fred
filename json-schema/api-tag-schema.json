@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fred/refs/heads/main/json-schema/api-tag-schema.json",
+  "title": "Tag",
+  "description": "A FRED tag.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Lower-case tag name.",
+      "example": "Unemployment Rate"
+    },
+    "group_id": {
+      "type": "string",
+      "description": "Tag group id (freq",
+      "gen": null,
+      "geo": null,
+      "geot": null,
+      "rls": null,
+      "seas": null,
+      "src).": null,
+      "example": "freq"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Editorial notes.",
+      "example": "Editorial notes."
+    },
+    "created": {
+      "type": "string",
+      "description": "ISO-8601 created timestamp.",
+      "example": "example"
+    },
+    "popularity": {
+      "type": "integer",
+      "description": "Popularity score 0\u2013100.",
+      "example": 95
+    },
+    "series_count": {
+      "type": "integer",
+      "description": "Number of series carrying this tag.",
+      "example": 380000
+    }
+  },
+  "required": [
+    "name",
+    "group_id"
+  ]
+}

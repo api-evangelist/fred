@@ -1,0 +1,10 @@
+{
+  "meta": {
+    "title": "Consumer Price Index for All Urban Consumers",
+    "region": "Missouri",
+    "seasonality": "example",
+    "units": "Billions of Dollars",
+    "frequency": "Quarterly",
+    "data": {}
+  }
+}

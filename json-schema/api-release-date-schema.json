@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fred/refs/heads/main/json-schema/api-release-date-schema.json",
+  "title": "ReleaseDate",
+  "description": "A scheduled or historical release date.",
+  "type": "object",
+  "properties": {
+    "release_id": {
+      "type": "integer",
+      "example": 9
+    },
+    "release_name": {
+      "type": "string",
+      "example": "example"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "example": "2026-05-28"
+    }
+  },
+  "required": [
+    "release_id",
+    "date"
+  ]
+}

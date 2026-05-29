@@ -1,0 +1,13 @@
+{
+  "realtime_start": "2026-05-28",
+  "realtime_end": "2026-05-28",
+  "order_by": "example",
+  "sort_order": "example",
+  "count": 1,
+  "offset": 0,
+  "limit": 1000,
+  "releases": [
+    null,
+    null
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fred/refs/heads/main/json-schema/api-source-schema.json",
+  "title": "Source",
+  "description": "An originating source of FRED economic data.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "example": 1
+    },
+    "realtime_start": {
+      "type": "string",
+      "format": "date",
+      "example": "2026-05-28"
+    },
+    "realtime_end": {
+      "type": "string",
+      "format": "date",
+      "example": "2026-05-28"
+    },
+    "name": {
+      "type": "string",
+      "example": "Unemployment Rate"
+    },
+    "link": {
+      "type": "string",
+      "format": "uri",
+      "example": "https://fred.stlouisfed.org/"
+    },
+    "notes": {
+      "type": "string",
+      "example": "Editorial notes."
+    }
+  },
+  "required": [
+    "id",
+    "name"
+  ]
+}

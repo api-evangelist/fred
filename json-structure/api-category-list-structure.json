@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fred/refs/heads/main/json-structure/api-category-list-structure.json",
+  "name": "CategoryList",
+  "description": "A list of FRED categories.",
+  "type": "object",
+  "properties": {
+    "categories": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Category"
+      }
+    }
+  },
+  "required": [
+    "categories"
+  ]
+}

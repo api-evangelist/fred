@@ -1,0 +1,300 @@
+openapi: 3.0.3
+info:
+  title: FRED Maps API (GeoFRED)
+  version: '1.0'
+  description: >-
+    GeoFRED (the FRED Maps API) exposes geographic / regional views of FRED
+    economic data. Series-group metadata, regional-data lookups across
+    geographies (state, county, MSA, country, census tract, etc.), and GeoJSON
+    shape files for cartographic rendering of FRED indicators.
+  contact:
+    name: Federal Reserve Bank of St. Louis — Research Division
+    url: https://fred.stlouisfed.org/docs/api/geofred/
+  license:
+    name: U.S. Government Work / Public Domain (most series)
+    url: https://fred.stlouisfed.org/legal/
+  termsOfService: https://fred.stlouisfed.org/legal/
+  x-generated-from: documentation
+  x-last-validated: '2026-05-28'
+
+servers:
+  - url: https://api.stlouisfed.org/geofred
+    description: Production GeoFRED API
+
+tags:
+  - name: Shapes
+    description: GeoJSON shape files for state, county, MSA, country, and census-tract geographies.
+  - name: Series Group
+    description: Series-group metadata — the regional identifier and supported region types for a series.
+  - name: Series Data
+    description: Regional data values attached to a specific FRED series.
+  - name: Regional Data
+    description: Regional data values for a series group across a geography.
+
+security:
+  - ApiKeyAuth: []
+
+paths:
+
+  /shapes/file:
+    get:
+      operationId: getShapeFile
+      summary: FRED Get GeoJSON Shape Files for a Geographic Type
+      description: Get GeoJSON shape file data for a given geographic type (state, county, msa, country, etc.). Returns coordinates as quantized integers (not WGS84 lat/lon).
+      tags: [Shapes]
+      parameters:
+        - $ref: '#/components/parameters/ApiKey'
+        - $ref: '#/components/parameters/FileType'
+        - name: shape
+          in: query
+          required: true
+          description: Geographic type — bea, msa, frb, necta, state, country, county, censusregion, censusdivision.
+          schema:
+            type: string
+            enum: [bea, msa, frb, necta, state, country, county, censusregion, censusdivision]
+          example: state
+      responses:
+        '200':
+          description: GeoJSON shape collection.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ShapeCollection'}
+              examples:
+                Getshapefile200Example:
+                  summary: Default getShapeFile 200 response
+                  x-microcks-default: true
+                  value:
+                    shape: state
+                    features:
+                      - name: California
+                        code: '06'
+                        centroid: -1219000000,3700000000
+                        geometry: '...'
+                      - name: Missouri
+                        code: '29'
+                        centroid: -922000000,3837000000
+                        geometry: '...'
+      x-microcks-operation: {delay: 0, dispatcher: FALLBACK}
+
+  /series/group:
+    get:
+      operationId: getSeriesGroup
+      summary: FRED Get the Series Group for a Series
+      description: Get the series group information for a regional data series. The series group identifier groups a collection of series matched along geography, units, frequency, and seasonal adjustment.
+      tags: [Series Group]
+      parameters:
+        - $ref: '#/components/parameters/ApiKey'
+        - $ref: '#/components/parameters/FileType'
+        - name: series_id
+          in: query
+          required: true
+          description: The FRED series ID.
+          schema: {type: string}
+          example: UNRATE
+      responses:
+        '200':
+          description: Series group metadata.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/SeriesGroup'}
+              examples:
+                Getseriesgroup200Example:
+                  summary: Default getSeriesGroup 200 response
+                  x-microcks-default: true
+                  value:
+                    title: 'All Employees: Total Nonfarm'
+                    region_type: state
+                    series_group: '1223'
+                    season: SA
+                    units: Thousands of Persons
+                    frequency: Monthly
+                    min_date: '1990-01-01'
+                    max_date: '2026-04-01'
+      x-microcks-operation: {delay: 0, dispatcher: FALLBACK}
+
+  /series/data:
+    get:
+      operationId: getSeriesData
+      summary: FRED Get Regional Data Values for a Series
+      description: Get regional data values attached to a specific FRED series.
+      tags: [Series Data]
+      parameters:
+        - $ref: '#/components/parameters/ApiKey'
+        - $ref: '#/components/parameters/FileType'
+        - {name: series_id, in: query, required: true, schema: {type: string}, description: The FRED series ID., example: UNRATE}
+        - {name: date, in: query, schema: {type: string, format: date}, description: Date for the data values (YYYY-MM-DD). Defaults to the most recent., example: '2026-04-01'}
+        - {name: start_date, in: query, schema: {type: string, format: date}, description: Optional start date for a range query., example: '2026-01-01'}
+      responses:
+        '200':
+          description: Regional data values for the series.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/RegionalDataResult'}
+              examples:
+                Getseriesdata200Example:
+                  summary: Default getSeriesData 200 response
+                  x-microcks-default: true
+                  value:
+                    meta:
+                      title: 'All Employees: Total Nonfarm'
+                      region: state
+                      seasonality: Seasonally Adjusted
+                      units: Thousands of Persons
+                      frequency: Monthly
+                      data:
+                        '2026-04-01':
+                          - region: California
+                            code: '06'
+                            value: 17920.5
+                            series_id: CANA
+                          - region: Missouri
+                            code: '29'
+                            value: 2960.1
+                            series_id: MONA
+      x-microcks-operation: {delay: 0, dispatcher: FALLBACK}
+
+  /regional/data:
+    get:
+      operationId: getRegionalData
+      summary: FRED Get Regional Data by Series Group
+      description: Get regional data values across a geography for a series group.
+      tags: [Regional Data]
+      parameters:
+        - $ref: '#/components/parameters/ApiKey'
+        - $ref: '#/components/parameters/FileType'
+        - {name: series_group, in: query, required: true, schema: {type: string}, description: ID for a group of series found in FRED., example: '1223'}
+        - {name: region_type, in: query, required: true, schema: {type: string, enum: [bea, msa, frb, necta, state, country, county, censusregion, censusdivision]}, description: Geography to pull data for., example: state}
+        - {name: date, in: query, required: true, schema: {type: string, format: date}, description: Date you want data from (YYYY-MM-DD)., example: '2026-04-01'}
+        - {name: start_date, in: query, schema: {type: string, format: date}, description: Optional start date for a range query., example: '2026-01-01'}
+        - {name: season, in: query, required: true, schema: {type: string, enum: [SA, NSA, SSA, SAAR, NSAAR]}, description: Seasonal-adjustment treatment., example: SA}
+        - {name: units, in: query, required: true, schema: {type: string}, description: Units of the series you want to pull (e.g. Dollars, Percent).: null, example: lin}
+        - {name: frequency, in: query, required: true, schema: {type: string, enum: [d, w, bw, m, q, sa, a]}, description: Data frequency code., example: m}
+        - {name: transformation, in: query, schema: {type: string, enum: [lin, chg, ch1, pch, pc1, pca, cch, cca, log], default: lin}, description: Unit transformation applied to the data., example: lin}
+        - {name: aggregation_method, in: query, schema: {type: string, enum: [avg, sum, eop], default: avg}, description: Method used to aggregate values when frequency is supplied., example: avg}
+      responses:
+        '200':
+          description: Regional data values for the series group.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/RegionalDataResult'}
+              examples:
+                Getregionaldata200Example:
+                  summary: Default getRegionalData 200 response
+                  x-microcks-default: true
+                  value:
+                    meta:
+                      title: 'All Employees: Total Nonfarm'
+                      region: state
+                      seasonality: Seasonally Adjusted
+                      units: Thousands of Persons
+                      frequency: Monthly
+                      data:
+                        '2026-04-01':
+                          - region: California
+                            code: '06'
+                            value: 17920.5
+                            series_id: CANA
+                          - region: Missouri
+                            code: '29'
+                            value: 2960.1
+                            series_id: MONA
+      x-microcks-operation: {delay: 0, dispatcher: FALLBACK}
+
+components:
+
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: query
+      name: api_key
+      description: 32-character lower-case alphanumeric FRED API key (same key used for the FRED API).
+
+  parameters:
+    ApiKey:
+      name: api_key
+      in: query
+      required: true
+      description: 32-character lower-case alphanumeric FRED API key.
+      schema:
+        type: string
+        pattern: '^[0-9a-f]{32}$'
+      example: abcdef0123456789abcdef0123456789
+    FileType:
+      name: file_type
+      in: query
+      required: false
+      description: Response format — json or xml.
+      schema:
+        type: string
+        enum: [json, xml]
+        default: json
+
+      example: json
+  schemas:
+
+    Shape:
+      type: object
+      description: A single GeoJSON-style shape feature.
+      properties:
+        name: {type: string, description: Display name of the region., example: Unemployment Rate}
+        code: {type: string, description: Region code (FIPS, ISO: null, etc.).: null, example: example}
+        centroid: {type: string, description: Quantized centroid coordinates., example: example}
+        geometry: {type: string, description: Quantized geometry path., example: example}
+      required: [name, code]
+
+    ShapeCollection:
+      type: object
+      description: A collection of shapes for a geographic type.
+      properties:
+        shape:
+          type: string
+          description: The geographic type that was requested.
+          example: example
+        features:
+          type: array
+          items: {$ref: '#/components/schemas/Shape'}
+      required: [features]
+
+    SeriesGroup:
+      type: object
+      description: Metadata describing a regional series group.
+      properties:
+        title: {type: string, description: Display title of the series group., example: Unemployment Rate}
+        region_type: {type: string, description: Geography type the group covers., example: example}
+        series_group: {type: string, description: Series-group identifier., example: example}
+        season: {type: string, enum: [SA, NSA, SSA, SAAR, NSAAR], example: example}
+        units: {type: string, example: Percent}
+        frequency: {type: string, example: Monthly}
+        min_date: {type: string, format: date, example: '2026-05-28'}
+        max_date: {type: string, format: date, example: '2026-05-28'}
+      required: [series_group, region_type]
+
+    RegionalDatum:
+      type: object
+      description: A single regional data value.
+      properties:
+        region: {type: string, description: Region display name., example: example}
+        code: {type: string, description: Region code (FIPS, ISO: null, etc.).: null, example: example}
+        value: {type: number, description: Indicator value., example: 4.0}
+        series_id: {type: string, description: Underlying FRED series ID., example: UNRATE}
+      required: [region, value]
+
+    RegionalDataResult:
+      type: object
+      description: A regional-data result wrapped by date.
+      properties:
+        meta:
+          type: object
+          properties:
+            title: {type: string}
+            region: {type: string}
+            seasonality: {type: string}
+            units: {type: string}
+            frequency: {type: string}
+            data:
+              type: object
+              additionalProperties:
+                type: array
+                items: {$ref: '#/components/schemas/RegionalDatum'}
+              description: Date-keyed map of regional values.
+      required: [meta]

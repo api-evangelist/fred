@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fred/refs/heads/main/json-structure/api-category-structure.json",
+  "name": "Category",
+  "description": "A FRED category node.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "int32",
+      "description": "Numeric category ID.",
+      "example": 1
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the category.",
+      "example": "Unemployment Rate"
+    },
+    "parent_id": {
+      "type": "int32",
+      "description": "Parent category ID.",
+      "example": 0
+    },
+    "notes": {
+      "type": "string",
+      "description": "Optional editorial notes.",
+      "example": "Editorial notes."
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "parent_id"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fred/refs/heads/main/json-structure/api-series-list-structure.json",
+  "name": "SeriesList",
+  "description": "A list of FRED series.",
+  "type": "object",
+  "properties": {
+    "realtime_start": {
+      "type": "date",
+      "example": "2026-05-28"
+    },
+    "realtime_end": {
+      "type": "date",
+      "example": "2026-05-28"
+    },
+    "order_by": {
+      "type": "string",
+      "example": "example"
+    },
+    "sort_order": {
+      "type": "string",
+      "example": "example"
+    },
+    "count": {
+      "type": "int32",
+      "example": 1
+    },
+    "offset": {
+      "type": "int32",
+      "example": 0
+    },
+    "limit": {
+      "type": "int32",
+      "example": 1000
+    },
+    "seriess": {
+      "type": "array",
+      "description": "Array of series (FRED uses the legacy \"seriess\" key intentionally).",
+      "items": {
+        "$ref": "#/components/schemas/Series"
+      }
+    }
+  },
+  "required": [
+    "seriess"
+  ]
+}

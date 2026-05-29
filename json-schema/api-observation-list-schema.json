@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fred/refs/heads/main/json-schema/api-observation-list-schema.json",
+  "title": "ObservationList",
+  "description": "A list of observations for a series.",
+  "type": "object",
+  "properties": {
+    "realtime_start": {
+      "type": "string",
+      "format": "date",
+      "example": "2026-05-28"
+    },
+    "realtime_end": {
+      "type": "string",
+      "format": "date",
+      "example": "2026-05-28"
+    },
+    "observation_start": {
+      "type": "string",
+      "format": "date",
+      "example": "2026-05-28"
+    },
+    "observation_end": {
+      "type": "string",
+      "format": "date",
+      "example": "2026-05-28"
+    },
+    "units": {
+      "type": "string",
+      "example": "Percent"
+    },
+    "output_type": {
+      "type": "integer",
+      "example": 1
+    },
+    "file_type": {
+      "type": "string",
+      "example": "example"
+    },
+    "order_by": {
+      "type": "string",
+      "example": "example"
+    },
+    "sort_order": {
+      "type": "string",
+      "example": "example"
+    },
+    "count": {
+      "type": "integer",
+      "example": 1
+    },
+    "offset": {
+      "type": "integer",
+      "example": 0
+    },
+    "limit": {
+      "type": "integer",
+      "example": 1000
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Observation"
+      }
+    }
+  },
+  "required": [
+    "observations"
+  ]
+}

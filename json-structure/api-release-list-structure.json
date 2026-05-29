@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fred/refs/heads/main/json-structure/api-release-list-structure.json",
+  "name": "ReleaseList",
+  "description": "A list of FRED releases.",
+  "type": "object",
+  "properties": {
+    "realtime_start": {
+      "type": "date",
+      "example": "2026-05-28"
+    },
+    "realtime_end": {
+      "type": "date",
+      "example": "2026-05-28"
+    },
+    "order_by": {
+      "type": "string",
+      "example": "example"
+    },
+    "sort_order": {
+      "type": "string",
+      "example": "example"
+    },
+    "count": {
+      "type": "int32",
+      "description": "Total count of releases matched.",
+      "example": 1
+    },
+    "offset": {
+      "type": "int32",
+      "example": 0
+    },
+    "limit": {
+      "type": "int32",
+      "example": 1000
+    },
+    "releases": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Release"
+      }
+    }
+  },
+  "required": [
+    "releases"
+  ]
+}

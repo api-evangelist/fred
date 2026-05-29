@@ -1,0 +1,275 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "fred": "https://fred.stlouisfed.org/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "CategoryList": "fred:CategoryList",
+    "Category": "fred:Category",
+    "ObservationList": "fred:ObservationList",
+    "Observation": "fred:Observation",
+    "ReleaseDateList": "fred:ReleaseDateList",
+    "ReleaseDate": "fred:ReleaseDate",
+    "ReleaseList": "fred:ReleaseList",
+    "Release": "fred:Release",
+    "ReleaseTable": "fred:ReleaseTable",
+    "SeriesList": "fred:SeriesList",
+    "Series": "fred:Series",
+    "SourceList": "fred:SourceList",
+    "Source": "fred:Source",
+    "TagList": "fred:TagList",
+    "Tag": "fred:Tag",
+    "VintageDateList": "fred:VintageDateList",
+    "RegionalDataResult": "fred:RegionalDataResult",
+    "RegionalDatum": "fred:RegionalDatum",
+    "SeriesGroup": "fred:SeriesGroup",
+    "ShapeCollection": "fred:ShapeCollection",
+    "Shape": "fred:Shape",
+    "categories": {
+      "@id": "fred:categories",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "id": {
+      "@id": "fred:id",
+      "@type": "xsd:integer"
+    },
+    "name": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "parentId": {
+      "@id": "fred:parent_id",
+      "@type": "xsd:integer"
+    },
+    "notes": {
+      "@id": "schema:description",
+      "@type": "xsd:string"
+    },
+    "realtimeStart": {
+      "@id": "fred:realtime_start",
+      "@type": "xsd:date"
+    },
+    "realtimeEnd": {
+      "@id": "fred:realtime_end",
+      "@type": "xsd:date"
+    },
+    "observationStart": {
+      "@id": "fred:observation_start",
+      "@type": "xsd:date"
+    },
+    "observationEnd": {
+      "@id": "fred:observation_end",
+      "@type": "xsd:date"
+    },
+    "units": {
+      "@id": "fred:units",
+      "@type": "xsd:string"
+    },
+    "outputType": {
+      "@id": "fred:output_type",
+      "@type": "xsd:integer"
+    },
+    "fileType": {
+      "@id": "fred:file_type",
+      "@type": "xsd:string"
+    },
+    "orderBy": {
+      "@id": "fred:order_by",
+      "@type": "xsd:string"
+    },
+    "sortOrder": {
+      "@id": "fred:sort_order",
+      "@type": "xsd:string"
+    },
+    "count": {
+      "@id": "fred:count",
+      "@type": "xsd:integer"
+    },
+    "offset": {
+      "@id": "fred:offset",
+      "@type": "xsd:integer"
+    },
+    "limit": {
+      "@id": "fred:limit",
+      "@type": "xsd:integer"
+    },
+    "observations": {
+      "@id": "fred:observations",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "date": {
+      "@id": "fred:date",
+      "@type": "xsd:date"
+    },
+    "value": {
+      "@id": "fred:value",
+      "@type": "xsd:string"
+    },
+    "releaseDates": {
+      "@id": "fred:release_dates",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "releaseId": {
+      "@id": "fred:release_id",
+      "@type": "xsd:integer"
+    },
+    "releaseName": {
+      "@id": "fred:release_name",
+      "@type": "xsd:string"
+    },
+    "releases": {
+      "@id": "fred:releases",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "pressRelease": {
+      "@id": "fred:press_release",
+      "@type": "xsd:boolean"
+    },
+    "link": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "elementId": {
+      "@id": "fred:element_id",
+      "@type": "xsd:integer"
+    },
+    "elements": {
+      "@id": "fred:elements",
+      "@type": "@id"
+    },
+    "seriess": {
+      "@id": "fred:seriess",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "title": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "frequency": {
+      "@id": "fred:frequency",
+      "@type": "xsd:string"
+    },
+    "frequencyShort": {
+      "@id": "fred:frequency_short",
+      "@type": "xsd:string"
+    },
+    "unitsShort": {
+      "@id": "fred:units_short",
+      "@type": "xsd:string"
+    },
+    "seasonalAdjustment": {
+      "@id": "fred:seasonal_adjustment",
+      "@type": "xsd:string"
+    },
+    "seasonalAdjustmentShort": {
+      "@id": "fred:seasonal_adjustment_short",
+      "@type": "xsd:string"
+    },
+    "lastUpdated": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:string"
+    },
+    "popularity": {
+      "@id": "fred:popularity",
+      "@type": "xsd:integer"
+    },
+    "groupPopularity": {
+      "@id": "fred:group_popularity",
+      "@type": "xsd:integer"
+    },
+    "sources": {
+      "@id": "fred:sources",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "tags": {
+      "@id": "fred:tags",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "groupId": {
+      "@id": "fred:group_id",
+      "@type": "xsd:string"
+    },
+    "created": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:string"
+    },
+    "seriesCount": {
+      "@id": "fred:series_count",
+      "@type": "xsd:integer"
+    },
+    "vintageDates": {
+      "@id": "fred:vintage_dates",
+      "@container": "@set",
+      "@type": "xsd:date"
+    },
+    "meta": {
+      "@id": "fred:meta",
+      "@type": "@id"
+    },
+    "region": {
+      "@id": "fred:region",
+      "@type": "xsd:string"
+    },
+    "seasonality": {
+      "@id": "fred:seasonality",
+      "@type": "xsd:string"
+    },
+    "data": {
+      "@id": "fred:data",
+      "@type": "@id"
+    },
+    "code": {
+      "@id": "fred:code",
+      "@type": "xsd:string"
+    },
+    "seriesId": {
+      "@id": "fred:series_id",
+      "@type": "xsd:string"
+    },
+    "regionType": {
+      "@id": "fred:region_type",
+      "@type": "xsd:string"
+    },
+    "seriesGroup": {
+      "@id": "fred:series_group",
+      "@type": "xsd:string"
+    },
+    "season": {
+      "@id": "fred:season",
+      "@type": "xsd:string"
+    },
+    "minDate": {
+      "@id": "fred:min_date",
+      "@type": "xsd:date"
+    },
+    "maxDate": {
+      "@id": "fred:max_date",
+      "@type": "xsd:date"
+    },
+    "shape": {
+      "@id": "fred:shape",
+      "@type": "xsd:string"
+    },
+    "features": {
+      "@id": "fred:features",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "centroid": {
+      "@id": "fred:centroid",
+      "@type": "xsd:string"
+    },
+    "geometry": {
+      "@id": "fred:geometry",
+      "@type": "xsd:string"
+    }
+  }
+}

@@ -1,0 +1,70 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+
+provider: FRED (Federal Reserve Economic Data)
+providerId: fred
+
+created: '2026-05-28'
+modified: '2026-05-28'
+reconciled: true
+
+tags:
+  - Finance
+  - Government
+  - Economic Data
+  - Free Public API
+  - Open Data
+
+description: >-
+  The FRED API is a free public service operated by the Research Division of
+  the Federal Reserve Bank of St. Louis. There is a single self-service tier —
+  no paid plans, no enterprise SKUs. Access is gated only by a free 32-character
+  API key. Use is constrained by a single published rate limit (120 requests
+  per minute per key) and the FRED Terms of Use. Commercial redistribution of
+  series sourced from third parties (e.g. S&P / Case-Shiller, NAHB) carries
+  additional licensing obligations imposed by those sources, but FRED itself
+  does not bill or meter consumers.
+
+sources:
+  - https://fred.stlouisfed.org/docs/api/api_key.html
+  - https://fred.stlouisfed.org/docs/api/fred/overview.html
+  - https://fred.stlouisfed.org/legal/
+
+plans:
+  - id: fred-free
+    name: Free Public Access
+    type: freemium
+    description: >-
+      The only FRED API tier. Free access for any non-abusive use case —
+      research, dashboards, mobile apps, AI agents. Requires a free API key.
+    elements:
+      - name: All FRED API endpoints (Categories, Releases, Series, Sources, Tags, Observations)
+      - name: All GeoFRED Maps API endpoints (Shapes, Series Group, Series Data, Regional Data)
+      - name: ALFRED real-time vintage support (realtime_start / realtime_end)
+      - name: Frequency aggregation (avg, sum, end-of-period)
+      - name: Unit transformations (lin, chg, ch1, pch, pc1, pca, cch, cca, log)
+      - name: XML, JSON, CSV, and XLSX response formats
+      - name: 800,000+ time series from 100+ data sources
+      - name: Free 32-character API key (instant, self-service)
+    entries:
+      - label: API requests
+        name: api_requests
+        type: metered
+        metric: request
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0'
+        userMultiplied: false
+      - label: Per-key throttle
+        name: rate_limit_per_minute
+        type: quota
+        metric: request
+        limit: 120
+        timeFrame: minute
+        geo: global
+        unit: 1
+        price: '0'
+        userMultiplied: false

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fred/refs/heads/main/json-structure/geofred-api-shape-collection-structure.json",
+  "name": "ShapeCollection",
+  "description": "A collection of shapes for a geographic type.",
+  "type": "object",
+  "properties": {
+    "shape": {
+      "type": "string",
+      "description": "The geographic type that was requested.",
+      "example": "example"
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Shape"
+      }
+    }
+  },
+  "required": [
+    "features"
+  ]
+}

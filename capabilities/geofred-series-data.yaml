@@ -1,0 +1,108 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: FRED Maps API (GeoFRED) — Series Data
+  description: 'FRED Maps API (GeoFRED) — Series Data. 1 operations. Lead operation: FRED Get Regional Data Values for a Series. Self-contained Naftiko capability covering one FRED business surface.'
+  tags:
+    - FRED
+    - FRED Maps
+    - Series Data
+  created: '2026-05-28'
+  modified: '2026-05-28'
+binds:
+  - namespace: env
+    keys:
+      FRED_API_KEY: FRED_API_KEY
+capability:
+  consumes:
+    - type: http
+      namespace: geofred-series-data
+      baseUri: https://api.stlouisfed.org/geofred
+      description: FRED Maps API (GeoFRED) — Series Data business capability. Self-contained, no shared references.
+      authentication:
+        type: apikey
+        key: api_key
+        value: '{{env.FRED_API_KEY}}'
+        placement: query
+      resources:
+        - name: series-data
+          path: /series/data
+          operations:
+            - name: getSeriesData
+              method: GET
+              description: FRED Get Regional Data Values for a Series
+              inputParameters:
+                - name: api_key
+                  in: query
+                  type: string
+                  required: true
+                  description: 32-character lower-case alphanumeric FRED API key.
+                - name: file_type
+                  in: query
+                  type: string
+                  required: false
+                  description: Response format — json or xml.
+                - name: series_id
+                  in: query
+                  type: string
+                  required: true
+                  description: The FRED series ID.
+                - name: date
+                  in: query
+                  type: string
+                  required: false
+                  description: Date for the data values (YYYY-MM-DD). Defaults to the most recent.
+                - name: start_date
+                  in: query
+                  type: string
+                  required: false
+                  description: Optional start date for a range query.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+  exposes:
+    - type: rest
+      namespace: geofred-series-data-rest
+      port: 8080
+      description: REST adapter for FRED Maps API (GeoFRED) — Series Data. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+      resources:
+        - path: /v1/series/data
+          name: series-data
+          description: REST surface for /series/data.
+          operations:
+            - method: GET
+              name: getSeriesData
+              description: FRED Get Regional Data Values for a Series
+              call: geofred-series-data.getSeriesData
+              with:
+                api_key: rest.api_key
+                file_type: rest.file_type
+                series_id: rest.series_id
+                date: rest.date
+                start_date: rest.start_date
+              outputParameters:
+                - type: object
+                  mapping: $.
+    - type: mcp
+      namespace: geofred-series-data-mcp
+      port: 9090
+      transport: http
+      description: MCP adapter for FRED Maps API (GeoFRED) — Series Data. One tool per consumed operation, routed inline through this capability's consumes block.
+      tools:
+        - name: get-regional-data-values-series
+          description: FRED Get Regional Data Values for a Series
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: geofred-series-data.getSeriesData
+          with:
+            api_key: tools.api_key
+            file_type: tools.file_type
+            series_id: tools.series_id
+            date: tools.date
+            start_date: tools.start_date
+          outputParameters:
+            - type: object
+              mapping: $.

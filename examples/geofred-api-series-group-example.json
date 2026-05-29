@@ -1,0 +1,10 @@
+{
+  "title": "Unemployment Rate",
+  "region_type": "example",
+  "series_group": "example",
+  "season": "NSA",
+  "units": "Percent",
+  "frequency": "Monthly",
+  "min_date": "2026-05-28",
+  "max_date": "2026-05-28"
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fred/refs/heads/main/json-structure/geofred-api-shape-structure.json",
+  "name": "Shape",
+  "description": "A single GeoJSON-style shape feature.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Display name of the region.",
+      "example": "Unemployment Rate"
+    },
+    "code": {
+      "type": "string",
+      "description": "Region code (FIPS",
+      "ISO": null,
+      "etc.).": null,
+      "example": "example"
+    },
+    "centroid": {
+      "type": "string",
+      "description": "Quantized centroid coordinates.",
+      "example": "example"
+    },
+    "geometry": {
+      "type": "string",
+      "description": "Quantized geometry path.",
+      "example": "example"
+    }
+  },
+  "required": [
+    "name",
+    "code"
+  ]
+}

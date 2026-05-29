@@ -1,0 +1,18 @@
+{
+  "id": "UNRATE",
+  "realtime_start": "2026-05-28",
+  "realtime_end": "2026-05-28",
+  "title": "Unemployment Rate",
+  "observation_start": "2026-05-28",
+  "observation_end": "2026-05-28",
+  "frequency": "Monthly",
+  "frequency_short": "Monthly",
+  "units": "Percent",
+  "units_short": "Percent",
+  "seasonal_adjustment": "Seasonally Adjusted",
+  "seasonal_adjustment_short": "SA",
+  "last_updated": "2026-05-02 07:46:10-05",
+  "popularity": 95,
+  "group_popularity": 95,
+  "notes": "Editorial notes."
+}

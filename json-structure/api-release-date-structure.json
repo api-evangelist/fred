@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fred/refs/heads/main/json-structure/api-release-date-structure.json",
+  "name": "ReleaseDate",
+  "description": "A scheduled or historical release date.",
+  "type": "object",
+  "properties": {
+    "release_id": {
+      "type": "int32",
+      "example": 9
+    },
+    "release_name": {
+      "type": "string",
+      "example": "example"
+    },
+    "date": {
+      "type": "date",
+      "example": "2026-05-28"
+    }
+  },
+  "required": [
+    "release_id",
+    "date"
+  ]
+}

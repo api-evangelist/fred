@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fred/refs/heads/main/json-structure/api-observation-structure.json",
+  "name": "Observation",
+  "description": "A single time-series observation.",
+  "type": "object",
+  "properties": {
+    "realtime_start": {
+      "type": "date",
+      "example": "2026-05-28"
+    },
+    "realtime_end": {
+      "type": "date",
+      "example": "2026-05-28"
+    },
+    "date": {
+      "type": "date",
+      "description": "Observation date.",
+      "example": "2026-05-28"
+    },
+    "value": {
+      "type": "string",
+      "description": "Observation value (string to preserve \".\" for missing values).",
+      "example": "4.0"
+    }
+  },
+  "required": [
+    "date",
+    "value"
+  ]
+}

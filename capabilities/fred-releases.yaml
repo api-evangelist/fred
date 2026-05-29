@@ -1,0 +1,913 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: FRED API — Releases
+  description: 'FRED API — Releases. 9 operations. Lead operation: FRED Get All Releases of Economic Data. Self-contained Naftiko capability covering one FRED business surface.'
+  tags:
+    - FRED
+    - FRED
+    - Releases
+  created: '2026-05-28'
+  modified: '2026-05-28'
+binds:
+  - namespace: env
+    keys:
+      FRED_API_KEY: FRED_API_KEY
+capability:
+  consumes:
+    - type: http
+      namespace: fred-releases
+      baseUri: https://api.stlouisfed.org/fred
+      description: FRED API — Releases business capability. Self-contained, no shared references.
+      authentication:
+        type: apikey
+        key: api_key
+        value: '{{env.FRED_API_KEY}}'
+        placement: query
+      resources:
+        - name: releases
+          path: /releases
+          operations:
+            - name: getReleases
+              method: GET
+              description: FRED Get All Releases of Economic Data
+              inputParameters:
+                - name: api_key
+                  in: query
+                  type: string
+                  required: true
+                  description: 32-character lower-case alphanumeric FRED API key.
+                - name: file_type
+                  in: query
+                  type: string
+                  required: false
+                  description: Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.
+                - name: realtime_start
+                  in: query
+                  type: string
+                  required: false
+                  description: Start of the real-time period (YYYY-MM-DD). Defaults to today.
+                - name: realtime_end
+                  in: query
+                  type: string
+                  required: false
+                  description: End of the real-time period (YYYY-MM-DD). Defaults to today.
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: Maximum number of results to return (1–1000).
+                - name: offset
+                  in: query
+                  type: integer
+                  required: false
+                  description: Non-negative integer offset into the result set for pagination.
+                - name: order_by
+                  in: query
+                  type: string
+                  required: false
+                  description: Field to order release results by.
+                - name: sort_order
+                  in: query
+                  type: string
+                  required: false
+                  description: Sort order. asc (ascending, default) or desc (descending).
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+        - name: releases-dates
+          path: /releases/dates
+          operations:
+            - name: getReleasesDates
+              method: GET
+              description: FRED Get Release Dates for All Releases of Economic Data
+              inputParameters:
+                - name: api_key
+                  in: query
+                  type: string
+                  required: true
+                  description: 32-character lower-case alphanumeric FRED API key.
+                - name: file_type
+                  in: query
+                  type: string
+                  required: false
+                  description: Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.
+                - name: realtime_start
+                  in: query
+                  type: string
+                  required: false
+                  description: Start of the real-time period (YYYY-MM-DD). Defaults to today.
+                - name: realtime_end
+                  in: query
+                  type: string
+                  required: false
+                  description: End of the real-time period (YYYY-MM-DD). Defaults to today.
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: Maximum number of results to return (1–1000).
+                - name: offset
+                  in: query
+                  type: integer
+                  required: false
+                  description: Non-negative integer offset into the result set for pagination.
+                - name: order_by
+                  in: query
+                  type: string
+                  required: false
+                  description: Ordering field.
+                - name: sort_order
+                  in: query
+                  type: string
+                  required: false
+                  description: Sort order. asc (ascending, default) or desc (descending).
+                - name: include_release_dates_with_no_data
+                  in: query
+                  type: boolean
+                  required: false
+                  description: Include releases that have no data.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+        - name: release
+          path: /release
+          operations:
+            - name: getRelease
+              method: GET
+              description: FRED Get a Release of Economic Data
+              inputParameters:
+                - name: api_key
+                  in: query
+                  type: string
+                  required: true
+                  description: 32-character lower-case alphanumeric FRED API key.
+                - name: file_type
+                  in: query
+                  type: string
+                  required: false
+                  description: Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.
+                - name: release_id
+                  in: query
+                  type: integer
+                  required: true
+                  description: Numeric release ID.
+                - name: realtime_start
+                  in: query
+                  type: string
+                  required: false
+                  description: Start of the real-time period (YYYY-MM-DD). Defaults to today.
+                - name: realtime_end
+                  in: query
+                  type: string
+                  required: false
+                  description: End of the real-time period (YYYY-MM-DD). Defaults to today.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+        - name: release-dates
+          path: /release/dates
+          operations:
+            - name: getReleaseDates
+              method: GET
+              description: FRED Get the Release Dates for a Release of Economic Data
+              inputParameters:
+                - name: api_key
+                  in: query
+                  type: string
+                  required: true
+                  description: 32-character lower-case alphanumeric FRED API key.
+                - name: file_type
+                  in: query
+                  type: string
+                  required: false
+                  description: Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.
+                - name: release_id
+                  in: query
+                  type: integer
+                  required: true
+                  description: Numeric release ID.
+                - name: realtime_start
+                  in: query
+                  type: string
+                  required: false
+                  description: Start of the real-time period (YYYY-MM-DD). Defaults to today.
+                - name: realtime_end
+                  in: query
+                  type: string
+                  required: false
+                  description: End of the real-time period (YYYY-MM-DD). Defaults to today.
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: Maximum number of results to return (1–10000).
+                - name: offset
+                  in: query
+                  type: integer
+                  required: false
+                  description: Non-negative integer offset into the result set for pagination.
+                - name: sort_order
+                  in: query
+                  type: string
+                  required: false
+                  description: Sort by release date.
+                - name: include_release_dates_with_no_data
+                  in: query
+                  type: boolean
+                  required: false
+                  description: Include dates that have no data attached.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+        - name: release-series
+          path: /release/series
+          operations:
+            - name: getReleaseSeries
+              method: GET
+              description: FRED Get the Series on a Release of Economic Data
+              inputParameters:
+                - name: api_key
+                  in: query
+                  type: string
+                  required: true
+                  description: 32-character lower-case alphanumeric FRED API key.
+                - name: file_type
+                  in: query
+                  type: string
+                  required: false
+                  description: Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.
+                - name: release_id
+                  in: query
+                  type: integer
+                  required: true
+                  description: Numeric release ID.
+                - name: realtime_start
+                  in: query
+                  type: string
+                  required: false
+                  description: Start of the real-time period (YYYY-MM-DD). Defaults to today.
+                - name: realtime_end
+                  in: query
+                  type: string
+                  required: false
+                  description: End of the real-time period (YYYY-MM-DD). Defaults to today.
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: Maximum number of results to return (1–1000).
+                - name: offset
+                  in: query
+                  type: integer
+                  required: false
+                  description: Non-negative integer offset into the result set for pagination.
+                - name: order_by
+                  in: query
+                  type: string
+                  required: false
+                  description: Field to order series results by.
+                - name: sort_order
+                  in: query
+                  type: string
+                  required: false
+                  description: Sort order. asc (ascending, default) or desc (descending).
+                - name: filter_variable
+                  in: query
+                  type: string
+                  required: false
+                  description: Attribute to filter series results by.
+                - name: filter_value
+                  in: query
+                  type: string
+                  required: false
+                  description: Value of the filter_variable attribute to match.
+                - name: tag_names
+                  in: query
+                  type: string
+                  required: false
+                  description: Semicolon-separated list of tag names to require.
+                - name: exclude_tag_names
+                  in: query
+                  type: string
+                  required: false
+                  description: Semicolon-separated list of tag names to exclude.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+        - name: release-sources
+          path: /release/sources
+          operations:
+            - name: getReleaseSources
+              method: GET
+              description: FRED Get the Sources for a Release of Economic Data
+              inputParameters:
+                - name: api_key
+                  in: query
+                  type: string
+                  required: true
+                  description: 32-character lower-case alphanumeric FRED API key.
+                - name: file_type
+                  in: query
+                  type: string
+                  required: false
+                  description: Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.
+                - name: release_id
+                  in: query
+                  type: integer
+                  required: true
+                  description: Numeric release ID.
+                - name: realtime_start
+                  in: query
+                  type: string
+                  required: false
+                  description: Start of the real-time period (YYYY-MM-DD). Defaults to today.
+                - name: realtime_end
+                  in: query
+                  type: string
+                  required: false
+                  description: End of the real-time period (YYYY-MM-DD). Defaults to today.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+        - name: release-tags
+          path: /release/tags
+          operations:
+            - name: getReleaseTags
+              method: GET
+              description: FRED Get the Tags for a Release
+              inputParameters:
+                - name: api_key
+                  in: query
+                  type: string
+                  required: true
+                  description: 32-character lower-case alphanumeric FRED API key.
+                - name: file_type
+                  in: query
+                  type: string
+                  required: false
+                  description: Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.
+                - name: release_id
+                  in: query
+                  type: integer
+                  required: true
+                  description: Numeric release ID.
+                - name: realtime_start
+                  in: query
+                  type: string
+                  required: false
+                  description: Start of the real-time period (YYYY-MM-DD). Defaults to today.
+                - name: realtime_end
+                  in: query
+                  type: string
+                  required: false
+                  description: End of the real-time period (YYYY-MM-DD). Defaults to today.
+                - name: tag_names
+                  in: query
+                  type: string
+                  required: false
+                  description: Semicolon-separated list of tag names to require.
+                - name: tag_group_id
+                  in: query
+                  type: string
+                  required: false
+                  description: Group identifier for tags — freq, gen, geo, geot, rls, seas, src.
+                - name: search_text
+                  in: query
+                  type: string
+                  required: false
+                  description: Words to match against tag names and descriptions.
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: Maximum number of results to return (1–1000).
+                - name: offset
+                  in: query
+                  type: integer
+                  required: false
+                  description: Non-negative integer offset into the result set for pagination.
+                - name: order_by
+                  in: query
+                  type: string
+                  required: false
+                  description: Field to order tag results by.
+                - name: sort_order
+                  in: query
+                  type: string
+                  required: false
+                  description: Sort order. asc (ascending, default) or desc (descending).
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+        - name: release-related-tags
+          path: /release/related_tags
+          operations:
+            - name: getReleaseRelatedTags
+              method: GET
+              description: FRED Get the Related Tags for a Release
+              inputParameters:
+                - name: api_key
+                  in: query
+                  type: string
+                  required: true
+                  description: 32-character lower-case alphanumeric FRED API key.
+                - name: file_type
+                  in: query
+                  type: string
+                  required: false
+                  description: Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.
+                - name: release_id
+                  in: query
+                  type: integer
+                  required: true
+                  description: Numeric release ID.
+                - name: realtime_start
+                  in: query
+                  type: string
+                  required: false
+                  description: Start of the real-time period (YYYY-MM-DD). Defaults to today.
+                - name: realtime_end
+                  in: query
+                  type: string
+                  required: false
+                  description: End of the real-time period (YYYY-MM-DD). Defaults to today.
+                - name: tag_names
+                  in: query
+                  type: string
+                  required: false
+                  description: Semicolon-separated list of tag names to require.
+                - name: exclude_tag_names
+                  in: query
+                  type: string
+                  required: false
+                  description: Semicolon-separated list of tag names to exclude.
+                - name: tag_group_id
+                  in: query
+                  type: string
+                  required: false
+                  description: Group identifier for tags — freq, gen, geo, geot, rls, seas, src.
+                - name: search_text
+                  in: query
+                  type: string
+                  required: false
+                  description: Words to match against tag names and descriptions.
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: Maximum number of results to return (1–1000).
+                - name: offset
+                  in: query
+                  type: integer
+                  required: false
+                  description: Non-negative integer offset into the result set for pagination.
+                - name: order_by
+                  in: query
+                  type: string
+                  required: false
+                  description: Field to order tag results by.
+                - name: sort_order
+                  in: query
+                  type: string
+                  required: false
+                  description: Sort order. asc (ascending, default) or desc (descending).
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+        - name: release-tables
+          path: /release/tables
+          operations:
+            - name: getReleaseTables
+              method: GET
+              description: FRED Get Release Tables
+              inputParameters:
+                - name: api_key
+                  in: query
+                  type: string
+                  required: true
+                  description: 32-character lower-case alphanumeric FRED API key.
+                - name: file_type
+                  in: query
+                  type: string
+                  required: false
+                  description: Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.
+                - name: release_id
+                  in: query
+                  type: integer
+                  required: true
+                  description: Numeric release ID.
+                - name: element_id
+                  in: query
+                  type: integer
+                  required: false
+                  description: Optional element of the release table to root the tree at.
+                - name: include_observation_values
+                  in: query
+                  type: boolean
+                  required: false
+                  description: Include observation values inline.
+                - name: observation_date
+                  in: query
+                  type: string
+                  required: false
+                  description: Date of the observations to include (YYYY-MM-DD).
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+  exposes:
+    - type: rest
+      namespace: fred-releases-rest
+      port: 8080
+      description: REST adapter for FRED API — Releases. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+      resources:
+        - path: /v1/releases
+          name: releases
+          description: REST surface for /releases.
+          operations:
+            - method: GET
+              name: getReleases
+              description: FRED Get All Releases of Economic Data
+              call: fred-releases.getReleases
+              with:
+                api_key: rest.api_key
+                file_type: rest.file_type
+                realtime_start: rest.realtime_start
+                realtime_end: rest.realtime_end
+                limit: rest.limit
+                offset: rest.offset
+                order_by: rest.order_by
+                sort_order: rest.sort_order
+              outputParameters:
+                - type: object
+                  mapping: $.
+        - path: /v1/releases/dates
+          name: releases-dates
+          description: REST surface for /releases/dates.
+          operations:
+            - method: GET
+              name: getReleasesDates
+              description: FRED Get Release Dates for All Releases of Economic Data
+              call: fred-releases.getReleasesDates
+              with:
+                api_key: rest.api_key
+                file_type: rest.file_type
+                realtime_start: rest.realtime_start
+                realtime_end: rest.realtime_end
+                limit: rest.limit
+                offset: rest.offset
+                order_by: rest.order_by
+                sort_order: rest.sort_order
+                include_release_dates_with_no_data: rest.include_release_dates_with_no_data
+              outputParameters:
+                - type: object
+                  mapping: $.
+        - path: /v1/release
+          name: release
+          description: REST surface for /release.
+          operations:
+            - method: GET
+              name: getRelease
+              description: FRED Get a Release of Economic Data
+              call: fred-releases.getRelease
+              with:
+                api_key: rest.api_key
+                file_type: rest.file_type
+                release_id: rest.release_id
+                realtime_start: rest.realtime_start
+                realtime_end: rest.realtime_end
+              outputParameters:
+                - type: object
+                  mapping: $.
+        - path: /v1/release/dates
+          name: release-dates
+          description: REST surface for /release/dates.
+          operations:
+            - method: GET
+              name: getReleaseDates
+              description: FRED Get the Release Dates for a Release of Economic Data
+              call: fred-releases.getReleaseDates
+              with:
+                api_key: rest.api_key
+                file_type: rest.file_type
+                release_id: rest.release_id
+                realtime_start: rest.realtime_start
+                realtime_end: rest.realtime_end
+                limit: rest.limit
+                offset: rest.offset
+                sort_order: rest.sort_order
+                include_release_dates_with_no_data: rest.include_release_dates_with_no_data
+              outputParameters:
+                - type: object
+                  mapping: $.
+        - path: /v1/release/series
+          name: release-series
+          description: REST surface for /release/series.
+          operations:
+            - method: GET
+              name: getReleaseSeries
+              description: FRED Get the Series on a Release of Economic Data
+              call: fred-releases.getReleaseSeries
+              with:
+                api_key: rest.api_key
+                file_type: rest.file_type
+                release_id: rest.release_id
+                realtime_start: rest.realtime_start
+                realtime_end: rest.realtime_end
+                limit: rest.limit
+                offset: rest.offset
+                order_by: rest.order_by
+                sort_order: rest.sort_order
+                filter_variable: rest.filter_variable
+                filter_value: rest.filter_value
+                tag_names: rest.tag_names
+                exclude_tag_names: rest.exclude_tag_names
+              outputParameters:
+                - type: object
+                  mapping: $.
+        - path: /v1/release/sources
+          name: release-sources
+          description: REST surface for /release/sources.
+          operations:
+            - method: GET
+              name: getReleaseSources
+              description: FRED Get the Sources for a Release of Economic Data
+              call: fred-releases.getReleaseSources
+              with:
+                api_key: rest.api_key
+                file_type: rest.file_type
+                release_id: rest.release_id
+                realtime_start: rest.realtime_start
+                realtime_end: rest.realtime_end
+              outputParameters:
+                - type: object
+                  mapping: $.
+        - path: /v1/release/tags
+          name: release-tags
+          description: REST surface for /release/tags.
+          operations:
+            - method: GET
+              name: getReleaseTags
+              description: FRED Get the Tags for a Release
+              call: fred-releases.getReleaseTags
+              with:
+                api_key: rest.api_key
+                file_type: rest.file_type
+                release_id: rest.release_id
+                realtime_start: rest.realtime_start
+                realtime_end: rest.realtime_end
+                tag_names: rest.tag_names
+                tag_group_id: rest.tag_group_id
+                search_text: rest.search_text
+                limit: rest.limit
+                offset: rest.offset
+                order_by: rest.order_by
+                sort_order: rest.sort_order
+              outputParameters:
+                - type: object
+                  mapping: $.
+        - path: /v1/release/related-tags
+          name: release-related-tags
+          description: REST surface for /release/related_tags.
+          operations:
+            - method: GET
+              name: getReleaseRelatedTags
+              description: FRED Get the Related Tags for a Release
+              call: fred-releases.getReleaseRelatedTags
+              with:
+                api_key: rest.api_key
+                file_type: rest.file_type
+                release_id: rest.release_id
+                realtime_start: rest.realtime_start
+                realtime_end: rest.realtime_end
+                tag_names: rest.tag_names
+                exclude_tag_names: rest.exclude_tag_names
+                tag_group_id: rest.tag_group_id
+                search_text: rest.search_text
+                limit: rest.limit
+                offset: rest.offset
+                order_by: rest.order_by
+                sort_order: rest.sort_order
+              outputParameters:
+                - type: object
+                  mapping: $.
+        - path: /v1/release/tables
+          name: release-tables
+          description: REST surface for /release/tables.
+          operations:
+            - method: GET
+              name: getReleaseTables
+              description: FRED Get Release Tables
+              call: fred-releases.getReleaseTables
+              with:
+                api_key: rest.api_key
+                file_type: rest.file_type
+                release_id: rest.release_id
+                element_id: rest.element_id
+                include_observation_values: rest.include_observation_values
+                observation_date: rest.observation_date
+              outputParameters:
+                - type: object
+                  mapping: $.
+    - type: mcp
+      namespace: fred-releases-mcp
+      port: 9090
+      transport: http
+      description: MCP adapter for FRED API — Releases. One tool per consumed operation, routed inline through this capability's consumes block.
+      tools:
+        - name: get-all-releases-economic-data
+          description: FRED Get All Releases of Economic Data
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: fred-releases.getReleases
+          with:
+            api_key: tools.api_key
+            file_type: tools.file_type
+            realtime_start: tools.realtime_start
+            realtime_end: tools.realtime_end
+            limit: tools.limit
+            offset: tools.offset
+            order_by: tools.order_by
+            sort_order: tools.sort_order
+          outputParameters:
+            - type: object
+              mapping: $.
+        - name: get-release-dates-all-releases
+          description: FRED Get Release Dates for All Releases of Economic Data
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: fred-releases.getReleasesDates
+          with:
+            api_key: tools.api_key
+            file_type: tools.file_type
+            realtime_start: tools.realtime_start
+            realtime_end: tools.realtime_end
+            limit: tools.limit
+            offset: tools.offset
+            order_by: tools.order_by
+            sort_order: tools.sort_order
+            include_release_dates_with_no_data: tools.include_release_dates_with_no_data
+          outputParameters:
+            - type: object
+              mapping: $.
+        - name: get-release-economic-data
+          description: FRED Get a Release of Economic Data
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: fred-releases.getRelease
+          with:
+            api_key: tools.api_key
+            file_type: tools.file_type
+            release_id: tools.release_id
+            realtime_start: tools.realtime_start
+            realtime_end: tools.realtime_end
+          outputParameters:
+            - type: object
+              mapping: $.
+        - name: get-release-dates-release-economic
+          description: FRED Get the Release Dates for a Release of Economic Data
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: fred-releases.getReleaseDates
+          with:
+            api_key: tools.api_key
+            file_type: tools.file_type
+            release_id: tools.release_id
+            realtime_start: tools.realtime_start
+            realtime_end: tools.realtime_end
+            limit: tools.limit
+            offset: tools.offset
+            sort_order: tools.sort_order
+            include_release_dates_with_no_data: tools.include_release_dates_with_no_data
+          outputParameters:
+            - type: object
+              mapping: $.
+        - name: get-series-release-economic-data
+          description: FRED Get the Series on a Release of Economic Data
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: fred-releases.getReleaseSeries
+          with:
+            api_key: tools.api_key
+            file_type: tools.file_type
+            release_id: tools.release_id
+            realtime_start: tools.realtime_start
+            realtime_end: tools.realtime_end
+            limit: tools.limit
+            offset: tools.offset
+            order_by: tools.order_by
+            sort_order: tools.sort_order
+            filter_variable: tools.filter_variable
+            filter_value: tools.filter_value
+            tag_names: tools.tag_names
+            exclude_tag_names: tools.exclude_tag_names
+          outputParameters:
+            - type: object
+              mapping: $.
+        - name: get-sources-release-economic-data
+          description: FRED Get the Sources for a Release of Economic Data
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: fred-releases.getReleaseSources
+          with:
+            api_key: tools.api_key
+            file_type: tools.file_type
+            release_id: tools.release_id
+            realtime_start: tools.realtime_start
+            realtime_end: tools.realtime_end
+          outputParameters:
+            - type: object
+              mapping: $.
+        - name: get-tags-release
+          description: FRED Get the Tags for a Release
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: fred-releases.getReleaseTags
+          with:
+            api_key: tools.api_key
+            file_type: tools.file_type
+            release_id: tools.release_id
+            realtime_start: tools.realtime_start
+            realtime_end: tools.realtime_end
+            tag_names: tools.tag_names
+            tag_group_id: tools.tag_group_id
+            search_text: tools.search_text
+            limit: tools.limit
+            offset: tools.offset
+            order_by: tools.order_by
+            sort_order: tools.sort_order
+          outputParameters:
+            - type: object
+              mapping: $.
+        - name: get-related-tags-release
+          description: FRED Get the Related Tags for a Release
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: fred-releases.getReleaseRelatedTags
+          with:
+            api_key: tools.api_key
+            file_type: tools.file_type
+            release_id: tools.release_id
+            realtime_start: tools.realtime_start
+            realtime_end: tools.realtime_end
+            tag_names: tools.tag_names
+            exclude_tag_names: tools.exclude_tag_names
+            tag_group_id: tools.tag_group_id
+            search_text: tools.search_text
+            limit: tools.limit
+            offset: tools.offset
+            order_by: tools.order_by
+            sort_order: tools.sort_order
+          outputParameters:
+            - type: object
+              mapping: $.
+        - name: get-release-tables
+          description: FRED Get Release Tables
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: fred-releases.getReleaseTables
+          with:
+            api_key: tools.api_key
+            file_type: tools.file_type
+            release_id: tools.release_id
+            element_id: tools.element_id
+            include_observation_values: tools.include_observation_values
+            observation_date: tools.observation_date
+          outputParameters:
+            - type: object
+              mapping: $.

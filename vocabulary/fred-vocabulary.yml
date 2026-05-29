@@ -1,0 +1,481 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "FRED (Federal Reserve Economic Data)"
+  description: >-
+    Unified vocabulary for the Federal Reserve Bank of St. Louis FRED API and
+    GeoFRED Maps API. Captures the operational dimension (35 OpenAPI operations
+    across six tag families) and the capability dimension (10 Naftiko
+    capabilities, each surfaced as both a REST and an MCP adapter).
+  created: "2026-05-28"
+  modified: "2026-05-28"
+
+# OPERATIONAL DIMENSION (from OpenAPI)
+
+operational:
+
+  apis:
+    - name: "FRED API"
+      namespace: fred
+      version: "1.0"
+      baseUrl: https://api.stlouisfed.org/fred
+      status: active
+    - name: "FRED Maps API (GeoFRED)"
+      namespace: geofred
+      version: "1.0"
+      baseUrl: https://api.stlouisfed.org/geofred
+      status: active
+
+  resources:
+    - name: category
+      api: FRED API
+      actions: [get, list_children, list_related, list_series, list_tags, list_related_tags]
+    - name: release
+      api: FRED API
+      actions: [list, get, list_dates, list_series, list_sources, list_tags, list_related_tags, list_tables]
+    - name: series
+      api: FRED API
+      actions: [get, list_categories, get_observations, get_release, search, search_tags, search_related_tags, list_tags, list_updates, list_vintage_dates]
+    - name: source
+      api: FRED API
+      actions: [list, get, list_releases]
+    - name: tag
+      api: FRED API
+      actions: [list, list_related, list_series]
+    - name: shape
+      api: FRED Maps API (GeoFRED)
+      actions: [get_geojson]
+    - name: series_group
+      api: FRED Maps API (GeoFRED)
+      actions: [get]
+    - name: series_data
+      api: FRED Maps API (GeoFRED)
+      actions: [get]
+    - name: regional_data
+      api: FRED Maps API (GeoFRED)
+      actions: [get]
+
+  actions:
+    - name: get
+      httpMethod: GET
+      pattern: read
+    - name: list
+      httpMethod: GET
+      pattern: read
+    - name: search
+      httpMethod: GET
+      pattern: query
+    - name: list_children
+      httpMethod: GET
+      pattern: read
+    - name: list_related
+      httpMethod: GET
+      pattern: read
+    - name: list_series
+      httpMethod: GET
+      pattern: read
+    - name: list_tags
+      httpMethod: GET
+      pattern: read
+    - name: list_related_tags
+      httpMethod: GET
+      pattern: read
+    - name: list_dates
+      httpMethod: GET
+      pattern: read
+    - name: list_sources
+      httpMethod: GET
+      pattern: read
+    - name: list_tables
+      httpMethod: GET
+      pattern: read
+    - name: list_categories
+      httpMethod: GET
+      pattern: read
+    - name: get_observations
+      httpMethod: GET
+      pattern: read
+    - name: get_release
+      httpMethod: GET
+      pattern: read
+    - name: search_tags
+      httpMethod: GET
+      pattern: query
+    - name: search_related_tags
+      httpMethod: GET
+      pattern: query
+    - name: list_updates
+      httpMethod: GET
+      pattern: read
+    - name: list_vintage_dates
+      httpMethod: GET
+      pattern: read
+    - name: list_releases
+      httpMethod: GET
+      pattern: read
+    - name: get_geojson
+      httpMethod: GET
+      pattern: read
+
+  schemas:
+    core:
+      - Series
+      - SeriesList
+      - Observation
+      - ObservationList
+      - Category
+      - CategoryList
+      - Release
+      - ReleaseList
+      - ReleaseDate
+      - ReleaseDateList
+      - ReleaseTable
+      - Source
+      - SourceList
+      - Tag
+      - TagList
+      - VintageDateList
+    geographic:
+      - Shape
+      - ShapeCollection
+      - SeriesGroup
+      - RegionalDatum
+      - RegionalDataResult
+    error:
+      - ErrorResponse
+
+  parameters:
+    pagination:
+      - limit
+      - offset
+    identifiers:
+      - api_key
+      - series_id
+      - release_id
+      - source_id
+      - category_id
+      - series_group
+      - element_id
+    realtime:
+      - realtime_start
+      - realtime_end
+      - observation_start
+      - observation_end
+      - vintage_dates
+      - start_time
+      - end_time
+      - date
+      - start_date
+    filters:
+      - filter_variable
+      - filter_value
+      - tag_names
+      - exclude_tag_names
+      - tag_group_id
+      - search_text
+      - search_type
+      - series_search_text
+      - tag_search_text
+      - region_type
+      - shape
+    ordering:
+      - order_by
+      - sort_order
+    transformation:
+      - units
+      - frequency
+      - aggregation_method
+      - season
+      - transformation
+      - output_type
+    formatting:
+      - file_type
+      - include_release_dates_with_no_data
+      - include_observation_values
+      - observation_date
+
+  enums:
+    frequency:
+      - d   # daily
+      - w   # weekly
+      - bw  # biweekly
+      - m   # monthly
+      - q   # quarterly
+      - sa  # semiannual
+      - a   # annual
+      - wef
+      - weth
+      - wew
+      - wetu
+      - wem
+      - wesu
+      - wesa
+      - bwew
+      - bwem
+    units:
+      - lin
+      - chg
+      - ch1
+      - pch
+      - pc1
+      - pca
+      - cch
+      - cca
+      - log
+    aggregation_method:
+      - avg
+      - sum
+      - eop
+    season:
+      - SA
+      - NSA
+      - SSA
+      - SAAR
+      - NSAAR
+    tag_group_id:
+      - freq
+      - gen
+      - geo
+      - geot
+      - rls
+      - seas
+      - src
+    sort_order:
+      - asc
+      - desc
+    file_type:
+      - xml
+      - json
+      - xlsx
+      - csv
+      - txt
+    region_type:
+      - bea
+      - msa
+      - frb
+      - necta
+      - state
+      - country
+      - county
+      - censusregion
+      - censusdivision
+    output_type:
+      - 1
+      - 2
+      - 3
+      - 4
+
+  authentication:
+    schemes:
+      - name: ApiKeyAuth
+        type: apiKey
+        location: query
+        parameter: api_key
+        usedBy: [FRED API, FRED Maps API (GeoFRED)]
+        notes: >-
+          A single 32-character lower-case alphanumeric key is shared across the
+          FRED API and the GeoFRED Maps API. Free; obtained from
+          https://fred.stlouisfed.org/docs/api/api_key.html.
+
+# CAPABILITY DIMENSION (from Naftiko)
+
+capability:
+
+  workflows:
+    - name: FRED Categories
+      file: capabilities/fred-categories.yaml
+      api: FRED API
+      tools: 6
+      personas: [Economist, Data Engineer]
+      domains: [Discovery, Taxonomy]
+    - name: FRED Releases
+      file: capabilities/fred-releases.yaml
+      api: FRED API
+      tools: 9
+      personas: [Economist, Financial Analyst]
+      domains: [Calendar, Publication]
+    - name: FRED Series
+      file: capabilities/fred-series.yaml
+      api: FRED API
+      tools: 9
+      personas: [Economist, Quant, Researcher]
+      domains: [Metadata, Search]
+    - name: FRED Observations
+      file: capabilities/fred-observations.yaml
+      api: FRED API
+      tools: 1
+      personas: [Quant, Data Engineer, Researcher]
+      domains: [Time Series, Backtesting]
+    - name: FRED Sources
+      file: capabilities/fred-sources.yaml
+      api: FRED API
+      tools: 3
+      personas: [Researcher]
+      domains: [Provenance]
+    - name: FRED Tags
+      file: capabilities/fred-tags.yaml
+      api: FRED API
+      tools: 3
+      personas: [Researcher, Data Engineer]
+      domains: [Discovery, Search]
+    - name: GeoFRED Shapes
+      file: capabilities/geofred-shapes.yaml
+      api: FRED Maps API (GeoFRED)
+      tools: 1
+      personas: [Cartographer, GIS Analyst]
+      domains: [Geography]
+    - name: GeoFRED Series Group
+      file: capabilities/geofred-series-group.yaml
+      api: FRED Maps API (GeoFRED)
+      tools: 1
+      personas: [GIS Analyst]
+      domains: [Geography, Metadata]
+    - name: GeoFRED Series Data
+      file: capabilities/geofred-series-data.yaml
+      api: FRED Maps API (GeoFRED)
+      tools: 1
+      personas: [GIS Analyst]
+      domains: [Geography, Time Series]
+    - name: GeoFRED Regional Data
+      file: capabilities/geofred-regional-data.yaml
+      api: FRED Maps API (GeoFRED)
+      tools: 1
+      personas: [Cartographer, GIS Analyst, Economist]
+      domains: [Geography, Regional Economics]
+
+  personas:
+    - id: economist
+      name: Economist
+      description: Pulls macro indicators and writes commentary.
+      workflows: [FRED Categories, FRED Releases, FRED Series, GeoFRED Regional Data]
+    - id: quant
+      name: Quant
+      description: Builds factor models from historical series.
+      workflows: [FRED Series, FRED Observations]
+    - id: data-engineer
+      name: Data Engineer
+      description: Schedules ingestion pipelines and refreshes warehouses.
+      workflows: [FRED Categories, FRED Observations, FRED Tags]
+    - id: researcher
+      name: Researcher
+      description: Academic or policy researcher using ALFRED vintages.
+      workflows: [FRED Series, FRED Sources, FRED Tags, FRED Observations]
+    - id: financial-analyst
+      name: Financial Analyst
+      description: Tracks release calendars and downstream prints.
+      workflows: [FRED Releases]
+    - id: cartographer
+      name: Cartographer
+      description: Renders state / county / MSA heat maps.
+      workflows: [GeoFRED Shapes, GeoFRED Regional Data]
+    - id: gis-analyst
+      name: GIS Analyst
+      description: Works with geographies and joined indicator data.
+      workflows: [GeoFRED Shapes, GeoFRED Series Group, GeoFRED Series Data, GeoFRED Regional Data]
+
+  domains:
+    - name: Discovery
+      description: Browsing the FRED taxonomy by category and tag.
+    - name: Taxonomy
+      description: Hierarchical category tree and tag groups.
+    - name: Calendar
+      description: Release schedules and historical release dates.
+    - name: Publication
+      description: Releases and the series they contain.
+    - name: Metadata
+      description: Series metadata, units, frequency, seasonal adjustment.
+    - name: Search
+      description: Full-text and series_id search.
+    - name: Time Series
+      description: Observation values, vintages, frequency conversion.
+    - name: Backtesting
+      description: ALFRED vintage support for point-in-time research.
+    - name: Provenance
+      description: Sources (BLS, BEA, OECD, etc.) and their releases.
+    - name: Geography
+      description: GeoJSON shapes and regional aggregations.
+    - name: Regional Economics
+      description: State / county / MSA / country indicators.
+
+  namespaces:
+    - consumed: fred-categories
+      rest: fred-categories-rest
+      mcp: fred-categories-mcp
+      port_rest: 8080
+      port_mcp: 9090
+    - consumed: fred-releases
+      rest: fred-releases-rest
+      mcp: fred-releases-mcp
+    - consumed: fred-series
+      rest: fred-series-rest
+      mcp: fred-series-mcp
+    - consumed: fred-observations
+      rest: fred-observations-rest
+      mcp: fred-observations-mcp
+    - consumed: fred-sources
+      rest: fred-sources-rest
+      mcp: fred-sources-mcp
+    - consumed: fred-tags
+      rest: fred-tags-rest
+      mcp: fred-tags-mcp
+    - consumed: geofred-shapes
+      rest: geofred-shapes-rest
+      mcp: geofred-shapes-mcp
+    - consumed: geofred-series-group
+      rest: geofred-series-group-rest
+      mcp: geofred-series-group-mcp
+    - consumed: geofred-series-data
+      rest: geofred-series-data-rest
+      mcp: geofred-series-data-mcp
+    - consumed: geofred-regional-data
+      rest: geofred-regional-data-rest
+      mcp: geofred-regional-data-mcp
+
+  binds:
+    - env: FRED_API_KEY
+      description: 32-character FRED API key, shared by all capabilities.
+      workflows: [FRED Categories, FRED Releases, FRED Series, FRED Observations, FRED Sources, FRED Tags, GeoFRED Shapes, GeoFRED Series Group, GeoFRED Series Data, GeoFRED Regional Data]
+
+# CROSS-REFERENCE
+
+crossReference:
+  - resource: category
+    operations: [getCategory, getCategoryChildren, getCategoryRelated, getCategorySeries, getCategoryTags, getCategoryRelatedTags]
+    workflow: FRED Categories
+    personas: [Economist, Data Engineer]
+  - resource: release
+    operations: [getReleases, getReleasesDates, getRelease, getReleaseDates, getReleaseSeries, getReleaseSources, getReleaseTags, getReleaseRelatedTags, getReleaseTables]
+    workflow: FRED Releases
+    personas: [Economist, Financial Analyst]
+  - resource: series
+    operations: [getSeries, getSeriesCategories, getSeriesRelease, searchSeries, searchSeriesTags, searchSeriesRelatedTags, getSeriesTags, getSeriesUpdates, getSeriesVintageDates]
+    workflow: FRED Series
+    personas: [Economist, Quant, Researcher]
+  - resource: observation
+    operations: [getSeriesObservations]
+    workflow: FRED Observations
+    personas: [Quant, Data Engineer, Researcher]
+  - resource: source
+    operations: [getSources, getSource, getSourceReleases]
+    workflow: FRED Sources
+    personas: [Researcher]
+  - resource: tag
+    operations: [getTags, getRelatedTags, getTagsSeries]
+    workflow: FRED Tags
+    personas: [Researcher, Data Engineer]
+  - resource: shape
+    operations: [getShapeFile]
+    workflow: GeoFRED Shapes
+    personas: [Cartographer, GIS Analyst]
+  - resource: series_group
+    operations: [getSeriesGroup]
+    workflow: GeoFRED Series Group
+    personas: [GIS Analyst]
+  - resource: series_data
+    operations: [getSeriesData]
+    workflow: GeoFRED Series Data
+    personas: [GIS Analyst]
+  - resource: regional_data
+    operations: [getRegionalData]
+    workflow: GeoFRED Regional Data
+    personas: [Cartographer, GIS Analyst, Economist]

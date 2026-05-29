@@ -1,0 +1,444 @@
+# Spectral ruleset enforcing FRED (Federal Reserve Economic Data) API conventions.
+# Derived from the canonical FRED OpenAPI specs in this repo (Categories,
+# Releases, Series, Sources, Tags, Observations + GeoFRED Maps).
+
+extends:
+  - spectral:oas
+
+rules:
+
+  # ─────────────────────────────────────────────────────────────────────
+  # INFO / METADATA
+  # ─────────────────────────────────────────────────────────────────────
+  info-title-fred-prefix:
+    description: API title must start with "FRED".
+    message: Info title should begin with "FRED" (e.g. "FRED API", "FRED Maps API (GeoFRED)").
+    severity: error
+    given: $.info.title
+    then:
+      function: pattern
+      functionOptions:
+        match: '^FRED'
+
+  info-description-required:
+    description: Info description is required and should be substantive.
+    message: Provide a multi-sentence description that explains the API surface.
+    severity: error
+    given: $.info
+    then:
+      field: description
+      function: truthy
+
+  info-description-minlength:
+    description: Info description should be at least 120 characters.
+    severity: warn
+    given: $.info.description
+    then:
+      function: length
+      functionOptions:
+        min: 120
+
+  info-version-required:
+    description: Info version is required.
+    severity: error
+    given: $.info
+    then:
+      field: version
+      function: truthy
+
+  info-contact-required:
+    description: Info contact block is required (St. Louis Fed Research Division).
+    severity: warn
+    given: $.info
+    then:
+      field: contact
+      function: truthy
+
+  info-license-required:
+    description: Info license block is required.
+    severity: warn
+    given: $.info
+    then:
+      field: license
+      function: truthy
+
+  # ─────────────────────────────────────────────────────────────────────
+  # OPENAPI VERSION
+  # ─────────────────────────────────────────────────────────────────────
+  openapi-version-3:
+    description: Must use OpenAPI 3.x.
+    severity: error
+    given: $.openapi
+    then:
+      function: pattern
+      functionOptions:
+        match: '^3\.'
+
+  # ─────────────────────────────────────────────────────────────────────
+  # SERVERS
+  # ─────────────────────────────────────────────────────────────────────
+  servers-required:
+    description: At least one server must be defined.
+    severity: error
+    given: $.servers
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          minItems: 1
+
+  servers-https-only:
+    description: FRED endpoints are HTTPS only.
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: '^https://'
+
+  servers-stlouisfed-host:
+    description: Server URL must be on api.stlouisfed.org.
+    severity: warn
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: 'api\.stlouisfed\.org'
+
+  # ─────────────────────────────────────────────────────────────────────
+  # PATHS — NAMING CONVENTIONS
+  # ─────────────────────────────────────────────────────────────────────
+  paths-snake-case:
+    description: FRED paths use snake_case segments (e.g. /release/related_tags).
+    message: Path segments should be snake_case, lowercase.
+    severity: warn
+    given: $.paths.*~
+    then:
+      function: pattern
+      functionOptions:
+        match: '^/[a-z0-9_/]+$'
+
+  paths-no-trailing-slash:
+    description: No trailing slashes on path keys.
+    severity: error
+    given: $.paths.*~
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: '/$'
+
+  paths-no-query-string:
+    description: Paths must not embed query strings.
+    severity: error
+    given: $.paths.*~
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: '\?'
+
+  # ─────────────────────────────────────────────────────────────────────
+  # OPERATIONS
+  # ─────────────────────────────────────────────────────────────────────
+  operation-operationid-required:
+    description: Every operation must have an operationId.
+    severity: error
+    given: $.paths.*.*
+    then:
+      field: operationId
+      function: truthy
+
+  operation-operationid-camelcase:
+    description: operationId must be lowerCamelCase, verb-first.
+    severity: warn
+    given: $.paths.*.*.operationId
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[a-z][a-zA-Z0-9]*$'
+
+  operation-summary-required:
+    description: Every operation must have a summary.
+    severity: error
+    given: $.paths.*.*
+    then:
+      field: summary
+      function: truthy
+
+  operation-summary-fred-prefix:
+    description: Summaries should start with "FRED" so they read well in catalogs.
+    severity: warn
+    given: $.paths.*.*.summary
+    then:
+      function: pattern
+      functionOptions:
+        match: '^FRED'
+
+  operation-description-required:
+    description: Every operation must have a description.
+    severity: warn
+    given: $.paths.*.*
+    then:
+      field: description
+      function: truthy
+
+  operation-tags-required:
+    description: Every operation must have at least one tag.
+    severity: error
+    given: $.paths.*.*
+    then:
+      field: tags
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          minItems: 1
+
+  operation-microcks-extension:
+    description: Operations should carry x-microcks-operation for mock-server compatibility.
+    severity: info
+    given: $.paths.*.*
+    then:
+      field: x-microcks-operation
+      function: truthy
+
+  # ─────────────────────────────────────────────────────────────────────
+  # TAGS
+  # ─────────────────────────────────────────────────────────────────────
+  global-tags-defined:
+    description: Top-level tags array must be defined and non-empty.
+    severity: warn
+    given: $
+    then:
+      field: tags
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          minItems: 1
+
+  global-tag-description:
+    description: Each tag should have a description.
+    severity: warn
+    given: $.tags[*]
+    then:
+      field: description
+      function: truthy
+
+  global-tag-title-case:
+    description: Tag names use Title Case (Categories, Releases, Series, Sources, Tags, Observations, Series Group, Regional Data).
+    severity: warn
+    given: $.tags[*].name
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[A-Z][A-Za-z ]+$'
+
+  # ─────────────────────────────────────────────────────────────────────
+  # PARAMETERS
+  # ─────────────────────────────────────────────────────────────────────
+  parameter-description-required:
+    description: Every parameter needs a description.
+    severity: warn
+    given: $.paths.*.*.parameters[*]
+    then:
+      field: description
+      function: truthy
+
+  parameter-snake-case:
+    description: FRED parameters use snake_case (api_key, series_id, file_type, realtime_start).
+    severity: error
+    given: $.paths.*.*.parameters[?(@.name)]
+    then:
+      field: name
+      function: pattern
+      functionOptions:
+        match: '^[a-z][a-z0-9_]*$'
+
+  parameter-api-key-required-on-every-operation:
+    description: Every operation must include api_key (directly or via $ref).
+    message: Each operation must accept the api_key query parameter or reference the shared ApiKey parameter.
+    severity: error
+    given: $.paths.*.*
+    then:
+      field: parameters
+      function: truthy
+
+  parameter-pagination-limit-offset:
+    description: FRED paginates with limit + offset. Don't introduce page/size, cursor, or next_token.
+    severity: warn
+    given: $.paths.*.*.parameters[?(@.name)].name
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: '^(page|page_size|cursor|next_token|page_number)$'
+
+  parameter-realtime-period-snake:
+    description: Real-time period parameters must be realtime_start / realtime_end (not realTimeStart, real_time_start).
+    severity: error
+    given: $.paths.*.*.parameters[?(@.name=='realTimeStart' || @.name=='real_time_start' || @.name=='realTimeEnd' || @.name=='real_time_end')]
+    then:
+      function: falsy
+
+  # ─────────────────────────────────────────────────────────────────────
+  # REQUEST BODIES
+  # ─────────────────────────────────────────────────────────────────────
+  no-request-body-on-get:
+    description: GET operations must not declare a requestBody (FRED is GET-only with query parameters).
+    severity: error
+    given: $.paths.*.get
+    then:
+      field: requestBody
+      function: falsy
+
+  # ─────────────────────────────────────────────────────────────────────
+  # RESPONSES
+  # ─────────────────────────────────────────────────────────────────────
+  response-200-required:
+    description: Every operation must declare a 200 success response.
+    severity: error
+    given: $.paths.*.*.responses
+    then:
+      field: '200'
+      function: truthy
+
+  response-content-json:
+    description: 2xx responses must offer application/json.
+    severity: warn
+    given: $.paths.*.*.responses.200.content
+    then:
+      field: application/json
+      function: truthy
+
+  response-schema-required:
+    description: 2xx JSON responses must declare a schema.
+    severity: warn
+    given: $.paths.*.*.responses.200.content.application/json
+    then:
+      field: schema
+      function: truthy
+
+  response-400-recommended:
+    description: Operations should declare a 400 Bad Request response.
+    severity: info
+    given: $.paths.*.*.responses
+    then:
+      field: '400'
+      function: truthy
+
+  response-403-recommended:
+    description: Operations should declare a 403 Forbidden response for missing/invalid api_key.
+    severity: info
+    given: $.paths.*.*.responses
+    then:
+      field: '403'
+      function: truthy
+
+  # ─────────────────────────────────────────────────────────────────────
+  # SCHEMAS — PROPERTY NAMING
+  # ─────────────────────────────────────────────────────────────────────
+  schema-property-snake-case:
+    description: Schema properties use snake_case (series_id, realtime_start, last_updated).
+    severity: warn
+    given: $.components.schemas[*].properties.*~
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[a-z][a-z0-9_]*$'
+
+  schema-top-level-description:
+    description: Top-level schemas should carry a description.
+    severity: warn
+    given: $.components.schemas[*]
+    then:
+      field: description
+      function: truthy
+
+  schema-type-defined:
+    description: Top-level schemas must declare a type.
+    severity: error
+    given: $.components.schemas[*]
+    then:
+      field: type
+      function: truthy
+
+  # FRED uses the legacy "seriess" wrapper for series lists. Allow it.
+  schema-seriess-wrapper-allowed:
+    description: FRED intentionally uses the "seriess" property name on series-list responses. Documenting this for downstream tools so they don't auto-correct.
+    severity: info
+    given: $.components.schemas.SeriesList.properties
+    then:
+      field: seriess
+      function: truthy
+
+  # ─────────────────────────────────────────────────────────────────────
+  # SECURITY
+  # ─────────────────────────────────────────────────────────────────────
+  security-global-required:
+    description: Global security must be declared.
+    severity: error
+    given: $
+    then:
+      field: security
+      function: truthy
+
+  security-apikey-scheme:
+    description: Security scheme must be apiKey in query (FRED uses ?api_key=...).
+    severity: error
+    given: $.components.securitySchemes.ApiKeyAuth
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required: [type, in, name]
+          properties:
+            type: {const: apiKey}
+            in: {const: query}
+            name: {const: api_key}
+
+  # ─────────────────────────────────────────────────────────────────────
+  # HTTP METHOD CONVENTIONS
+  # ─────────────────────────────────────────────────────────────────────
+  http-method-get-only:
+    description: FRED is read-only. Only GET methods are allowed.
+    severity: error
+    given: $.paths.*
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          additionalProperties: false
+          properties:
+            get: {}
+            parameters: {}
+            summary: {}
+            description: {}
+            servers: {}
+
+  # ─────────────────────────────────────────────────────────────────────
+  # GENERAL QUALITY
+  # ─────────────────────────────────────────────────────────────────────
+  description-no-empty:
+    description: Descriptions must not be empty strings.
+    severity: warn
+    given: '$..description'
+    then:
+      function: truthy
+
+  examples-on-responses:
+    description: 2xx JSON responses should carry at least one named example.
+    severity: info
+    given: $.paths.*.*.responses.200.content.application/json
+    then:
+      field: examples
+      function: truthy
+
+  external-docs-encouraged:
+    description: An externalDocs block helps consumers find the canonical reference page.
+    severity: info
+    given: $
+    then:
+      field: externalDocs
+      function: truthy

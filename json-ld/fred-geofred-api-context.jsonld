@@ -1,0 +1,95 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "fred": "https://fred.stlouisfed.org/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "RegionalDataResult": "fred:RegionalDataResult",
+    "RegionalDatum": "fred:RegionalDatum",
+    "SeriesGroup": "fred:SeriesGroup",
+    "ShapeCollection": "fred:ShapeCollection",
+    "Shape": "fred:Shape",
+    "meta": {
+      "@id": "fred:meta",
+      "@type": "@id"
+    },
+    "title": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "region": {
+      "@id": "fred:region",
+      "@type": "xsd:string"
+    },
+    "seasonality": {
+      "@id": "fred:seasonality",
+      "@type": "xsd:string"
+    },
+    "units": {
+      "@id": "fred:units",
+      "@type": "xsd:string"
+    },
+    "frequency": {
+      "@id": "fred:frequency",
+      "@type": "xsd:string"
+    },
+    "data": {
+      "@id": "fred:data",
+      "@type": "@id"
+    },
+    "code": {
+      "@id": "fred:code",
+      "@type": "xsd:string"
+    },
+    "value": {
+      "@id": "fred:value",
+      "@type": "xsd:decimal"
+    },
+    "seriesId": {
+      "@id": "fred:series_id",
+      "@type": "xsd:string"
+    },
+    "regionType": {
+      "@id": "fred:region_type",
+      "@type": "xsd:string"
+    },
+    "seriesGroup": {
+      "@id": "fred:series_group",
+      "@type": "xsd:string"
+    },
+    "season": {
+      "@id": "fred:season",
+      "@type": "xsd:string"
+    },
+    "minDate": {
+      "@id": "fred:min_date",
+      "@type": "xsd:date"
+    },
+    "maxDate": {
+      "@id": "fred:max_date",
+      "@type": "xsd:date"
+    },
+    "shape": {
+      "@id": "fred:shape",
+      "@type": "xsd:string"
+    },
+    "features": {
+      "@id": "fred:features",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "centroid": {
+      "@id": "fred:centroid",
+      "@type": "xsd:string"
+    },
+    "geometry": {
+      "@id": "fred:geometry",
+      "@type": "xsd:string"
+    }
+  }
+}

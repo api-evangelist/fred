@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fred/refs/heads/main/json-structure/geofred-api-regional-data-result-structure.json",
+  "name": "RegionalDataResult",
+  "description": "A regional-data result wrapped by date.",
+  "type": "object",
+  "properties": {
+    "meta": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "seasonality": {
+          "type": "string"
+        },
+        "units": {
+          "type": "string"
+        },
+        "frequency": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RegionalDatum"
+            }
+          },
+          "description": "Date-keyed map of regional values."
+        }
+      }
+    }
+  },
+  "required": [
+    "meta"
+  ]
+}
