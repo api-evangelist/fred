@@ -2,11 +2,11 @@
   "repo": "fred",
   "feeds": [
     {
-      "source": "https://fredblog.stlouisfed.org/",
+      "source": "https://fredblog.stlouisfed.org/feed/",
       "feed_url": "https://fredblog.stlouisfed.org/feed/",
       "title": "",
       "saved": 2,
-      "method": "discovered"
+      "method": "feed"
     },
     {
       "source": "https://github.com/public-apis/public-apis",
@@ -16,6 +16,6 @@
       "method": "none"
     }
   ],
-  "post_count": 2,
-  "fetched": "2026-06-14T20:42:17Z"
+  "post_count": 6,
+  "fetched": "2026-06-27T12:03:07Z"
 }

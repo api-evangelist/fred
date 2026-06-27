@@ -119,34 +119,34 @@ common:
   - type: Tools
     title: US Gov Open Data MCP (includes FRED)
     url: https://github.com/lzinga/us-gov-open-data-mcp
-  - type: SDK
+  - type: SDKs
     title: Python SDK (fredapi)
     url: https://pypi.org/project/fredapi/
-  - type: SDK
+  - type: SDKs
     title: Python SDK (pyfredapi)
     url: https://pypi.org/project/pyfredapi/
-  - type: SDK
+  - type: SDKs
     title: Python SDK (fred-py-api)
     url: https://pypi.org/project/fred-py-api/
-  - type: SDK
+  - type: SDKs
     title: Python SDK (pystlouisfed)
     url: https://pypi.org/project/pystlouisfed/
-  - type: SDK
+  - type: SDKs
     title: R SDK (fredr)
     url: https://cran.r-project.org/package=fredr
-  - type: SDK
+  - type: SDKs
     title: Go SDK (fred)
     url: https://github.com/ChrisSwanson/fred
-  - type: SDK
+  - type: SDKs
     title: Rust SDK (fred-rs)
     url: https://crates.io/crates/fred-rs
-  - type: SDK
+  - type: SDKs
     title: Node.js / TypeScript SDK (fred-api-client)
     url: https://github.com/iamkanishka/fred-api-client
-  - type: SDK
+  - type: SDKs
     title: .NET SDK (Xaye.Fred — archived)
     url: https://www.nuget.org/packages/Xaye.Fred
-  - type: SDK
+  - type: SDKs
     title: Elixir SDK (Fred)
     url: https://hex.pm/packages/fred
   - type: Rules
