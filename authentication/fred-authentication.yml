@@ -1,0 +1,18 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/fred-geofred-openapi.yml, openapi/fred-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - query
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: query
+  parameter: api_key
+  description: 32-character lower-case alphanumeric FRED API key (same key used for the FRED
+    API).
+  sources:
+  - openapi/fred-geofred-openapi.yml
+  - openapi/fred-openapi.yml

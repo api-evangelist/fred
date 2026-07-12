@@ -80,6 +80,10 @@ apis:
       - type: OpenAPI
         url: openapi/fred-geofred-openapi.yml
 common:
+  - type: DomainSecurity
+    url: security/fred-domain-security.yml
+  - type: Authentication
+    url: authentication/fred-authentication.yml
   - type: Website
     url: https://fred.stlouisfed.org
   - type: Documentation
