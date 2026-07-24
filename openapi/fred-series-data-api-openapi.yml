@@ -1,0 +1,166 @@
+openapi: 3.0.3
+info:
+  title: FRED Maps API (GeoFRED) Categories Series Data API
+  version: '1.0'
+  description: GeoFRED (the FRED Maps API) exposes geographic / regional views of FRED economic data. Series-group metadata, regional-data lookups across geographies (state, county, MSA, country, census tract, etc.), and GeoJSON shape files for cartographic rendering of FRED indicators.
+  contact:
+    name: Federal Reserve Bank of St. Louis — Research Division
+    url: https://fred.stlouisfed.org/docs/api/geofred/
+  license:
+    name: U.S. Government Work / Public Domain (most series)
+    url: https://fred.stlouisfed.org/legal/
+  termsOfService: https://fred.stlouisfed.org/legal/
+  x-generated-from: documentation
+  x-last-validated: '2026-05-28'
+servers:
+- url: https://api.stlouisfed.org/geofred
+  description: Production GeoFRED API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Series Data
+  description: Regional data values attached to a specific FRED series.
+paths:
+  /series/data:
+    get:
+      operationId: getSeriesData
+      summary: FRED Get Regional Data Values for a Series
+      description: Get regional data values attached to a specific FRED series.
+      tags:
+      - Series Data
+      parameters:
+      - $ref: '#/components/parameters/ApiKey'
+      - $ref: '#/components/parameters/FileType'
+      - name: series_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The FRED series ID.
+        example: UNRATE
+      - name: date
+        in: query
+        schema:
+          type: string
+          format: date
+        description: Date for the data values (YYYY-MM-DD). Defaults to the most recent.
+        example: '2026-04-01'
+      - name: start_date
+        in: query
+        schema:
+          type: string
+          format: date
+        description: Optional start date for a range query.
+        example: '2026-01-01'
+      responses:
+        '200':
+          description: Regional data values for the series.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegionalDataResult'
+              examples:
+                Getseriesdata200Example:
+                  summary: Default getSeriesData 200 response
+                  x-microcks-default: true
+                  value:
+                    meta:
+                      title: 'All Employees: Total Nonfarm'
+                      region: state
+                      seasonality: Seasonally Adjusted
+                      units: Thousands of Persons
+                      frequency: Monthly
+                      data:
+                        '2026-04-01':
+                        - region: California
+                          code: '06'
+                          value: 17920.5
+                          series_id: CANA
+                        - region: Missouri
+                          code: '29'
+                          value: 2960.1
+                          series_id: MONA
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    RegionalDataResult:
+      type: object
+      description: A regional-data result wrapped by date.
+      properties:
+        meta:
+          type: object
+          properties:
+            title:
+              type: string
+            region:
+              type: string
+            seasonality:
+              type: string
+            units:
+              type: string
+            frequency:
+              type: string
+            data:
+              type: object
+              additionalProperties:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RegionalDatum'
+              description: Date-keyed map of regional values.
+      required:
+      - meta
+    RegionalDatum:
+      type: object
+      description: A single regional data value.
+      properties:
+        region:
+          type: string
+          description: Region display name.
+          example: example
+        code:
+          type: string
+          description: Region code (FIPS
+          ISO: null
+          etc.).: null
+          example: example
+        value:
+          type: number
+          description: Indicator value.
+          example: 4.0
+        series_id:
+          type: string
+          description: Underlying FRED series ID.
+          example: UNRATE
+      required:
+      - region
+      - value
+  parameters:
+    ApiKey:
+      name: api_key
+      in: query
+      required: true
+      description: 32-character lower-case alphanumeric FRED API key.
+      schema:
+        type: string
+        pattern: ^[0-9a-f]{32}$
+      example: abcdef0123456789abcdef0123456789
+    FileType:
+      name: file_type
+      in: query
+      required: false
+      description: Response format — json or xml.
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        default: json
+      example: json
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: query
+      name: api_key
+      description: 32-character lower-case alphanumeric FRED API key (same key used for the FRED API).

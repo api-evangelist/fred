@@ -1,0 +1,135 @@
+openapi: 3.0.3
+info:
+  title: FRED Maps API (GeoFRED) Categories Series Group API
+  version: '1.0'
+  description: GeoFRED (the FRED Maps API) exposes geographic / regional views of FRED economic data. Series-group metadata, regional-data lookups across geographies (state, county, MSA, country, census tract, etc.), and GeoJSON shape files for cartographic rendering of FRED indicators.
+  contact:
+    name: Federal Reserve Bank of St. Louis — Research Division
+    url: https://fred.stlouisfed.org/docs/api/geofred/
+  license:
+    name: U.S. Government Work / Public Domain (most series)
+    url: https://fred.stlouisfed.org/legal/
+  termsOfService: https://fred.stlouisfed.org/legal/
+  x-generated-from: documentation
+  x-last-validated: '2026-05-28'
+servers:
+- url: https://api.stlouisfed.org/geofred
+  description: Production GeoFRED API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Series Group
+  description: Series-group metadata — the regional identifier and supported region types for a series.
+paths:
+  /series/group:
+    get:
+      operationId: getSeriesGroup
+      summary: FRED Get the Series Group for a Series
+      description: Get the series group information for a regional data series. The series group identifier groups a collection of series matched along geography, units, frequency, and seasonal adjustment.
+      tags:
+      - Series Group
+      parameters:
+      - $ref: '#/components/parameters/ApiKey'
+      - $ref: '#/components/parameters/FileType'
+      - name: series_id
+        in: query
+        required: true
+        description: The FRED series ID.
+        schema:
+          type: string
+        example: UNRATE
+      responses:
+        '200':
+          description: Series group metadata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SeriesGroup'
+              examples:
+                Getseriesgroup200Example:
+                  summary: Default getSeriesGroup 200 response
+                  x-microcks-default: true
+                  value:
+                    title: 'All Employees: Total Nonfarm'
+                    region_type: state
+                    series_group: '1223'
+                    season: SA
+                    units: Thousands of Persons
+                    frequency: Monthly
+                    min_date: '1990-01-01'
+                    max_date: '2026-04-01'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    SeriesGroup:
+      type: object
+      description: Metadata describing a regional series group.
+      properties:
+        title:
+          type: string
+          description: Display title of the series group.
+          example: Unemployment Rate
+        region_type:
+          type: string
+          description: Geography type the group covers.
+          example: example
+        series_group:
+          type: string
+          description: Series-group identifier.
+          example: example
+        season:
+          type: string
+          enum:
+          - SA
+          - NSA
+          - SSA
+          - SAAR
+          - NSAAR
+          example: example
+        units:
+          type: string
+          example: Percent
+        frequency:
+          type: string
+          example: Monthly
+        min_date:
+          type: string
+          format: date
+          example: '2026-05-28'
+        max_date:
+          type: string
+          format: date
+          example: '2026-05-28'
+      required:
+      - series_group
+      - region_type
+  parameters:
+    ApiKey:
+      name: api_key
+      in: query
+      required: true
+      description: 32-character lower-case alphanumeric FRED API key.
+      schema:
+        type: string
+        pattern: ^[0-9a-f]{32}$
+      example: abcdef0123456789abcdef0123456789
+    FileType:
+      name: file_type
+      in: query
+      required: false
+      description: Response format — json or xml.
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        default: json
+      example: json
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: query
+      name: api_key
+      description: 32-character lower-case alphanumeric FRED API key (same key used for the FRED API).

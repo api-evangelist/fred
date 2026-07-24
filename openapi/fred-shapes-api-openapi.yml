@@ -1,0 +1,144 @@
+openapi: 3.0.3
+info:
+  title: FRED Maps API (GeoFRED) Categories Shapes API
+  version: '1.0'
+  description: GeoFRED (the FRED Maps API) exposes geographic / regional views of FRED economic data. Series-group metadata, regional-data lookups across geographies (state, county, MSA, country, census tract, etc.), and GeoJSON shape files for cartographic rendering of FRED indicators.
+  contact:
+    name: Federal Reserve Bank of St. Louis — Research Division
+    url: https://fred.stlouisfed.org/docs/api/geofred/
+  license:
+    name: U.S. Government Work / Public Domain (most series)
+    url: https://fred.stlouisfed.org/legal/
+  termsOfService: https://fred.stlouisfed.org/legal/
+  x-generated-from: documentation
+  x-last-validated: '2026-05-28'
+servers:
+- url: https://api.stlouisfed.org/geofred
+  description: Production GeoFRED API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Shapes
+  description: GeoJSON shape files for state, county, MSA, country, and census-tract geographies.
+paths:
+  /shapes/file:
+    get:
+      operationId: getShapeFile
+      summary: FRED Get GeoJSON Shape Files for a Geographic Type
+      description: Get GeoJSON shape file data for a given geographic type (state, county, msa, country, etc.). Returns coordinates as quantized integers (not WGS84 lat/lon).
+      tags:
+      - Shapes
+      parameters:
+      - $ref: '#/components/parameters/ApiKey'
+      - $ref: '#/components/parameters/FileType'
+      - name: shape
+        in: query
+        required: true
+        description: Geographic type — bea, msa, frb, necta, state, country, county, censusregion, censusdivision.
+        schema:
+          type: string
+          enum:
+          - bea
+          - msa
+          - frb
+          - necta
+          - state
+          - country
+          - county
+          - censusregion
+          - censusdivision
+        example: state
+      responses:
+        '200':
+          description: GeoJSON shape collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShapeCollection'
+              examples:
+                Getshapefile200Example:
+                  summary: Default getShapeFile 200 response
+                  x-microcks-default: true
+                  value:
+                    shape: state
+                    features:
+                    - name: California
+                      code: '06'
+                      centroid: -1219000000,3700000000
+                      geometry: '...'
+                    - name: Missouri
+                      code: '29'
+                      centroid: -922000000,3837000000
+                      geometry: '...'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Shape:
+      type: object
+      description: A single GeoJSON-style shape feature.
+      properties:
+        name:
+          type: string
+          description: Display name of the region.
+          example: Unemployment Rate
+        code:
+          type: string
+          description: Region code (FIPS
+          ISO: null
+          etc.).: null
+          example: example
+        centroid:
+          type: string
+          description: Quantized centroid coordinates.
+          example: example
+        geometry:
+          type: string
+          description: Quantized geometry path.
+          example: example
+      required:
+      - name
+      - code
+    ShapeCollection:
+      type: object
+      description: A collection of shapes for a geographic type.
+      properties:
+        shape:
+          type: string
+          description: The geographic type that was requested.
+          example: example
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/Shape'
+      required:
+      - features
+  parameters:
+    ApiKey:
+      name: api_key
+      in: query
+      required: true
+      description: 32-character lower-case alphanumeric FRED API key.
+      schema:
+        type: string
+        pattern: ^[0-9a-f]{32}$
+      example: abcdef0123456789abcdef0123456789
+    FileType:
+      name: file_type
+      in: query
+      required: false
+      description: Response format — json or xml.
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        default: json
+      example: json
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: query
+      name: api_key
+      description: 32-character lower-case alphanumeric FRED API key (same key used for the FRED API).

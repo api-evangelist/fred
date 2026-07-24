@@ -1,0 +1,1153 @@
+openapi: 3.0.3
+info:
+  title: FRED Maps API (GeoFRED) Categories Releases API
+  version: '1.0'
+  description: GeoFRED (the FRED Maps API) exposes geographic / regional views of FRED economic data. Series-group metadata, regional-data lookups across geographies (state, county, MSA, country, census tract, etc.), and GeoJSON shape files for cartographic rendering of FRED indicators.
+  contact:
+    name: Federal Reserve Bank of St. Louis — Research Division
+    url: https://fred.stlouisfed.org/docs/api/geofred/
+  license:
+    name: U.S. Government Work / Public Domain (most series)
+    url: https://fred.stlouisfed.org/legal/
+  termsOfService: https://fred.stlouisfed.org/legal/
+  x-generated-from: documentation
+  x-last-validated: '2026-05-28'
+servers:
+- url: https://api.stlouisfed.org/geofred
+  description: Production GeoFRED API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Releases
+  description: Economic data releases — schedules, member series, sources, and tags per release.
+paths:
+  /releases:
+    get:
+      operationId: getReleases
+      summary: FRED Get All Releases of Economic Data
+      description: Get all releases of economic data.
+      tags:
+      - Releases
+      parameters:
+      - $ref: '#/components/parameters/ApiKey'
+      - $ref: '#/components/parameters/FileType'
+      - $ref: '#/components/parameters/RealtimeStart'
+      - $ref: '#/components/parameters/RealtimeEnd'
+      - $ref: '#/components/parameters/Limit1000'
+      - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/OrderByReleases'
+      - $ref: '#/components/parameters/SortOrder'
+      responses:
+        '200':
+          description: All releases.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReleaseList'
+              examples:
+                Getreleases200Example:
+                  summary: Default getReleases 200 response
+                  x-microcks-default: true
+                  value:
+                    realtime_start: '2026-05-28'
+                    realtime_end: '2026-05-28'
+                    order_by: release_id
+                    sort_order: asc
+                    count: 326
+                    offset: 0
+                    limit: 1000
+                    releases:
+                    - id: 9
+                      realtime_start: '2026-05-28'
+                      realtime_end: '2026-05-28'
+                      name: Advance Monthly Sales for Retail and Food Services
+                      press_release: true
+                      link: http://www.census.gov/retail/
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /releases/dates:
+    get:
+      operationId: getReleasesDates
+      summary: FRED Get Release Dates for All Releases of Economic Data
+      description: Get release dates for all releases of economic data.
+      tags:
+      - Releases
+      parameters:
+      - $ref: '#/components/parameters/ApiKey'
+      - $ref: '#/components/parameters/FileType'
+      - $ref: '#/components/parameters/RealtimeStart'
+      - $ref: '#/components/parameters/RealtimeEnd'
+      - $ref: '#/components/parameters/Limit1000'
+      - $ref: '#/components/parameters/Offset'
+      - name: order_by
+        in: query
+        schema:
+          type: string
+          enum:
+          - release_date
+          - release_id
+          - release_name
+        description: Ordering field.
+        example: series_count
+      - $ref: '#/components/parameters/SortOrder'
+      - name: include_release_dates_with_no_data
+        in: query
+        schema:
+          type: boolean
+          default: false
+        description: Include releases that have no data.
+        example: false
+      responses:
+        '200':
+          description: Release dates across all releases.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReleaseDateList'
+              examples:
+                Getreleasesdates200Example:
+                  summary: Default getReleasesDates 200 response
+                  x-microcks-default: true
+                  value:
+                    realtime_start: '2026-05-28'
+                    realtime_end: '2026-05-28'
+                    order_by: release_date
+                    sort_order: asc
+                    count: 1
+                    offset: 0
+                    limit: 1000
+                    release_dates:
+                    - release_id: 9
+                      release_name: Advance Monthly Sales for Retail and Food Services
+                      date: '2026-05-14'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /release:
+    get:
+      operationId: getRelease
+      summary: FRED Get a Release of Economic Data
+      description: Get a release of economic data by ID.
+      tags:
+      - Releases
+      parameters:
+      - $ref: '#/components/parameters/ApiKey'
+      - $ref: '#/components/parameters/FileType'
+      - name: release_id
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: Numeric release ID.
+        example: 9
+      - $ref: '#/components/parameters/RealtimeStart'
+      - $ref: '#/components/parameters/RealtimeEnd'
+      responses:
+        '200':
+          description: A single release.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReleaseList'
+              examples:
+                Getrelease200Example:
+                  summary: Default getRelease 200 response
+                  x-microcks-default: true
+                  value:
+                    realtime_start: '2026-05-28'
+                    realtime_end: '2026-05-28'
+                    order_by: release_id
+                    sort_order: asc
+                    count: 326
+                    offset: 0
+                    limit: 1000
+                    releases:
+                    - id: 9
+                      realtime_start: '2026-05-28'
+                      realtime_end: '2026-05-28'
+                      name: Advance Monthly Sales for Retail and Food Services
+                      press_release: true
+                      link: http://www.census.gov/retail/
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /release/dates:
+    get:
+      operationId: getReleaseDates
+      summary: FRED Get the Release Dates for a Release of Economic Data
+      description: Get the release dates for a release of economic data.
+      tags:
+      - Releases
+      parameters:
+      - $ref: '#/components/parameters/ApiKey'
+      - $ref: '#/components/parameters/FileType'
+      - name: release_id
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: Numeric release ID.
+        example: 9
+      - $ref: '#/components/parameters/RealtimeStart'
+      - $ref: '#/components/parameters/RealtimeEnd'
+      - $ref: '#/components/parameters/Limit10000'
+      - $ref: '#/components/parameters/Offset'
+      - name: sort_order
+        in: query
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+        description: Sort by release date.
+        example: asc
+      - name: include_release_dates_with_no_data
+        in: query
+        schema:
+          type: boolean
+          default: false
+        description: Include dates that have no data attached.
+        example: false
+      responses:
+        '200':
+          description: Release dates for the release.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReleaseDateList'
+              examples:
+                Getreleasedates200Example:
+                  summary: Default getReleaseDates 200 response
+                  x-microcks-default: true
+                  value:
+                    realtime_start: '2026-05-28'
+                    realtime_end: '2026-05-28'
+                    order_by: release_date
+                    sort_order: asc
+                    count: 1
+                    offset: 0
+                    limit: 1000
+                    release_dates:
+                    - release_id: 9
+                      release_name: Advance Monthly Sales for Retail and Food Services
+                      date: '2026-05-14'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /release/series:
+    get:
+      operationId: getReleaseSeries
+      summary: FRED Get the Series on a Release of Economic Data
+      description: Get the series on a release of economic data.
+      tags:
+      - Releases
+      parameters:
+      - $ref: '#/components/parameters/ApiKey'
+      - $ref: '#/components/parameters/FileType'
+      - name: release_id
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: Numeric release ID.
+        example: 9
+      - $ref: '#/components/parameters/RealtimeStart'
+      - $ref: '#/components/parameters/RealtimeEnd'
+      - $ref: '#/components/parameters/Limit1000'
+      - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/OrderBySeries'
+      - $ref: '#/components/parameters/SortOrder'
+      - $ref: '#/components/parameters/FilterVariable'
+      - $ref: '#/components/parameters/FilterValue'
+      - $ref: '#/components/parameters/TagNames'
+      - $ref: '#/components/parameters/ExcludeTagNames'
+      responses:
+        '200':
+          description: Series on the release.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SeriesList'
+              examples:
+                Getreleaseseries200Example:
+                  summary: Default getReleaseSeries 200 response
+                  x-microcks-default: true
+                  value:
+                    realtime_start: '2026-05-28'
+                    realtime_end: '2026-05-28'
+                    order_by: series_id
+                    sort_order: asc
+                    count: 1
+                    offset: 0
+                    limit: 1000
+                    seriess:
+                    - id: UNRATE
+                      realtime_start: '2026-05-28'
+                      realtime_end: '2026-05-28'
+                      title: Unemployment Rate
+                      observation_start: '1948-01-01'
+                      observation_end: '2026-04-01'
+                      frequency: Monthly
+                      frequency_short: M
+                      units: Percent
+                      units_short: '%'
+                      seasonal_adjustment: Seasonally Adjusted
+                      seasonal_adjustment_short: SA
+                      last_updated: '2026-05-02 07:46:10-05'
+                      popularity: 95
+                      group_popularity: 95
+                      notes: The unemployment rate represents the number of unemployed as a percentage of the labor force.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /release/sources:
+    get:
+      operationId: getReleaseSources
+      summary: FRED Get the Sources for a Release of Economic Data
+      description: Get the sources for a release of economic data.
+      tags:
+      - Releases
+      parameters:
+      - $ref: '#/components/parameters/ApiKey'
+      - $ref: '#/components/parameters/FileType'
+      - name: release_id
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: Numeric release ID.
+        example: 9
+      - $ref: '#/components/parameters/RealtimeStart'
+      - $ref: '#/components/parameters/RealtimeEnd'
+      responses:
+        '200':
+          description: Sources for the release.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceList'
+              examples:
+                Getreleasesources200Example:
+                  summary: Default getReleaseSources 200 response
+                  x-microcks-default: true
+                  value:
+                    realtime_start: '2026-05-28'
+                    realtime_end: '2026-05-28'
+                    order_by: source_id
+                    sort_order: asc
+                    count: 1
+                    offset: 0
+                    limit: 1000
+                    sources:
+                    - id: 1
+                      realtime_start: '2026-05-28'
+                      realtime_end: '2026-05-28'
+                      name: Board of Governors of the Federal Reserve System (US)
+                      link: http://www.federalreserve.gov/
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /release/tags:
+    get:
+      operationId: getReleaseTags
+      summary: FRED Get the Tags for a Release
+      description: Get the FRED tags for a release.
+      tags:
+      - Releases
+      parameters:
+      - $ref: '#/components/parameters/ApiKey'
+      - $ref: '#/components/parameters/FileType'
+      - name: release_id
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: Numeric release ID.
+        example: 9
+      - $ref: '#/components/parameters/RealtimeStart'
+      - $ref: '#/components/parameters/RealtimeEnd'
+      - $ref: '#/components/parameters/TagNames'
+      - $ref: '#/components/parameters/TagGroupId'
+      - $ref: '#/components/parameters/SearchText'
+      - $ref: '#/components/parameters/Limit1000'
+      - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/OrderByTags'
+      - $ref: '#/components/parameters/SortOrder'
+      responses:
+        '200':
+          description: Tags for the release.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagList'
+              examples:
+                Getreleasetags200Example:
+                  summary: Default getReleaseTags 200 response
+                  x-microcks-default: true
+                  value:
+                    realtime_start: '2026-05-28'
+                    realtime_end: '2026-05-28'
+                    order_by: series_count
+                    sort_order: desc
+                    count: 2
+                    offset: 0
+                    limit: 1000
+                    tags:
+                    - name: monthly
+                      group_id: freq
+                      notes: ''
+                      created: '2012-02-27 10:18:19-06'
+                      popularity: 100
+                      series_count: 380000
+                    - name: nation
+                      group_id: geot
+                      notes: ''
+                      created: '2012-02-27 10:18:19-06'
+                      popularity: 99
+                      series_count: 110000
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /release/related_tags:
+    get:
+      operationId: getReleaseRelatedTags
+      summary: FRED Get the Related Tags for a Release
+      description: Get the related FRED tags for one or more FRED tags within a release.
+      tags:
+      - Releases
+      parameters:
+      - $ref: '#/components/parameters/ApiKey'
+      - $ref: '#/components/parameters/FileType'
+      - name: release_id
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: Numeric release ID.
+        example: 9
+      - $ref: '#/components/parameters/RealtimeStart'
+      - $ref: '#/components/parameters/RealtimeEnd'
+      - $ref: '#/components/parameters/TagNames'
+      - $ref: '#/components/parameters/ExcludeTagNames'
+      - $ref: '#/components/parameters/TagGroupId'
+      - $ref: '#/components/parameters/SearchText'
+      - $ref: '#/components/parameters/Limit1000'
+      - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/OrderByTags'
+      - $ref: '#/components/parameters/SortOrder'
+      responses:
+        '200':
+          description: Related tags for the release.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagList'
+              examples:
+                Getreleaserelatedtags200Example:
+                  summary: Default getReleaseRelatedTags 200 response
+                  x-microcks-default: true
+                  value:
+                    realtime_start: '2026-05-28'
+                    realtime_end: '2026-05-28'
+                    order_by: series_count
+                    sort_order: desc
+                    count: 2
+                    offset: 0
+                    limit: 1000
+                    tags:
+                    - name: monthly
+                      group_id: freq
+                      notes: ''
+                      created: '2012-02-27 10:18:19-06'
+                      popularity: 100
+                      series_count: 380000
+                    - name: nation
+                      group_id: geot
+                      notes: ''
+                      created: '2012-02-27 10:18:19-06'
+                      popularity: 99
+                      series_count: 110000
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /release/tables:
+    get:
+      operationId: getReleaseTables
+      summary: FRED Get Release Tables
+      description: Get release table trees for a given release. Returns the table tree of a release.
+      tags:
+      - Releases
+      parameters:
+      - $ref: '#/components/parameters/ApiKey'
+      - $ref: '#/components/parameters/FileType'
+      - name: release_id
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: Numeric release ID.
+        example: 9
+      - name: element_id
+        in: query
+        schema:
+          type: integer
+        description: Optional element of the release table to root the tree at.
+        example: 12886
+      - name: include_observation_values
+        in: query
+        schema:
+          type: boolean
+          default: false
+        description: Include observation values inline.
+        example: false
+      - name: observation_date
+        in: query
+        schema:
+          type: string
+          format: date
+        description: Date of the observations to include (YYYY-MM-DD).
+        example: '2026-04-01'
+      responses:
+        '200':
+          description: Release table tree.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReleaseTable'
+              examples:
+                Getreleasetables200Example:
+                  summary: Default getReleaseTables 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Personal consumption expenditures
+                    element_id: 12886
+                    release_id: 53
+                    elements:
+                      '12886':
+                        element_id: 12886
+                        release_id: 53
+                        series_id: DGDSRC1
+                        parent_id: 12885
+                        line: '5'
+                        type: series
+                        name: Goods
+                        level: '1'
+                        children: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    RealtimeStart:
+      name: realtime_start
+      in: query
+      required: false
+      description: Start of the real-time period (YYYY-MM-DD). Defaults to today.
+      schema:
+        type: string
+        format: date
+      example: '2026-05-28'
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Non-negative integer offset into the result set for pagination.
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+      example: 0
+    SortOrder:
+      name: sort_order
+      in: query
+      required: false
+      description: Sort order. asc (ascending, default) or desc (descending).
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+        default: asc
+      example: asc
+    OrderByTags:
+      name: order_by
+      in: query
+      required: false
+      description: Field to order tag results by.
+      schema:
+        type: string
+        enum:
+        - series_count
+        - popularity
+        - created
+        - name
+        - group_id
+        default: series_count
+      example: series_count
+    SearchText:
+      name: search_text
+      in: query
+      required: false
+      description: Words to match against tag names and descriptions.
+      schema:
+        type: string
+      example: monetary aggregates
+    FileType:
+      name: file_type
+      in: query
+      required: false
+      description: Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.
+      schema:
+        type: string
+        enum:
+        - xml
+        - json
+        - xlsx
+        - csv
+        - txt
+        default: xml
+      example: json
+    FilterValue:
+      name: filter_value
+      in: query
+      required: false
+      description: Value of the filter_variable attribute to match.
+      schema:
+        type: string
+      example: monthly
+    RealtimeEnd:
+      name: realtime_end
+      in: query
+      required: false
+      description: End of the real-time period (YYYY-MM-DD). Defaults to today.
+      schema:
+        type: string
+        format: date
+      example: '2026-05-28'
+    OrderByReleases:
+      name: order_by
+      in: query
+      required: false
+      description: Field to order release results by.
+      schema:
+        type: string
+        enum:
+        - release_id
+        - name
+        - press_release
+        - realtime_start
+        - realtime_end
+      example: series_count
+    Limit10000:
+      name: limit
+      in: query
+      required: false
+      description: Maximum number of results to return (1–10000).
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 10000
+        default: 10000
+      example: 100
+    TagGroupId:
+      name: tag_group_id
+      in: query
+      required: false
+      description: Group identifier for tags — freq, gen, geo, geot, rls, seas, src.
+      schema:
+        type: string
+        enum:
+        - freq
+        - gen
+        - geo
+        - geot
+        - rls
+        - seas
+        - src
+      example: freq
+    OrderBySeries:
+      name: order_by
+      in: query
+      required: false
+      description: Field to order series results by.
+      schema:
+        type: string
+        enum:
+        - series_id
+        - title
+        - units
+        - frequency
+        - seasonal_adjustment
+        - realtime_start
+        - realtime_end
+        - last_updated
+        - observation_start
+        - observation_end
+        - popularity
+        - group_popularity
+      example: series_count
+    Limit1000:
+      name: limit
+      in: query
+      required: false
+      description: Maximum number of results to return (1–1000).
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 1000
+        default: 1000
+      example: 100
+    ExcludeTagNames:
+      name: exclude_tag_names
+      in: query
+      required: false
+      description: Semicolon-separated list of tag names to exclude.
+      schema:
+        type: string
+      example: discontinued
+    FilterVariable:
+      name: filter_variable
+      in: query
+      required: false
+      description: Attribute to filter series results by.
+      schema:
+        type: string
+        enum:
+        - frequency
+        - units
+        - seasonal_adjustment
+      example: frequency
+    TagNames:
+      name: tag_names
+      in: query
+      required: false
+      description: Semicolon-separated list of tag names to require.
+      schema:
+        type: string
+      example: monthly;usa
+    ApiKey:
+      name: api_key
+      in: query
+      required: true
+      description: 32-character lower-case alphanumeric FRED API key.
+      schema:
+        type: string
+        pattern: ^[0-9a-f]{32}$
+      example: abcdef0123456789abcdef0123456789
+  schemas:
+    Tag:
+      type: object
+      description: A FRED tag.
+      properties:
+        name:
+          type: string
+          description: Lower-case tag name.
+          example: Unemployment Rate
+        group_id:
+          type: string
+          description: Tag group id (freq
+          gen: null
+          geo: null
+          geot: null
+          rls: null
+          seas: null
+          src).: null
+          example: freq
+        notes:
+          type: string
+          description: Editorial notes.
+          example: Editorial notes.
+        created:
+          type: string
+          description: ISO-8601 created timestamp.
+          example: example
+        popularity:
+          type: integer
+          description: Popularity score 0–100.
+          example: 95
+        series_count:
+          type: integer
+          description: Number of series carrying this tag.
+          example: 380000
+      required:
+      - name
+      - group_id
+    ReleaseList:
+      type: object
+      description: A list of FRED releases.
+      properties:
+        realtime_start:
+          type: string
+          format: date
+          example: '2026-05-28'
+        realtime_end:
+          type: string
+          format: date
+          example: '2026-05-28'
+        order_by:
+          type: string
+          example: example
+        sort_order:
+          type: string
+          example: example
+        count:
+          type: integer
+          description: Total count of releases matched.
+          example: 1
+        offset:
+          type: integer
+          example: 0
+        limit:
+          type: integer
+          example: 1000
+        releases:
+          type: array
+          items:
+            $ref: '#/components/schemas/Release'
+      required:
+      - releases
+    Release:
+      type: object
+      description: A FRED release of economic data.
+      properties:
+        id:
+          type: integer
+          description: Numeric release ID.
+          example: 1
+        realtime_start:
+          type: string
+          format: date
+          example: '2026-05-28'
+        realtime_end:
+          type: string
+          format: date
+          example: '2026-05-28'
+        name:
+          type: string
+          description: Display name of the release.
+          example: Unemployment Rate
+        press_release:
+          type: boolean
+          description: True if this release is also a press release.
+          example: false
+        link:
+          type: string
+          format: uri
+          description: Provider link for the release.
+          example: https://fred.stlouisfed.org/
+        notes:
+          type: string
+          description: Editorial notes.
+          example: Editorial notes.
+      required:
+      - id
+      - name
+    TagList:
+      type: object
+      description: A list of FRED tags.
+      properties:
+        realtime_start:
+          type: string
+          format: date
+          example: '2026-05-28'
+        realtime_end:
+          type: string
+          format: date
+          example: '2026-05-28'
+        order_by:
+          type: string
+          example: example
+        sort_order:
+          type: string
+          example: example
+        count:
+          type: integer
+          example: 1
+        offset:
+          type: integer
+          example: 0
+        limit:
+          type: integer
+          example: 1000
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+      required:
+      - tags
+    SeriesList:
+      type: object
+      description: A list of FRED series.
+      properties:
+        realtime_start:
+          type: string
+          format: date
+          example: '2026-05-28'
+        realtime_end:
+          type: string
+          format: date
+          example: '2026-05-28'
+        order_by:
+          type: string
+          example: example
+        sort_order:
+          type: string
+          example: example
+        count:
+          type: integer
+          example: 1
+        offset:
+          type: integer
+          example: 0
+        limit:
+          type: integer
+          example: 1000
+        seriess:
+          type: array
+          description: Array of series (FRED uses the legacy "seriess" key intentionally).
+          items:
+            $ref: '#/components/schemas/Series'
+      required:
+      - seriess
+    ReleaseTable:
+      type: object
+      description: A release table tree node.
+      properties:
+        name:
+          type: string
+          example: Unemployment Rate
+        element_id:
+          type: integer
+          example: 1
+        release_id:
+          type: integer
+          example: 9
+        elements:
+          type: object
+          description: Map of element_id → child element.
+          additionalProperties:
+            type: object
+            properties:
+              element_id:
+                type: integer
+              release_id:
+                type: integer
+              series_id:
+                type: string
+              parent_id:
+                type: integer
+              line:
+                type: string
+              type:
+                type: string
+              name:
+                type: string
+              level:
+                type: string
+              children:
+                type: array
+                items:
+                  type: object
+      required:
+      - release_id
+      - elements
+    Source:
+      type: object
+      description: An originating source of FRED economic data.
+      properties:
+        id:
+          type: integer
+          example: 1
+        realtime_start:
+          type: string
+          format: date
+          example: '2026-05-28'
+        realtime_end:
+          type: string
+          format: date
+          example: '2026-05-28'
+        name:
+          type: string
+          example: Unemployment Rate
+        link:
+          type: string
+          format: uri
+          example: https://fred.stlouisfed.org/
+        notes:
+          type: string
+          example: Editorial notes.
+      required:
+      - id
+      - name
+    ReleaseDate:
+      type: object
+      description: A scheduled or historical release date.
+      properties:
+        release_id:
+          type: integer
+          example: 9
+        release_name:
+          type: string
+          example: example
+        date:
+          type: string
+          format: date
+          example: '2026-05-28'
+      required:
+      - release_id
+      - date
+    Series:
+      type: object
+      description: A FRED economic data series and its metadata.
+      properties:
+        id:
+          type: string
+          description: FRED series ID (e.g. UNRATE
+          GNPCA).: null
+          example: UNRATE
+        realtime_start:
+          type: string
+          format: date
+          example: '2026-05-28'
+        realtime_end:
+          type: string
+          format: date
+          example: '2026-05-28'
+        title:
+          type: string
+          description: Display title of the series.
+          example: Unemployment Rate
+        observation_start:
+          type: string
+          format: date
+          description: First available observation date.
+          example: '2026-05-28'
+        observation_end:
+          type: string
+          format: date
+          description: Last available observation date.
+          example: '2026-05-28'
+        frequency:
+          type: string
+          description: Display frequency (e.g. "Monthly").
+          example: Monthly
+        frequency_short:
+          type: string
+          description: Frequency code (d
+          w: null
+          m: null
+          q: null
+          a).: null
+          example: Monthly
+        units:
+          type: string
+          description: Display unit string.
+          example: Percent
+        units_short:
+          type: string
+          description: Short unit string.
+          example: Percent
+        seasonal_adjustment:
+          type: string
+          description: Seasonal adjustment description.
+          example: Seasonally Adjusted
+        seasonal_adjustment_short:
+          type: string
+          description: Seasonal adjustment code (SA
+          NSA: null
+          SAAR: null
+          NSAAR: null
+          SSA).: null
+          example: SA
+        last_updated:
+          type: string
+          description: ISO-8601 timestamp of last update.
+          example: '2026-05-02 07:46:10-05'
+        popularity:
+          type: integer
+          description: Popularity score 0–100.
+          example: 95
+        group_popularity:
+          type: integer
+          description: Group popularity score 0–100.
+          example: 95
+        notes:
+          type: string
+          description: Editorial notes for the series.
+          example: Editorial notes.
+      required:
+      - id
+      - title
+    SourceList:
+      type: object
+      description: A list of FRED sources.
+      properties:
+        realtime_start:
+          type: string
+          format: date
+          example: '2026-05-28'
+        realtime_end:
+          type: string
+          format: date
+          example: '2026-05-28'
+        order_by:
+          type: string
+          example: example
+        sort_order:
+          type: string
+          example: example
+        count:
+          type: integer
+          example: 1
+        offset:
+          type: integer
+          example: 0
+        limit:
+          type: integer
+          example: 1000
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+      required:
+      - sources
+    ReleaseDateList:
+      type: object
+      description: A list of release dates.
+      properties:
+        realtime_start:
+          type: string
+          format: date
+          example: '2026-05-28'
+        realtime_end:
+          type: string
+          format: date
+          example: '2026-05-28'
+        order_by:
+          type: string
+          example: example
+        sort_order:
+          type: string
+          example: example
+        count:
+          type: integer
+          example: 1
+        offset:
+          type: integer
+          example: 0
+        limit:
+          type: integer
+          example: 1000
+        release_dates:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReleaseDate'
+      required:
+      - release_dates
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: query
+      name: api_key
+      description: 32-character lower-case alphanumeric FRED API key (same key used for the FRED API).
