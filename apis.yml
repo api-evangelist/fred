@@ -10,6 +10,19 @@ description: >-
   GeoJSON shape files. All endpoints are HTTPS, return XML or JSON (CSV / Excel for observations), and require a free
   API key.
 url: https://fred.stlouisfed.org/docs/api/fred/
+accessModel:
+  pricing: free
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Free · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://fred.stlouisfed.org/images/api/fred-square-blue.svg
 specificationVersion: '0.20'
 created: '2026-05-28'
@@ -28,57 +41,249 @@ tags:
   - Open Data
   - Public APIs
 apis:
-  - name: FRED API
-    description: >-
-      Core REST API for the Federal Reserve Economic Data (FRED) database. Five endpoint families — Categories,
-      Releases, Series, Sources, Tags — plus Series Observations for the underlying time-series values. Supports XML and
-      JSON response formats, real-time periods (ALFRED), frequency aggregation, and unit transformations.
-    humanURL: https://fred.stlouisfed.org/docs/api/fred/
-    baseURL: https://api.stlouisfed.org/fred
-    tags:
-      - Finance
-      - Economic Data
-      - Time Series
-      - Categories
-      - Releases
-      - Series
-      - Sources
-      - Tags
-    properties:
-      - type: Documentation
-        url: https://fred.stlouisfed.org/docs/api/fred/
-      - type: Overview
-        url: https://fred.stlouisfed.org/docs/api/fred/overview.html
-      - type: APIKey
-        url: https://fred.stlouisfed.org/docs/api/api_key.html
-      - type: TermsOfService
-        url: https://fred.stlouisfed.org/legal/
-      - type: Authentication
-        url: https://fred.stlouisfed.org/docs/api/api_key.html
-      - type: RealTimePeriods
-        url: https://fred.stlouisfed.org/docs/api/fred/realtime_period.html
-      - type: OpenAPI
-        url: openapi/fred-openapi.yml
-  - name: FRED Maps API (GeoFRED)
-    description: >-
-      Geographic / regional view of FRED economic data. Exposes series-group metadata, regional-data lookups across
-      geographies (state, county, MSA, country, census tract, etc.), and GeoJSON shape files for cartographic rendering
-      of FRED indicators.
-    humanURL: https://fred.stlouisfed.org/docs/api/geofred/
-    baseURL: https://api.stlouisfed.org/geofred
-    tags:
-      - Finance
-      - Economic Data
-      - Geographic
-      - Maps
-      - GeoJSON
-    properties:
-      - type: Documentation
-        url: https://fred.stlouisfed.org/docs/api/geofred/
-      - type: APIKey
-        url: https://fred.stlouisfed.org/docs/api/api_key.html
-      - type: OpenAPI
-        url: openapi/fred-geofred-openapi.yml
+- aid: fred:fred-categories-api
+  name: FRED Categories API
+  description: Category hierarchy navigation — children, related, series, and tags within a category.
+  humanURL: https://fred.stlouisfed.org/docs/api/fred/
+  baseURL: https://api.stlouisfed.org/fred
+  tags:
+  - Categories
+  properties:
+  - type: OpenAPI
+    url: openapi/fred-categories-api-openapi.yml
+  - type: Documentation
+    url: https://fred.stlouisfed.org/docs/api/fred/
+  - type: Overview
+    url: https://fred.stlouisfed.org/docs/api/fred/overview.html
+  - type: APIKey
+    url: https://fred.stlouisfed.org/docs/api/api_key.html
+  - type: TermsOfService
+    url: https://fred.stlouisfed.org/legal/
+  - type: Authentication
+    url: https://fred.stlouisfed.org/docs/api/api_key.html
+  - type: RealTimePeriods
+    url: https://fred.stlouisfed.org/docs/api/fred/realtime_period.html
+  - type: Documentation
+    url: https://fred.stlouisfed.org/docs/api/geofred/
+- aid: fred:fred-observations-api
+  name: FRED Observations API
+  description: >-
+    The underlying time-series data values, with frequency aggregation and unit transformations.
+  humanURL: https://fred.stlouisfed.org/docs/api/fred/
+  baseURL: https://api.stlouisfed.org/fred
+  tags:
+  - Observations
+  properties:
+  - type: OpenAPI
+    url: openapi/fred-observations-api-openapi.yml
+  - type: Documentation
+    url: https://fred.stlouisfed.org/docs/api/fred/
+  - type: Overview
+    url: https://fred.stlouisfed.org/docs/api/fred/overview.html
+  - type: APIKey
+    url: https://fred.stlouisfed.org/docs/api/api_key.html
+  - type: TermsOfService
+    url: https://fred.stlouisfed.org/legal/
+  - type: Authentication
+    url: https://fred.stlouisfed.org/docs/api/api_key.html
+  - type: RealTimePeriods
+    url: https://fred.stlouisfed.org/docs/api/fred/realtime_period.html
+  - type: Documentation
+    url: https://fred.stlouisfed.org/docs/api/geofred/
+- aid: fred:fred-regional-data-api
+  name: FRED Regional Data API
+  description: Regional data values for a series group across a geography.
+  humanURL: https://fred.stlouisfed.org/docs/api/fred/
+  baseURL: https://api.stlouisfed.org/fred
+  tags:
+  - Regional Data
+  properties:
+  - type: OpenAPI
+    url: openapi/fred-regional-data-api-openapi.yml
+  - type: Documentation
+    url: https://fred.stlouisfed.org/docs/api/fred/
+  - type: Overview
+    url: https://fred.stlouisfed.org/docs/api/fred/overview.html
+  - type: APIKey
+    url: https://fred.stlouisfed.org/docs/api/api_key.html
+  - type: TermsOfService
+    url: https://fred.stlouisfed.org/legal/
+  - type: Authentication
+    url: https://fred.stlouisfed.org/docs/api/api_key.html
+  - type: RealTimePeriods
+    url: https://fred.stlouisfed.org/docs/api/fred/realtime_period.html
+  - type: Documentation
+    url: https://fred.stlouisfed.org/docs/api/geofred/
+- aid: fred:fred-releases-api
+  name: FRED Releases API
+  description: Economic data releases — schedules, member series, sources, and tags per release.
+  humanURL: https://fred.stlouisfed.org/docs/api/fred/
+  baseURL: https://api.stlouisfed.org/fred
+  tags:
+  - Releases
+  properties:
+  - type: OpenAPI
+    url: openapi/fred-releases-api-openapi.yml
+  - type: Documentation
+    url: https://fred.stlouisfed.org/docs/api/fred/
+  - type: Overview
+    url: https://fred.stlouisfed.org/docs/api/fred/overview.html
+  - type: APIKey
+    url: https://fred.stlouisfed.org/docs/api/api_key.html
+  - type: TermsOfService
+    url: https://fred.stlouisfed.org/legal/
+  - type: Authentication
+    url: https://fred.stlouisfed.org/docs/api/api_key.html
+  - type: RealTimePeriods
+    url: https://fred.stlouisfed.org/docs/api/fred/realtime_period.html
+  - type: Documentation
+    url: https://fred.stlouisfed.org/docs/api/geofred/
+- aid: fred:fred-series-api
+  name: FRED Series API
+  description: >-
+    Economic data series metadata, search, categorization, release linkage, tags, updates, and vintages.
+  humanURL: https://fred.stlouisfed.org/docs/api/fred/
+  baseURL: https://api.stlouisfed.org/fred
+  tags:
+  - Series
+  properties:
+  - type: OpenAPI
+    url: openapi/fred-series-api-openapi.yml
+  - type: Documentation
+    url: https://fred.stlouisfed.org/docs/api/fred/
+  - type: Overview
+    url: https://fred.stlouisfed.org/docs/api/fred/overview.html
+  - type: APIKey
+    url: https://fred.stlouisfed.org/docs/api/api_key.html
+  - type: TermsOfService
+    url: https://fred.stlouisfed.org/legal/
+  - type: Authentication
+    url: https://fred.stlouisfed.org/docs/api/api_key.html
+  - type: RealTimePeriods
+    url: https://fred.stlouisfed.org/docs/api/fred/realtime_period.html
+  - type: Documentation
+    url: https://fred.stlouisfed.org/docs/api/geofred/
+- aid: fred:fred-series-data-api
+  name: FRED Series Data API
+  description: Regional data values attached to a specific FRED series.
+  humanURL: https://fred.stlouisfed.org/docs/api/fred/
+  baseURL: https://api.stlouisfed.org/fred
+  tags:
+  - Series Data
+  properties:
+  - type: OpenAPI
+    url: openapi/fred-series-data-api-openapi.yml
+  - type: Documentation
+    url: https://fred.stlouisfed.org/docs/api/fred/
+  - type: Overview
+    url: https://fred.stlouisfed.org/docs/api/fred/overview.html
+  - type: APIKey
+    url: https://fred.stlouisfed.org/docs/api/api_key.html
+  - type: TermsOfService
+    url: https://fred.stlouisfed.org/legal/
+  - type: Authentication
+    url: https://fred.stlouisfed.org/docs/api/api_key.html
+  - type: RealTimePeriods
+    url: https://fred.stlouisfed.org/docs/api/fred/realtime_period.html
+  - type: Documentation
+    url: https://fred.stlouisfed.org/docs/api/geofred/
+- aid: fred:fred-series-group-api
+  name: FRED Series Group API
+  description: Series-group metadata — the regional identifier and supported region types for a series.
+  humanURL: https://fred.stlouisfed.org/docs/api/fred/
+  baseURL: https://api.stlouisfed.org/fred
+  tags:
+  - Series Group
+  properties:
+  - type: OpenAPI
+    url: openapi/fred-series-group-api-openapi.yml
+  - type: Documentation
+    url: https://fred.stlouisfed.org/docs/api/fred/
+  - type: Overview
+    url: https://fred.stlouisfed.org/docs/api/fred/overview.html
+  - type: APIKey
+    url: https://fred.stlouisfed.org/docs/api/api_key.html
+  - type: TermsOfService
+    url: https://fred.stlouisfed.org/legal/
+  - type: Authentication
+    url: https://fred.stlouisfed.org/docs/api/api_key.html
+  - type: RealTimePeriods
+    url: https://fred.stlouisfed.org/docs/api/fred/realtime_period.html
+  - type: Documentation
+    url: https://fred.stlouisfed.org/docs/api/geofred/
+- aid: fred:fred-shapes-api
+  name: FRED Shapes API
+  description: GeoJSON shape files for state, county, MSA, country, and census-tract geographies.
+  humanURL: https://fred.stlouisfed.org/docs/api/fred/
+  baseURL: https://api.stlouisfed.org/fred
+  tags:
+  - Shapes
+  properties:
+  - type: OpenAPI
+    url: openapi/fred-shapes-api-openapi.yml
+  - type: Documentation
+    url: https://fred.stlouisfed.org/docs/api/fred/
+  - type: Overview
+    url: https://fred.stlouisfed.org/docs/api/fred/overview.html
+  - type: APIKey
+    url: https://fred.stlouisfed.org/docs/api/api_key.html
+  - type: TermsOfService
+    url: https://fred.stlouisfed.org/legal/
+  - type: Authentication
+    url: https://fred.stlouisfed.org/docs/api/api_key.html
+  - type: RealTimePeriods
+    url: https://fred.stlouisfed.org/docs/api/fred/realtime_period.html
+  - type: Documentation
+    url: https://fred.stlouisfed.org/docs/api/geofred/
+- aid: fred:fred-sources-api
+  name: FRED Sources API
+  description: >-
+    Originating institutions for FRED series (BLS, BEA, OECD, etc.) and the releases they publish.
+  humanURL: https://fred.stlouisfed.org/docs/api/fred/
+  baseURL: https://api.stlouisfed.org/fred
+  tags:
+  - Sources
+  properties:
+  - type: OpenAPI
+    url: openapi/fred-sources-api-openapi.yml
+  - type: Documentation
+    url: https://fred.stlouisfed.org/docs/api/fred/
+  - type: Overview
+    url: https://fred.stlouisfed.org/docs/api/fred/overview.html
+  - type: APIKey
+    url: https://fred.stlouisfed.org/docs/api/api_key.html
+  - type: TermsOfService
+    url: https://fred.stlouisfed.org/legal/
+  - type: Authentication
+    url: https://fred.stlouisfed.org/docs/api/api_key.html
+  - type: RealTimePeriods
+    url: https://fred.stlouisfed.org/docs/api/fred/realtime_period.html
+  - type: Documentation
+    url: https://fred.stlouisfed.org/docs/api/geofred/
+- aid: fred:fred-tags-api
+  name: FRED Tags API
+  description: Faceted classification across FRED — tag listings, related tags, and tag-matched series.
+  humanURL: https://fred.stlouisfed.org/docs/api/fred/
+  baseURL: https://api.stlouisfed.org/fred
+  tags:
+  - Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/fred-tags-api-openapi.yml
+  - type: Documentation
+    url: https://fred.stlouisfed.org/docs/api/fred/
+  - type: Overview
+    url: https://fred.stlouisfed.org/docs/api/fred/overview.html
+  - type: APIKey
+    url: https://fred.stlouisfed.org/docs/api/api_key.html
+  - type: TermsOfService
+    url: https://fred.stlouisfed.org/legal/
+  - type: Authentication
+    url: https://fred.stlouisfed.org/docs/api/api_key.html
+  - type: RealTimePeriods
+    url: https://fred.stlouisfed.org/docs/api/fred/realtime_period.html
+  - type: Documentation
+    url: https://fred.stlouisfed.org/docs/api/geofred/
 common:
   - type: AgenticAccess
     url: agentic-access/fred-agentic-access.yml
