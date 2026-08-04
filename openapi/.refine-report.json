@@ -1,0 +1,32 @@
+{
+  "provider": "fred",
+  "sources": [
+    "fred-categories-api-openapi.yml",
+    "fred-observations-api-openapi.yml",
+    "fred-regional-data-api-openapi.yml",
+    "fred-releases-api-openapi.yml",
+    "fred-series-api-openapi.yml",
+    "fred-series-data-api-openapi.yml",
+    "fred-series-group-api-openapi.yml",
+    "fred-shapes-api-openapi.yml",
+    "fred-sources-api-openapi.yml",
+    "fred-tags-api-openapi.yml"
+  ],
+  "outputs": [
+    "fred-categories-api-openapi.yml",
+    "fred-observations-api-openapi.yml",
+    "fred-regional-data-api-openapi.yml",
+    "fred-releases-api-openapi.yml",
+    "fred-series-api-openapi.yml",
+    "fred-series-data-api-openapi.yml",
+    "fred-series-group-api-openapi.yml",
+    "fred-shapes-api-openapi.yml",
+    "fred-sources-api-openapi.yml",
+    "fred-tags-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
