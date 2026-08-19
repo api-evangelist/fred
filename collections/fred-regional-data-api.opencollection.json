@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "FRED Maps API (GeoFRED) Categories Regional Data API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Regional Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "FRED Get Regional Data by Series Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stlouisfed.org/geofred/regional/data",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abcdef0123456789abcdef0123456789",
+                "type": "query",
+                "description": "32-character lower-case alphanumeric FRED API key."
+              },
+              {
+                "name": "file_type",
+                "value": "json",
+                "type": "query",
+                "description": "Response format — json or xml."
+              },
+              {
+                "name": "series_group",
+                "value": "1223",
+                "type": "query",
+                "description": "ID for a group of series found in FRED."
+              },
+              {
+                "name": "region_type",
+                "value": "state",
+                "type": "query",
+                "description": "Geography to pull data for."
+              },
+              {
+                "name": "date",
+                "value": "2026-04-01",
+                "type": "query",
+                "description": "Date you want data from (YYYY-MM-DD)."
+              },
+              {
+                "name": "start_date",
+                "value": "2026-01-01",
+                "type": "query",
+                "description": "Optional start date for a range query."
+              },
+              {
+                "name": "season",
+                "value": "SA",
+                "type": "query",
+                "description": "Seasonal-adjustment treatment."
+              },
+              {
+                "name": "units",
+                "value": "lin",
+                "type": "query",
+                "description": "Units of the series you want to pull (e.g. Dollars"
+              },
+              {
+                "name": "frequency",
+                "value": "m",
+                "type": "query",
+                "description": "Data frequency code."
+              },
+              {
+                "name": "transformation",
+                "value": "lin",
+                "type": "query",
+                "description": "Unit transformation applied to the data."
+              },
+              {
+                "name": "aggregation_method",
+                "value": "avg",
+                "type": "query",
+                "description": "Method used to aggregate values when frequency is supplied."
+              }
+            ]
+          },
+          "docs": "Get regional data values across a geography for a series group."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

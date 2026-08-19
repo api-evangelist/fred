@@ -1,0 +1,263 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "FRED Maps API (GeoFRED) Categories Tags API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "FRED Get FRED Tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stlouisfed.org/geofred/tags",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abcdef0123456789abcdef0123456789",
+                "type": "query",
+                "description": "32-character lower-case alphanumeric FRED API key."
+              },
+              {
+                "name": "file_type",
+                "value": "json",
+                "type": "query",
+                "description": "Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv."
+              },
+              {
+                "name": "realtime_start",
+                "value": "2026-05-28",
+                "type": "query",
+                "description": "Start of the real-time period (YYYY-MM-DD). Defaults to today."
+              },
+              {
+                "name": "realtime_end",
+                "value": "2026-05-28",
+                "type": "query",
+                "description": "End of the real-time period (YYYY-MM-DD). Defaults to today."
+              },
+              {
+                "name": "tag_names",
+                "value": "monthly;usa",
+                "type": "query",
+                "description": "Semicolon-separated list of tag names to require."
+              },
+              {
+                "name": "tag_group_id",
+                "value": "freq",
+                "type": "query",
+                "description": "Group identifier for tags — freq, gen, geo, geot, rls, seas, src."
+              },
+              {
+                "name": "search_text",
+                "value": "monetary aggregates",
+                "type": "query",
+                "description": "Words to match against tag names and descriptions."
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "Maximum number of results to return (1–1000)."
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query",
+                "description": "Non-negative integer offset into the result set for pagination."
+              },
+              {
+                "name": "order_by",
+                "value": "series_count",
+                "type": "query",
+                "description": "Field to order tag results by."
+              },
+              {
+                "name": "sort_order",
+                "value": "asc",
+                "type": "query",
+                "description": "Sort order. asc (ascending, default) or desc (descending)."
+              }
+            ]
+          },
+          "docs": "Get FRED tags. Optionally filtered by tag names, group_id, or search text."
+        },
+        {
+          "info": {
+            "name": "FRED Get the Related FRED Tags for One or More FRED Tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stlouisfed.org/geofred/related_tags",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abcdef0123456789abcdef0123456789",
+                "type": "query",
+                "description": "32-character lower-case alphanumeric FRED API key."
+              },
+              {
+                "name": "file_type",
+                "value": "json",
+                "type": "query",
+                "description": "Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv."
+              },
+              {
+                "name": "realtime_start",
+                "value": "2026-05-28",
+                "type": "query",
+                "description": "Start of the real-time period (YYYY-MM-DD). Defaults to today."
+              },
+              {
+                "name": "realtime_end",
+                "value": "2026-05-28",
+                "type": "query",
+                "description": "End of the real-time period (YYYY-MM-DD). Defaults to today."
+              },
+              {
+                "name": "tag_names",
+                "value": "monthly;usa",
+                "type": "query",
+                "description": "Semicolon-separated list of tag names to require."
+              },
+              {
+                "name": "exclude_tag_names",
+                "value": "discontinued",
+                "type": "query",
+                "description": "Semicolon-separated list of tag names to exclude."
+              },
+              {
+                "name": "tag_group_id",
+                "value": "freq",
+                "type": "query",
+                "description": "Group identifier for tags — freq, gen, geo, geot, rls, seas, src."
+              },
+              {
+                "name": "search_text",
+                "value": "monetary aggregates",
+                "type": "query",
+                "description": "Words to match against tag names and descriptions."
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "Maximum number of results to return (1–1000)."
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query",
+                "description": "Non-negative integer offset into the result set for pagination."
+              },
+              {
+                "name": "order_by",
+                "value": "series_count",
+                "type": "query",
+                "description": "Field to order tag results by."
+              },
+              {
+                "name": "sort_order",
+                "value": "asc",
+                "type": "query",
+                "description": "Sort order. asc (ascending, default) or desc (descending)."
+              }
+            ]
+          },
+          "docs": "Get the related FRED tags for one or more FRED tags. Related tags are tags assigned to series that also have all of the tag_names tags."
+        },
+        {
+          "info": {
+            "name": "FRED Get the Series Matching All Tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stlouisfed.org/geofred/tags/series",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abcdef0123456789abcdef0123456789",
+                "type": "query",
+                "description": "32-character lower-case alphanumeric FRED API key."
+              },
+              {
+                "name": "file_type",
+                "value": "json",
+                "type": "query",
+                "description": "Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv."
+              },
+              {
+                "name": "tag_names",
+                "value": "monthly;usa",
+                "type": "query",
+                "description": "Semicolon-separated list of tag names to require."
+              },
+              {
+                "name": "exclude_tag_names",
+                "value": "discontinued",
+                "type": "query",
+                "description": "Semicolon-separated list of tag names to exclude."
+              },
+              {
+                "name": "realtime_start",
+                "value": "2026-05-28",
+                "type": "query",
+                "description": "Start of the real-time period (YYYY-MM-DD). Defaults to today."
+              },
+              {
+                "name": "realtime_end",
+                "value": "2026-05-28",
+                "type": "query",
+                "description": "End of the real-time period (YYYY-MM-DD). Defaults to today."
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "Maximum number of results to return (1–1000)."
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query",
+                "description": "Non-negative integer offset into the result set for pagination."
+              },
+              {
+                "name": "order_by",
+                "value": "series_count",
+                "type": "query",
+                "description": "Field to order series results by."
+              },
+              {
+                "name": "sort_order",
+                "value": "asc",
+                "type": "query",
+                "description": "Sort order. asc (ascending, default) or desc (descending)."
+              }
+            ]
+          },
+          "docs": "Get the series matching all of the supplied tags."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

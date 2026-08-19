@@ -1,0 +1,51 @@
+# Kin Score artifact — fred — 2026-08-19T082702
+# The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
+---
+kin_score:
+  slug: fred
+  schema_version: 0.12.0
+  scored_at: '2026-08-19'
+  run_ts: 2026-08-19T082702
+  composite: 41.9
+  band: developing
+  facets:
+    discoverability: 81.5
+    contract_quality: 21.7
+    governance: 54.5
+    operational_transparency: 36.8
+    developer_ergonomics: 40.5
+    commercial_clarity: 31.6
+    contract_governance: 54.5
+    access_clarity: 31.6
+  agent_readiness:
+    score: 41.8
+    band: agent-ready
+    dimensions:
+      spec_presence: true
+      agentic_access: derived
+      reversibility_documented: na
+      mcp_server: false
+      auth_clarity: true
+      idempotency: na
+      error_semantics: false
+      openapi_examples: verified
+      rate_limit_signal: documented
+      event_surface_described: false
+      agent_skills: false
+      well_known_catalog: false
+      consent_identity: false
+      agent_card: false
+      dry_run_mode: na
+  regulatory:
+    applies: true
+    regime: Government & Public Sector
+    regime_id: government
+    score: 38.9
+    matched_via: tags
+  provenance:
+    agentic_access: derived
+    contracts:
+      total: 10
+      derived: 10
+      coverage: 100.0
+      callable: 100.0

@@ -1,0 +1,129 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "FRED Maps API (GeoFRED) Categories Observations API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Observations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "FRED Get the Observations or Data Values for an Economic Data Series",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stlouisfed.org/geofred/series/observations",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abcdef0123456789abcdef0123456789",
+                "type": "query",
+                "description": "32-character lower-case alphanumeric FRED API key."
+              },
+              {
+                "name": "file_type",
+                "value": "json",
+                "type": "query",
+                "description": "Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv."
+              },
+              {
+                "name": "series_id",
+                "value": "UNRATE",
+                "type": "query",
+                "description": "The FRED series ID."
+              },
+              {
+                "name": "realtime_start",
+                "value": "2026-05-28",
+                "type": "query",
+                "description": "Start of the real-time period (YYYY-MM-DD). Defaults to today."
+              },
+              {
+                "name": "realtime_end",
+                "value": "2026-05-28",
+                "type": "query",
+                "description": "End of the real-time period (YYYY-MM-DD). Defaults to today."
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "Maximum number of observations to return (1–100000)."
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query",
+                "description": "Non-negative integer offset into the result set for pagination."
+              },
+              {
+                "name": "sort_order",
+                "value": "asc",
+                "type": "query",
+                "description": "Sort by observation_date."
+              },
+              {
+                "name": "observation_start",
+                "value": "2020-01-01",
+                "type": "query",
+                "description": "Earliest observation date (YYYY-MM-DD)."
+              },
+              {
+                "name": "observation_end",
+                "value": "2026-04-01",
+                "type": "query",
+                "description": "Latest observation date (YYYY-MM-DD)."
+              },
+              {
+                "name": "units",
+                "value": "lin",
+                "type": "query",
+                "description": "Unit transformation applied to the data."
+              },
+              {
+                "name": "frequency",
+                "value": "m",
+                "type": "query",
+                "description": "Frequency to aggregate the series to."
+              },
+              {
+                "name": "aggregation_method",
+                "value": "avg",
+                "type": "query",
+                "description": "How to aggregate when a frequency is supplied."
+              },
+              {
+                "name": "output_type",
+                "value": "1",
+                "type": "query",
+                "description": "Observations output type. 1=observations by real-time period"
+              },
+              {
+                "name": "vintage_dates",
+                "value": "2024-01-15,2025-01-15",
+                "type": "query",
+                "description": "Comma-separated list of YYYY-MM-DD vintage dates."
+              }
+            ]
+          },
+          "docs": "Get the observations or data values for an economic data series. Supports frequency aggregation and unit transformations."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

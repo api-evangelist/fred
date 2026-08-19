@@ -1,0 +1,611 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "FRED Maps API (GeoFRED) Categories Series API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Series",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "FRED Get an Economic Data Series",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stlouisfed.org/geofred/series",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abcdef0123456789abcdef0123456789",
+                "type": "query",
+                "description": "32-character lower-case alphanumeric FRED API key."
+              },
+              {
+                "name": "file_type",
+                "value": "json",
+                "type": "query",
+                "description": "Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv."
+              },
+              {
+                "name": "series_id",
+                "value": "UNRATE",
+                "type": "query",
+                "description": "The FRED series ID (e.g. GNPCA"
+              },
+              {
+                "name": "realtime_start",
+                "value": "2026-05-28",
+                "type": "query",
+                "description": "Start of the real-time period (YYYY-MM-DD). Defaults to today."
+              },
+              {
+                "name": "realtime_end",
+                "value": "2026-05-28",
+                "type": "query",
+                "description": "End of the real-time period (YYYY-MM-DD). Defaults to today."
+              }
+            ]
+          },
+          "docs": "Get an economic data series by ID."
+        },
+        {
+          "info": {
+            "name": "FRED Get the Categories for an Economic Data Series",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stlouisfed.org/geofred/series/categories",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abcdef0123456789abcdef0123456789",
+                "type": "query",
+                "description": "32-character lower-case alphanumeric FRED API key."
+              },
+              {
+                "name": "file_type",
+                "value": "json",
+                "type": "query",
+                "description": "Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv."
+              },
+              {
+                "name": "series_id",
+                "value": "UNRATE",
+                "type": "query",
+                "description": "The FRED series ID."
+              },
+              {
+                "name": "realtime_start",
+                "value": "2026-05-28",
+                "type": "query",
+                "description": "Start of the real-time period (YYYY-MM-DD). Defaults to today."
+              },
+              {
+                "name": "realtime_end",
+                "value": "2026-05-28",
+                "type": "query",
+                "description": "End of the real-time period (YYYY-MM-DD). Defaults to today."
+              }
+            ]
+          },
+          "docs": "Get the categories for an economic data series."
+        },
+        {
+          "info": {
+            "name": "FRED Get the Release for an Economic Data Series",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stlouisfed.org/geofred/series/release",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abcdef0123456789abcdef0123456789",
+                "type": "query",
+                "description": "32-character lower-case alphanumeric FRED API key."
+              },
+              {
+                "name": "file_type",
+                "value": "json",
+                "type": "query",
+                "description": "Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv."
+              },
+              {
+                "name": "series_id",
+                "value": "UNRATE",
+                "type": "query",
+                "description": "The FRED series ID."
+              },
+              {
+                "name": "realtime_start",
+                "value": "2026-05-28",
+                "type": "query",
+                "description": "Start of the real-time period (YYYY-MM-DD). Defaults to today."
+              },
+              {
+                "name": "realtime_end",
+                "value": "2026-05-28",
+                "type": "query",
+                "description": "End of the real-time period (YYYY-MM-DD). Defaults to today."
+              }
+            ]
+          },
+          "docs": "Get the release for an economic data series."
+        },
+        {
+          "info": {
+            "name": "FRED Get Economic Data Series That Match Keywords",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stlouisfed.org/geofred/series/search",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abcdef0123456789abcdef0123456789",
+                "type": "query",
+                "description": "32-character lower-case alphanumeric FRED API key."
+              },
+              {
+                "name": "file_type",
+                "value": "json",
+                "type": "query",
+                "description": "Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv."
+              },
+              {
+                "name": "search_text",
+                "value": "monetary aggregates",
+                "type": "query",
+                "description": "Words to match against series IDs"
+              },
+              {
+                "name": "search_type",
+                "value": "",
+                "type": "query",
+                "description": "Type of search."
+              },
+              {
+                "name": "realtime_start",
+                "value": "2026-05-28",
+                "type": "query",
+                "description": "Start of the real-time period (YYYY-MM-DD). Defaults to today."
+              },
+              {
+                "name": "realtime_end",
+                "value": "2026-05-28",
+                "type": "query",
+                "description": "End of the real-time period (YYYY-MM-DD). Defaults to today."
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "Maximum number of results to return (1–1000)."
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query",
+                "description": "Non-negative integer offset into the result set for pagination."
+              },
+              {
+                "name": "order_by",
+                "value": "series_count",
+                "type": "query",
+                "description": "Ordering field."
+              },
+              {
+                "name": "sort_order",
+                "value": "asc",
+                "type": "query",
+                "description": "Sort order. asc (ascending, default) or desc (descending)."
+              },
+              {
+                "name": "filter_variable",
+                "value": "frequency",
+                "type": "query",
+                "description": "Attribute to filter series results by."
+              },
+              {
+                "name": "filter_value",
+                "value": "monthly",
+                "type": "query",
+                "description": "Value of the filter_variable attribute to match."
+              },
+              {
+                "name": "tag_names",
+                "value": "monthly;usa",
+                "type": "query",
+                "description": "Semicolon-separated list of tag names to require."
+              },
+              {
+                "name": "exclude_tag_names",
+                "value": "discontinued",
+                "type": "query",
+                "description": "Semicolon-separated list of tag names to exclude."
+              }
+            ]
+          },
+          "docs": "Get economic data series that match keywords."
+        },
+        {
+          "info": {
+            "name": "FRED Get the Tags for a Series Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stlouisfed.org/geofred/series/search/tags",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abcdef0123456789abcdef0123456789",
+                "type": "query",
+                "description": "32-character lower-case alphanumeric FRED API key."
+              },
+              {
+                "name": "file_type",
+                "value": "json",
+                "type": "query",
+                "description": "Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv."
+              },
+              {
+                "name": "series_search_text",
+                "value": "monetary",
+                "type": "query",
+                "description": "Words to match against series titles."
+              },
+              {
+                "name": "realtime_start",
+                "value": "2026-05-28",
+                "type": "query",
+                "description": "Start of the real-time period (YYYY-MM-DD). Defaults to today."
+              },
+              {
+                "name": "realtime_end",
+                "value": "2026-05-28",
+                "type": "query",
+                "description": "End of the real-time period (YYYY-MM-DD). Defaults to today."
+              },
+              {
+                "name": "tag_names",
+                "value": "monthly;usa",
+                "type": "query",
+                "description": "Semicolon-separated list of tag names to require."
+              },
+              {
+                "name": "tag_group_id",
+                "value": "freq",
+                "type": "query",
+                "description": "Group identifier for tags — freq, gen, geo, geot, rls, seas, src."
+              },
+              {
+                "name": "tag_search_text",
+                "value": "usa",
+                "type": "query",
+                "description": "Words to match against tag names."
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "Maximum number of results to return (1–1000)."
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query",
+                "description": "Non-negative integer offset into the result set for pagination."
+              },
+              {
+                "name": "order_by",
+                "value": "series_count",
+                "type": "query",
+                "description": "Field to order tag results by."
+              },
+              {
+                "name": "sort_order",
+                "value": "asc",
+                "type": "query",
+                "description": "Sort order. asc (ascending, default) or desc (descending)."
+              }
+            ]
+          },
+          "docs": "Get the FRED tags for a series search. Find tags that match the search text and are also assigned to series matching that search."
+        },
+        {
+          "info": {
+            "name": "FRED Get the Related Tags for a Series Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stlouisfed.org/geofred/series/search/related_tags",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abcdef0123456789abcdef0123456789",
+                "type": "query",
+                "description": "32-character lower-case alphanumeric FRED API key."
+              },
+              {
+                "name": "file_type",
+                "value": "json",
+                "type": "query",
+                "description": "Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv."
+              },
+              {
+                "name": "series_search_text",
+                "value": "monetary",
+                "type": "query",
+                "description": "Words to match against series titles."
+              },
+              {
+                "name": "realtime_start",
+                "value": "2026-05-28",
+                "type": "query",
+                "description": "Start of the real-time period (YYYY-MM-DD). Defaults to today."
+              },
+              {
+                "name": "realtime_end",
+                "value": "2026-05-28",
+                "type": "query",
+                "description": "End of the real-time period (YYYY-MM-DD). Defaults to today."
+              },
+              {
+                "name": "tag_names",
+                "value": "monthly;usa",
+                "type": "query",
+                "description": "Semicolon-separated list of tag names to require."
+              },
+              {
+                "name": "exclude_tag_names",
+                "value": "discontinued",
+                "type": "query",
+                "description": "Semicolon-separated list of tag names to exclude."
+              },
+              {
+                "name": "tag_group_id",
+                "value": "freq",
+                "type": "query",
+                "description": "Group identifier for tags — freq, gen, geo, geot, rls, seas, src."
+              },
+              {
+                "name": "tag_search_text",
+                "value": "usa",
+                "type": "query",
+                "description": "Words to match against tag names."
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "Maximum number of results to return (1–1000)."
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query",
+                "description": "Non-negative integer offset into the result set for pagination."
+              },
+              {
+                "name": "order_by",
+                "value": "series_count",
+                "type": "query",
+                "description": "Field to order tag results by."
+              },
+              {
+                "name": "sort_order",
+                "value": "asc",
+                "type": "query",
+                "description": "Sort order. asc (ascending, default) or desc (descending)."
+              }
+            ]
+          },
+          "docs": "Get the related FRED tags for one or more FRED tags matching a series search."
+        },
+        {
+          "info": {
+            "name": "FRED Get the Tags for an Economic Data Series",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stlouisfed.org/geofred/series/tags",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abcdef0123456789abcdef0123456789",
+                "type": "query",
+                "description": "32-character lower-case alphanumeric FRED API key."
+              },
+              {
+                "name": "file_type",
+                "value": "json",
+                "type": "query",
+                "description": "Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv."
+              },
+              {
+                "name": "series_id",
+                "value": "UNRATE",
+                "type": "query",
+                "description": "The FRED series ID."
+              },
+              {
+                "name": "realtime_start",
+                "value": "2026-05-28",
+                "type": "query",
+                "description": "Start of the real-time period (YYYY-MM-DD). Defaults to today."
+              },
+              {
+                "name": "realtime_end",
+                "value": "2026-05-28",
+                "type": "query",
+                "description": "End of the real-time period (YYYY-MM-DD). Defaults to today."
+              },
+              {
+                "name": "order_by",
+                "value": "series_count",
+                "type": "query",
+                "description": "Field to order tag results by."
+              },
+              {
+                "name": "sort_order",
+                "value": "asc",
+                "type": "query",
+                "description": "Sort order. asc (ascending, default) or desc (descending)."
+              }
+            ]
+          },
+          "docs": "Get the FRED tags for an economic data series."
+        },
+        {
+          "info": {
+            "name": "FRED Get Economic Data Series Sorted by Last Updated Date",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stlouisfed.org/geofred/series/updates",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abcdef0123456789abcdef0123456789",
+                "type": "query",
+                "description": "32-character lower-case alphanumeric FRED API key."
+              },
+              {
+                "name": "file_type",
+                "value": "json",
+                "type": "query",
+                "description": "Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv."
+              },
+              {
+                "name": "realtime_start",
+                "value": "2026-05-28",
+                "type": "query",
+                "description": "Start of the real-time period (YYYY-MM-DD). Defaults to today."
+              },
+              {
+                "name": "realtime_end",
+                "value": "2026-05-28",
+                "type": "query",
+                "description": "End of the real-time period (YYYY-MM-DD). Defaults to today."
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "Maximum number of results to return (1–1000)."
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query",
+                "description": "Non-negative integer offset into the result set for pagination."
+              },
+              {
+                "name": "filter_value",
+                "value": "monthly",
+                "type": "query",
+                "description": "Filter results by audience."
+              },
+              {
+                "name": "start_time",
+                "value": "202601010000",
+                "type": "query",
+                "description": "Lower bound for when a series was updated (YYYYMMDDHhmm)."
+              },
+              {
+                "name": "end_time",
+                "value": "202605280000",
+                "type": "query",
+                "description": "Upper bound for when a series was updated (YYYYMMDDHhmm)."
+              }
+            ]
+          },
+          "docs": "Get economic data series sorted by when observations were updated on the FRED server."
+        },
+        {
+          "info": {
+            "name": "FRED Get the Dates in History When a Series Was Revised or Newly Released",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stlouisfed.org/geofred/series/vintagedates",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abcdef0123456789abcdef0123456789",
+                "type": "query",
+                "description": "32-character lower-case alphanumeric FRED API key."
+              },
+              {
+                "name": "file_type",
+                "value": "json",
+                "type": "query",
+                "description": "Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv."
+              },
+              {
+                "name": "series_id",
+                "value": "UNRATE",
+                "type": "query",
+                "description": "The FRED series ID."
+              },
+              {
+                "name": "realtime_start",
+                "value": "2026-05-28",
+                "type": "query",
+                "description": "Start of the real-time period (YYYY-MM-DD). Defaults to today."
+              },
+              {
+                "name": "realtime_end",
+                "value": "2026-05-28",
+                "type": "query",
+                "description": "End of the real-time period (YYYY-MM-DD). Defaults to today."
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "Maximum number of results to return (1–10000)."
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query",
+                "description": "Non-negative integer offset into the result set for pagination."
+              },
+              {
+                "name": "sort_order",
+                "value": "asc",
+                "type": "query",
+                "description": "Sort by vintage_date."
+              }
+            ]
+          },
+          "docs": "Get the dates in history when a series' data values were revised or new data values were released."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,177 @@
+{
+  "item": [
+    {
+      "id": "d5fe8225-98c0-4238-aa53-111c74fb1cfd",
+      "name": "Series Data",
+      "description": {
+        "content": "Regional data values attached to a specific FRED series.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "969e73af-4bc1-48d4-afd0-d3a15402ae62",
+          "name": "FRED Get Regional Data Values for a Series",
+          "request": {
+            "name": "FRED Get Regional Data Values for a Series",
+            "description": {
+              "content": "Get regional data values attached to a specific FRED series.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "series",
+                "data"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) 32-character lower-case alphanumeric FRED API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "file_type",
+                  "value": "json",
+                  "description": "Response format — json or xml."
+                },
+                {
+                  "disabled": false,
+                  "key": "series_id",
+                  "value": "<string>",
+                  "description": "(Required) The FRED series ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "<date>",
+                  "description": "Date for the data values (YYYY-MM-DD). Defaults to the most recent."
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "Optional start date for a range query."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "103e663f-7442-4cf3-af1e-a92c8641d21d",
+              "name": "Regional data values for the series.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "series",
+                    "data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abcdef0123456789abcdef0123456789"
+                    },
+                    {
+                      "key": "file_type",
+                      "value": "json"
+                    },
+                    {
+                      "key": "series_id",
+                      "value": "UNRATE"
+                    },
+                    {
+                      "key": "date",
+                      "value": "2026-04-01"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2026-01-01"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"title\": \"All Employees: Total Nonfarm\",\n    \"region\": \"state\",\n    \"seasonality\": \"Seasonally Adjusted\",\n    \"units\": \"Thousands of Persons\",\n    \"frequency\": \"Monthly\",\n    \"data\": {\n      \"2026-04-01\": [\n        {\n          \"region\": \"California\",\n          \"code\": \"06\",\n          \"value\": 17920.5,\n          \"series_id\": \"CANA\"\n        },\n        {\n          \"region\": \"Missouri\",\n          \"code\": \"29\",\n          \"value\": 2960.1,\n          \"series_id\": \"MONA\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.stlouisfed.org/geofred",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0fa24e45-e32d-4aae-85e1-cba550140d2a",
+    "name": "FRED Maps API (GeoFRED) Categories Series Data API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "GeoFRED (the FRED Maps API) exposes geographic / regional views of FRED economic data. Series-group metadata, regional-data lookups across geographies (state, county, MSA, country, census tract, etc.), and GeoJSON shape files for cartographic rendering of FRED indicators.\n\nContact Support:\n Name: Federal Reserve Bank of St. Louis — Research Division",
+      "type": "text/plain"
+    }
+  }
+}

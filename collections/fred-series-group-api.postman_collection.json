@@ -1,0 +1,157 @@
+{
+  "item": [
+    {
+      "id": "a491b337-041a-41ee-a558-764d98c5ac7a",
+      "name": "Series Group",
+      "description": {
+        "content": "Series-group metadata — the regional identifier and supported region types for a series.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f4580bb9-77e2-40c0-8808-f19ffe997578",
+          "name": "FRED Get the Series Group for a Series",
+          "request": {
+            "name": "FRED Get the Series Group for a Series",
+            "description": {
+              "content": "Get the series group information for a regional data series. The series group identifier groups a collection of series matched along geography, units, frequency, and seasonal adjustment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "series",
+                "group"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) 32-character lower-case alphanumeric FRED API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "file_type",
+                  "value": "json",
+                  "description": "Response format — json or xml."
+                },
+                {
+                  "disabled": false,
+                  "key": "series_id",
+                  "value": "<string>",
+                  "description": "(Required) The FRED series ID."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "36f2ee82-c8f1-40e6-9624-8d979a11f789",
+              "name": "Series group metadata.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "series",
+                    "group"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abcdef0123456789abcdef0123456789"
+                    },
+                    {
+                      "key": "file_type",
+                      "value": "json"
+                    },
+                    {
+                      "key": "series_id",
+                      "value": "UNRATE"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"All Employees: Total Nonfarm\",\n  \"region_type\": \"state\",\n  \"series_group\": \"1223\",\n  \"season\": \"SA\",\n  \"units\": \"Thousands of Persons\",\n  \"frequency\": \"Monthly\",\n  \"min_date\": \"1990-01-01\",\n  \"max_date\": \"2026-04-01\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.stlouisfed.org/geofred",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3988329a-7d52-450b-9a3e-05bb4eeae5b4",
+    "name": "FRED Maps API (GeoFRED) Categories Series Group API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "GeoFRED (the FRED Maps API) exposes geographic / regional views of FRED economic data. Series-group metadata, regional-data lookups across geographies (state, county, MSA, country, census tract, etc.), and GeoJSON shape files for cartographic rendering of FRED indicators.\n\nContact Support:\n Name: Federal Reserve Bank of St. Louis — Research Division",
+      "type": "text/plain"
+    }
+  }
+}

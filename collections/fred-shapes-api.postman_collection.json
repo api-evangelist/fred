@@ -1,0 +1,157 @@
+{
+  "item": [
+    {
+      "id": "d69562f5-c411-40cc-989b-73d9327a93fe",
+      "name": "Shapes",
+      "description": {
+        "content": "GeoJSON shape files for state, county, MSA, country, and census-tract geographies.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "17570f4e-537a-48a5-9ed1-ca2678d7634a",
+          "name": "FRED Get GeoJSON Shape Files for a Geographic Type",
+          "request": {
+            "name": "FRED Get GeoJSON Shape Files for a Geographic Type",
+            "description": {
+              "content": "Get GeoJSON shape file data for a given geographic type (state, county, msa, country, etc.). Returns coordinates as quantized integers (not WGS84 lat/lon).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "shapes",
+                "file"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) 32-character lower-case alphanumeric FRED API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "file_type",
+                  "value": "json",
+                  "description": "Response format — json or xml."
+                },
+                {
+                  "disabled": false,
+                  "key": "shape",
+                  "value": "<string>",
+                  "description": "(Required) Geographic type — bea, msa, frb, necta, state, country, county, censusregion, censusdivision."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2660e7e4-8423-4ec0-9284-c4dc88b951ff",
+              "name": "GeoJSON shape collection.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shapes",
+                    "file"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abcdef0123456789abcdef0123456789"
+                    },
+                    {
+                      "key": "file_type",
+                      "value": "json"
+                    },
+                    {
+                      "key": "shape",
+                      "value": "state"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shape\": \"state\",\n  \"features\": [\n    {\n      \"name\": \"California\",\n      \"code\": \"06\",\n      \"centroid\": \"-1219000000,3700000000\",\n      \"geometry\": \"...\"\n    },\n    {\n      \"name\": \"Missouri\",\n      \"code\": \"29\",\n      \"centroid\": \"-922000000,3837000000\",\n      \"geometry\": \"...\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.stlouisfed.org/geofred",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "eb341f8a-524e-4115-853b-ace14a04b378",
+    "name": "FRED Maps API (GeoFRED) Categories Shapes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "GeoFRED (the FRED Maps API) exposes geographic / regional views of FRED economic data. Series-group metadata, regional-data lookups across geographies (state, county, MSA, country, census tract, etc.), and GeoJSON shape files for cartographic rendering of FRED indicators.\n\nContact Support:\n Name: Federal Reserve Bank of St. Louis — Research Division",
+      "type": "text/plain"
+    }
+  }
+}

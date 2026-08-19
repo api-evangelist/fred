@@ -1,0 +1,237 @@
+{
+  "item": [
+    {
+      "id": "d61c5849-6b33-41c1-916c-621d1fdc782b",
+      "name": "Regional Data",
+      "description": {
+        "content": "Regional data values for a series group across a geography.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7e30dc4d-a49c-487a-92bb-36bfab354e66",
+          "name": "FRED Get Regional Data by Series Group",
+          "request": {
+            "name": "FRED Get Regional Data by Series Group",
+            "description": {
+              "content": "Get regional data values across a geography for a series group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "regional",
+                "data"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) 32-character lower-case alphanumeric FRED API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "file_type",
+                  "value": "json",
+                  "description": "Response format — json or xml."
+                },
+                {
+                  "disabled": false,
+                  "key": "series_group",
+                  "value": "<string>",
+                  "description": "(Required) ID for a group of series found in FRED."
+                },
+                {
+                  "disabled": false,
+                  "key": "region_type",
+                  "value": "<string>",
+                  "description": "(Required) Geography to pull data for."
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "<date>",
+                  "description": "(Required) Date you want data from (YYYY-MM-DD)."
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "Optional start date for a range query."
+                },
+                {
+                  "disabled": false,
+                  "key": "season",
+                  "value": "<string>",
+                  "description": "(Required) Seasonal-adjustment treatment."
+                },
+                {
+                  "disabled": false,
+                  "key": "units",
+                  "value": "<string>",
+                  "description": "(Required) Units of the series you want to pull (e.g. Dollars"
+                },
+                {
+                  "disabled": false,
+                  "key": "frequency",
+                  "value": "<string>",
+                  "description": "(Required) Data frequency code."
+                },
+                {
+                  "disabled": false,
+                  "key": "transformation",
+                  "value": "lin",
+                  "description": "Unit transformation applied to the data."
+                },
+                {
+                  "disabled": false,
+                  "key": "aggregation_method",
+                  "value": "avg",
+                  "description": "Method used to aggregate values when frequency is supplied."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3d376253-ddc8-4019-b29d-b91ebf3e1eee",
+              "name": "Regional data values for the series group.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "regional",
+                    "data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abcdef0123456789abcdef0123456789"
+                    },
+                    {
+                      "key": "file_type",
+                      "value": "json"
+                    },
+                    {
+                      "key": "series_group",
+                      "value": "1223"
+                    },
+                    {
+                      "key": "region_type",
+                      "value": "state"
+                    },
+                    {
+                      "key": "date",
+                      "value": "2026-04-01"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2026-01-01"
+                    },
+                    {
+                      "key": "season",
+                      "value": "SA"
+                    },
+                    {
+                      "key": "units",
+                      "value": "lin"
+                    },
+                    {
+                      "key": "frequency",
+                      "value": "m"
+                    },
+                    {
+                      "key": "transformation",
+                      "value": "lin"
+                    },
+                    {
+                      "key": "aggregation_method",
+                      "value": "avg"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"title\": \"All Employees: Total Nonfarm\",\n    \"region\": \"state\",\n    \"seasonality\": \"Seasonally Adjusted\",\n    \"units\": \"Thousands of Persons\",\n    \"frequency\": \"Monthly\",\n    \"data\": {\n      \"2026-04-01\": [\n        {\n          \"region\": \"California\",\n          \"code\": \"06\",\n          \"value\": 17920.5,\n          \"series_id\": \"CANA\"\n        },\n        {\n          \"region\": \"Missouri\",\n          \"code\": \"29\",\n          \"value\": 2960.1,\n          \"series_id\": \"MONA\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.stlouisfed.org/geofred",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "63e2bcca-3d25-4939-993d-bd21ddf90da4",
+    "name": "FRED Maps API (GeoFRED) Categories Regional Data API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "GeoFRED (the FRED Maps API) exposes geographic / regional views of FRED economic data. Series-group metadata, regional-data lookups across geographies (state, county, MSA, country, census tract, etc.), and GeoJSON shape files for cartographic rendering of FRED indicators.\n\nContact Support:\n Name: Federal Reserve Bank of St. Louis — Research Division",
+      "type": "text/plain"
+    }
+  }
+}

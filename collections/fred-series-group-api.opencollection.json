@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "FRED Maps API (GeoFRED) Categories Series Group API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Series Group",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "FRED Get the Series Group for a Series",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stlouisfed.org/geofred/series/group",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abcdef0123456789abcdef0123456789",
+                "type": "query",
+                "description": "32-character lower-case alphanumeric FRED API key."
+              },
+              {
+                "name": "file_type",
+                "value": "json",
+                "type": "query",
+                "description": "Response format — json or xml."
+              },
+              {
+                "name": "series_id",
+                "value": "UNRATE",
+                "type": "query",
+                "description": "The FRED series ID."
+              }
+            ]
+          },
+          "docs": "Get the series group information for a regional data series. The series group identifier groups a collection of series matched along geography, units, frequency, and seasonal adjustment."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

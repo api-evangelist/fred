@@ -1,0 +1,277 @@
+{
+  "item": [
+    {
+      "id": "20ca1bf9-1740-4ff0-89e3-d6c7d8579968",
+      "name": "Observations",
+      "description": {
+        "content": "The underlying time-series data values, with frequency aggregation and unit transformations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2a2901fa-b315-4bb8-8314-a64db6a38fa6",
+          "name": "FRED Get the Observations or Data Values for an Economic Data Series",
+          "request": {
+            "name": "FRED Get the Observations or Data Values for an Economic Data Series",
+            "description": {
+              "content": "Get the observations or data values for an economic data series. Supports frequency aggregation and unit transformations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "series",
+                "observations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) 32-character lower-case alphanumeric FRED API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "file_type",
+                  "value": "xml",
+                  "description": "Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv."
+                },
+                {
+                  "disabled": false,
+                  "key": "series_id",
+                  "value": "<string>",
+                  "description": "(Required) The FRED series ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "realtime_start",
+                  "value": "<date>",
+                  "description": "Start of the real-time period (YYYY-MM-DD). Defaults to today."
+                },
+                {
+                  "disabled": false,
+                  "key": "realtime_end",
+                  "value": "<date>",
+                  "description": "End of the real-time period (YYYY-MM-DD). Defaults to today."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100000",
+                  "description": "Maximum number of observations to return (1–100000)."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Non-negative integer offset into the result set for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_order",
+                  "value": "asc",
+                  "description": "Sort by observation_date."
+                },
+                {
+                  "disabled": false,
+                  "key": "observation_start",
+                  "value": "1776-07-04",
+                  "description": "Earliest observation date (YYYY-MM-DD)."
+                },
+                {
+                  "disabled": false,
+                  "key": "observation_end",
+                  "value": "9999-12-31",
+                  "description": "Latest observation date (YYYY-MM-DD)."
+                },
+                {
+                  "disabled": false,
+                  "key": "units",
+                  "value": "lin",
+                  "description": "Unit transformation applied to the data."
+                },
+                {
+                  "disabled": false,
+                  "key": "frequency",
+                  "value": "<string>",
+                  "description": "Frequency to aggregate the series to."
+                },
+                {
+                  "disabled": false,
+                  "key": "aggregation_method",
+                  "value": "avg",
+                  "description": "How to aggregate when a frequency is supplied."
+                },
+                {
+                  "disabled": false,
+                  "key": "output_type",
+                  "value": "1",
+                  "description": "Observations output type. 1=observations by real-time period"
+                },
+                {
+                  "disabled": false,
+                  "key": "vintage_dates",
+                  "value": "<string>",
+                  "description": "Comma-separated list of YYYY-MM-DD vintage dates."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b82b228b-43fa-4612-b0a6-57a0f3e92191",
+              "name": "Observations for the series.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "series",
+                    "observations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abcdef0123456789abcdef0123456789"
+                    },
+                    {
+                      "key": "file_type",
+                      "value": "json"
+                    },
+                    {
+                      "key": "series_id",
+                      "value": "UNRATE"
+                    },
+                    {
+                      "key": "realtime_start",
+                      "value": "2026-05-28"
+                    },
+                    {
+                      "key": "realtime_end",
+                      "value": "2026-05-28"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "observation_start",
+                      "value": "2020-01-01"
+                    },
+                    {
+                      "key": "observation_end",
+                      "value": "2026-04-01"
+                    },
+                    {
+                      "key": "units",
+                      "value": "lin"
+                    },
+                    {
+                      "key": "frequency",
+                      "value": "m"
+                    },
+                    {
+                      "key": "aggregation_method",
+                      "value": "avg"
+                    },
+                    {
+                      "key": "output_type",
+                      "value": "1"
+                    },
+                    {
+                      "key": "vintage_dates",
+                      "value": "2024-01-15,2025-01-15"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"realtime_start\": \"2026-05-28\",\n  \"realtime_end\": \"2026-05-28\",\n  \"observation_start\": \"2025-01-01\",\n  \"observation_end\": \"2026-04-01\",\n  \"units\": \"lin\",\n  \"output_type\": 1,\n  \"file_type\": \"json\",\n  \"order_by\": \"observation_date\",\n  \"sort_order\": \"asc\",\n  \"count\": 4,\n  \"offset\": 0,\n  \"limit\": 100000,\n  \"observations\": [\n    {\n      \"realtime_start\": \"2026-05-28\",\n      \"realtime_end\": \"2026-05-28\",\n      \"date\": \"2026-01-01\",\n      \"value\": \"4.0\"\n    },\n    {\n      \"realtime_start\": \"2026-05-28\",\n      \"realtime_end\": \"2026-05-28\",\n      \"date\": \"2026-02-01\",\n      \"value\": \"4.1\"\n    },\n    {\n      \"realtime_start\": \"2026-05-28\",\n      \"realtime_end\": \"2026-05-28\",\n      \"date\": \"2026-03-01\",\n      \"value\": \"3.9\"\n    },\n    {\n      \"realtime_start\": \"2026-05-28\",\n      \"realtime_end\": \"2026-05-28\",\n      \"date\": \"2026-04-01\",\n      \"value\": \"4.0\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.stlouisfed.org/geofred",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "53f386d4-54a1-4dae-8564-795a399f9355",
+    "name": "FRED Maps API (GeoFRED) Categories Observations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "GeoFRED (the FRED Maps API) exposes geographic / regional views of FRED economic data. Series-group metadata, regional-data lookups across geographies (state, county, MSA, country, census tract, etc.), and GeoJSON shape files for cartographic rendering of FRED indicators.\n\nContact Support:\n Name: Federal Reserve Bank of St. Louis — Research Division",
+      "type": "text/plain"
+    }
+  }
+}

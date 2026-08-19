@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "FRED Maps API (GeoFRED) Categories Shapes API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Shapes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "FRED Get GeoJSON Shape Files for a Geographic Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stlouisfed.org/geofred/shapes/file",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abcdef0123456789abcdef0123456789",
+                "type": "query",
+                "description": "32-character lower-case alphanumeric FRED API key."
+              },
+              {
+                "name": "file_type",
+                "value": "json",
+                "type": "query",
+                "description": "Response format — json or xml."
+              },
+              {
+                "name": "shape",
+                "value": "state",
+                "type": "query",
+                "description": "Geographic type — bea, msa, frb, necta, state, country, county, censusregion, censusdivision."
+              }
+            ]
+          },
+          "docs": "Get GeoJSON shape file data for a given geographic type (state, county, msa, country, etc.). Returns coordinates as quantized integers (not WGS84 lat/lon)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
