@@ -5,7 +5,7 @@
       "source": "https://fredblog.stlouisfed.org/feed/",
       "feed_url": "https://fredblog.stlouisfed.org/feed/",
       "title": "",
-      "saved": 2,
+      "saved": 0,
       "method": "feed"
     },
     {
@@ -13,10 +13,9 @@
       "feed_url": "https://github.com/public-apis/public-apis",
       "title": "",
       "saved": 0,
-      "method": "none",
-      "error": "parse_failed"
+      "method": "none"
     }
   ],
-  "post_count": 22,
-  "fetched": "2026-08-15T12:11:08Z"
+  "post_count": 24,
+  "fetched": "2026-08-22T20:20:02Z"
 }
