@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: FRED Maps API (GeoFRED) Categories Tags API
   version: '1.0'
@@ -189,23 +189,14 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
-    RealtimeStart:
-      name: realtime_start
+    TagNames:
+      name: tag_names
       in: query
       required: false
-      description: Start of the real-time period (YYYY-MM-DD). Defaults to today.
+      description: Semicolon-separated list of tag names to require.
       schema:
         type: string
-        format: date
-      example: '2026-05-28'
-    ExcludeTagNames:
-      name: exclude_tag_names
-      in: query
-      required: false
-      description: Semicolon-separated list of tag names to exclude.
-      schema:
-        type: string
-      example: discontinued
+      example: monthly;usa
     Offset:
       name: offset
       in: query
@@ -216,98 +207,6 @@ components:
         minimum: 0
         default: 0
       example: 0
-    FileType:
-      name: file_type
-      in: query
-      required: false
-      description: Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.
-      schema:
-        type: string
-        enum:
-        - xml
-        - json
-        - xlsx
-        - csv
-        - txt
-        default: xml
-      example: json
-    SearchText:
-      name: search_text
-      in: query
-      required: false
-      description: Words to match against tag names and descriptions.
-      schema:
-        type: string
-      example: monetary aggregates
-    TagNames:
-      name: tag_names
-      in: query
-      required: false
-      description: Semicolon-separated list of tag names to require.
-      schema:
-        type: string
-      example: monthly;usa
-    SortOrder:
-      name: sort_order
-      in: query
-      required: false
-      description: Sort order. asc (ascending, default) or desc (descending).
-      schema:
-        type: string
-        enum:
-        - asc
-        - desc
-        default: asc
-      example: asc
-    ApiKey:
-      name: api_key
-      in: query
-      required: true
-      description: 32-character lower-case alphanumeric FRED API key.
-      schema:
-        type: string
-        pattern: ^[0-9a-f]{32}$
-      example: abcdef0123456789abcdef0123456789
-    RealtimeEnd:
-      name: realtime_end
-      in: query
-      required: false
-      description: End of the real-time period (YYYY-MM-DD). Defaults to today.
-      schema:
-        type: string
-        format: date
-      example: '2026-05-28'
-    OrderByTags:
-      name: order_by
-      in: query
-      required: false
-      description: Field to order tag results by.
-      schema:
-        type: string
-        enum:
-        - series_count
-        - popularity
-        - created
-        - name
-        - group_id
-        default: series_count
-      example: series_count
-    TagGroupId:
-      name: tag_group_id
-      in: query
-      required: false
-      description: Group identifier for tags — freq, gen, geo, geot, rls, seas, src.
-      schema:
-        type: string
-        enum:
-        - freq
-        - gen
-        - geo
-        - geot
-        - rls
-        - seas
-        - src
-      example: freq
     OrderBySeries:
       name: order_by
       in: query
@@ -329,6 +228,83 @@ components:
         - popularity
         - group_popularity
       example: series_count
+    OrderByTags:
+      name: order_by
+      in: query
+      required: false
+      description: Field to order tag results by.
+      schema:
+        type: string
+        enum:
+        - series_count
+        - popularity
+        - created
+        - name
+        - group_id
+        default: series_count
+      example: series_count
+    RealtimeEnd:
+      name: realtime_end
+      in: query
+      required: false
+      description: End of the real-time period (YYYY-MM-DD). Defaults to today.
+      schema:
+        type: string
+        format: date
+      example: '2026-05-28'
+    RealtimeStart:
+      name: realtime_start
+      in: query
+      required: false
+      description: Start of the real-time period (YYYY-MM-DD). Defaults to today.
+      schema:
+        type: string
+        format: date
+      example: '2026-05-28'
+    ExcludeTagNames:
+      name: exclude_tag_names
+      in: query
+      required: false
+      description: Semicolon-separated list of tag names to exclude.
+      schema:
+        type: string
+      example: discontinued
+    TagGroupId:
+      name: tag_group_id
+      in: query
+      required: false
+      description: Group identifier for tags — freq, gen, geo, geot, rls, seas, src.
+      schema:
+        type: string
+        enum:
+        - freq
+        - gen
+        - geo
+        - geot
+        - rls
+        - seas
+        - src
+      example: freq
+    SearchText:
+      name: search_text
+      in: query
+      required: false
+      description: Words to match against tag names and descriptions.
+      schema:
+        type: string
+      example: monetary aggregates
+    SortOrder:
+      name: sort_order
+      in: query
+      required: false
+      description: Sort order. asc (ascending, default) or desc (descending).
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+        default: asc
+      example: asc
     Limit1000:
       name: limit
       in: query
@@ -340,6 +316,30 @@ components:
         maximum: 1000
         default: 1000
       example: 100
+    ApiKey:
+      name: api_key
+      in: query
+      required: true
+      description: 32-character lower-case alphanumeric FRED API key.
+      schema:
+        type: string
+        pattern: ^[0-9a-f]{32}$
+      example: abcdef0123456789abcdef0123456789
+    FileType:
+      name: file_type
+      in: query
+      required: false
+      description: Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.
+      schema:
+        type: string
+        enum:
+        - xml
+        - json
+        - xlsx
+        - csv
+        - txt
+        default: xml
+      example: json
   schemas:
     Tag:
       type: object
@@ -378,9 +378,9 @@ components:
       required:
       - name
       - group_id
-    TagList:
+    SeriesList:
       type: object
-      description: A list of FRED tags.
+      description: A list of FRED series.
       properties:
         realtime_start:
           type: string
@@ -405,12 +405,13 @@ components:
         limit:
           type: integer
           example: 1000
-        tags:
+        seriess:
           type: array
+          description: Array of series (FRED uses the legacy "seriess" key intentionally).
           items:
-            $ref: '#/components/schemas/Tag'
+            $ref: '#/components/schemas/Series'
       required:
-      - tags
+      - seriess
     Series:
       type: object
       description: A FRED economic data series and its metadata.
@@ -493,9 +494,9 @@ components:
       required:
       - id
       - title
-    SeriesList:
+    TagList:
       type: object
-      description: A list of FRED series.
+      description: A list of FRED tags.
       properties:
         realtime_start:
           type: string
@@ -520,13 +521,12 @@ components:
         limit:
           type: integer
           example: 1000
-        seriess:
+        tags:
           type: array
-          description: Array of series (FRED uses the legacy "seriess" key intentionally).
           items:
-            $ref: '#/components/schemas/Series'
+            $ref: '#/components/schemas/Tag'
       required:
-      - seriess
+      - tags
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

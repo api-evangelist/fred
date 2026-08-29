@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: FRED Maps API (GeoFRED) Categories Releases API
   version: '1.0'
@@ -539,60 +539,43 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
-    RealtimeStart:
-      name: realtime_start
+    TagNames:
+      name: tag_names
       in: query
       required: false
-      description: Start of the real-time period (YYYY-MM-DD). Defaults to today.
+      description: Semicolon-separated list of tag names to require.
+      schema:
+        type: string
+      example: monthly;usa
+    RealtimeEnd:
+      name: realtime_end
+      in: query
+      required: false
+      description: End of the real-time period (YYYY-MM-DD). Defaults to today.
       schema:
         type: string
         format: date
       example: '2026-05-28'
-    Offset:
-      name: offset
+    ExcludeTagNames:
+      name: exclude_tag_names
       in: query
       required: false
-      description: Non-negative integer offset into the result set for pagination.
+      description: Semicolon-separated list of tag names to exclude.
       schema:
-        type: integer
-        minimum: 0
-        default: 0
-      example: 0
-    SortOrder:
-      name: sort_order
+        type: string
+      example: discontinued
+    FilterVariable:
+      name: filter_variable
       in: query
       required: false
-      description: Sort order. asc (ascending, default) or desc (descending).
+      description: Attribute to filter series results by.
       schema:
         type: string
         enum:
-        - asc
-        - desc
-        default: asc
-      example: asc
-    OrderByTags:
-      name: order_by
-      in: query
-      required: false
-      description: Field to order tag results by.
-      schema:
-        type: string
-        enum:
-        - series_count
-        - popularity
-        - created
-        - name
-        - group_id
-        default: series_count
-      example: series_count
-    SearchText:
-      name: search_text
-      in: query
-      required: false
-      description: Words to match against tag names and descriptions.
-      schema:
-        type: string
-      example: monetary aggregates
+        - frequency
+        - units
+        - seasonal_adjustment
+      example: frequency
     FileType:
       name: file_type
       in: query
@@ -608,37 +591,14 @@ components:
         - txt
         default: xml
       example: json
-    FilterValue:
-      name: filter_value
+    SearchText:
+      name: search_text
       in: query
       required: false
-      description: Value of the filter_variable attribute to match.
+      description: Words to match against tag names and descriptions.
       schema:
         type: string
-      example: monthly
-    RealtimeEnd:
-      name: realtime_end
-      in: query
-      required: false
-      description: End of the real-time period (YYYY-MM-DD). Defaults to today.
-      schema:
-        type: string
-        format: date
-      example: '2026-05-28'
-    OrderByReleases:
-      name: order_by
-      in: query
-      required: false
-      description: Field to order release results by.
-      schema:
-        type: string
-        enum:
-        - release_id
-        - name
-        - press_release
-        - realtime_start
-        - realtime_end
-      example: series_count
+      example: monetary aggregates
     Limit10000:
       name: limit
       in: query
@@ -650,22 +610,25 @@ components:
         maximum: 10000
         default: 10000
       example: 100
-    TagGroupId:
-      name: tag_group_id
+    ApiKey:
+      name: api_key
       in: query
-      required: false
-      description: Group identifier for tags — freq, gen, geo, geot, rls, seas, src.
+      required: true
+      description: 32-character lower-case alphanumeric FRED API key.
       schema:
         type: string
-        enum:
-        - freq
-        - gen
-        - geo
-        - geot
-        - rls
-        - seas
-        - src
-      example: freq
+        pattern: ^[0-9a-f]{32}$
+      example: abcdef0123456789abcdef0123456789
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Non-negative integer offset into the result set for pagination.
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+      example: 0
     OrderBySeries:
       name: order_by
       in: query
@@ -687,6 +650,45 @@ components:
         - popularity
         - group_popularity
       example: series_count
+    RealtimeStart:
+      name: realtime_start
+      in: query
+      required: false
+      description: Start of the real-time period (YYYY-MM-DD). Defaults to today.
+      schema:
+        type: string
+        format: date
+      example: '2026-05-28'
+    TagGroupId:
+      name: tag_group_id
+      in: query
+      required: false
+      description: Group identifier for tags — freq, gen, geo, geot, rls, seas, src.
+      schema:
+        type: string
+        enum:
+        - freq
+        - gen
+        - geo
+        - geot
+        - rls
+        - seas
+        - src
+      example: freq
+    OrderByReleases:
+      name: order_by
+      in: query
+      required: false
+      description: Field to order release results by.
+      schema:
+        type: string
+        enum:
+        - release_id
+        - name
+        - press_release
+        - realtime_start
+        - realtime_end
+      example: series_count
     Limit1000:
       name: limit
       in: query
@@ -698,43 +700,41 @@ components:
         maximum: 1000
         default: 1000
       example: 100
-    ExcludeTagNames:
-      name: exclude_tag_names
+    OrderByTags:
+      name: order_by
       in: query
       required: false
-      description: Semicolon-separated list of tag names to exclude.
-      schema:
-        type: string
-      example: discontinued
-    FilterVariable:
-      name: filter_variable
-      in: query
-      required: false
-      description: Attribute to filter series results by.
+      description: Field to order tag results by.
       schema:
         type: string
         enum:
-        - frequency
-        - units
-        - seasonal_adjustment
-      example: frequency
-    TagNames:
-      name: tag_names
+        - series_count
+        - popularity
+        - created
+        - name
+        - group_id
+        default: series_count
+      example: series_count
+    FilterValue:
+      name: filter_value
       in: query
       required: false
-      description: Semicolon-separated list of tag names to require.
+      description: Value of the filter_variable attribute to match.
       schema:
         type: string
-      example: monthly;usa
-    ApiKey:
-      name: api_key
+      example: monthly
+    SortOrder:
+      name: sort_order
       in: query
-      required: true
-      description: 32-character lower-case alphanumeric FRED API key.
+      required: false
+      description: Sort order. asc (ascending, default) or desc (descending).
       schema:
         type: string
-        pattern: ^[0-9a-f]{32}$
-      example: abcdef0123456789abcdef0123456789
+        enum:
+        - asc
+        - desc
+        default: asc
+      example: asc
   schemas:
     Tag:
       type: object
@@ -773,9 +773,9 @@ components:
       required:
       - name
       - group_id
-    ReleaseList:
+    TagList:
       type: object
-      description: A list of FRED releases.
+      description: A list of FRED tags.
       properties:
         realtime_start:
           type: string
@@ -793,7 +793,6 @@ components:
           example: example
         count:
           type: integer
-          description: Total count of releases matched.
           example: 1
         offset:
           type: integer
@@ -801,12 +800,12 @@ components:
         limit:
           type: integer
           example: 1000
-        releases:
+        tags:
           type: array
           items:
-            $ref: '#/components/schemas/Release'
+            $ref: '#/components/schemas/Tag'
       required:
-      - releases
+      - tags
     Release:
       type: object
       description: A FRED release of economic data.
@@ -843,39 +842,6 @@ components:
       required:
       - id
       - name
-    TagList:
-      type: object
-      description: A list of FRED tags.
-      properties:
-        realtime_start:
-          type: string
-          format: date
-          example: '2026-05-28'
-        realtime_end:
-          type: string
-          format: date
-          example: '2026-05-28'
-        order_by:
-          type: string
-          example: example
-        sort_order:
-          type: string
-          example: example
-        count:
-          type: integer
-          example: 1
-        offset:
-          type: integer
-          example: 0
-        limit:
-          type: integer
-          example: 1000
-        tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tag'
-      required:
-      - tags
     SeriesList:
       type: object
       description: A list of FRED series.
@@ -910,6 +876,34 @@ components:
             $ref: '#/components/schemas/Series'
       required:
       - seriess
+    Source:
+      type: object
+      description: An originating source of FRED economic data.
+      properties:
+        id:
+          type: integer
+          example: 1
+        realtime_start:
+          type: string
+          format: date
+          example: '2026-05-28'
+        realtime_end:
+          type: string
+          format: date
+          example: '2026-05-28'
+        name:
+          type: string
+          example: Unemployment Rate
+        link:
+          type: string
+          format: uri
+          example: https://fred.stlouisfed.org/
+        notes:
+          type: string
+          example: Editorial notes.
+      required:
+      - id
+      - name
     ReleaseTable:
       type: object
       description: A release table tree node.
@@ -952,13 +946,10 @@ components:
       required:
       - release_id
       - elements
-    Source:
+    ReleaseList:
       type: object
-      description: An originating source of FRED economic data.
+      description: A list of FRED releases.
       properties:
-        id:
-          type: integer
-          example: 1
         realtime_start:
           type: string
           format: date
@@ -967,19 +958,28 @@ components:
           type: string
           format: date
           example: '2026-05-28'
-        name:
+        order_by:
           type: string
-          example: Unemployment Rate
-        link:
+          example: example
+        sort_order:
           type: string
-          format: uri
-          example: https://fred.stlouisfed.org/
-        notes:
-          type: string
-          example: Editorial notes.
+          example: example
+        count:
+          type: integer
+          description: Total count of releases matched.
+          example: 1
+        offset:
+          type: integer
+          example: 0
+        limit:
+          type: integer
+          example: 1000
+        releases:
+          type: array
+          items:
+            $ref: '#/components/schemas/Release'
       required:
-      - id
-      - name
+      - releases
     ReleaseDate:
       type: object
       description: A scheduled or historical release date.
@@ -1079,39 +1079,6 @@ components:
       required:
       - id
       - title
-    SourceList:
-      type: object
-      description: A list of FRED sources.
-      properties:
-        realtime_start:
-          type: string
-          format: date
-          example: '2026-05-28'
-        realtime_end:
-          type: string
-          format: date
-          example: '2026-05-28'
-        order_by:
-          type: string
-          example: example
-        sort_order:
-          type: string
-          example: example
-        count:
-          type: integer
-          example: 1
-        offset:
-          type: integer
-          example: 0
-        limit:
-          type: integer
-          example: 1000
-        sources:
-          type: array
-          items:
-            $ref: '#/components/schemas/Source'
-      required:
-      - sources
     ReleaseDateList:
       type: object
       description: A list of release dates.
@@ -1145,6 +1112,39 @@ components:
             $ref: '#/components/schemas/ReleaseDate'
       required:
       - release_dates
+    SourceList:
+      type: object
+      description: A list of FRED sources.
+      properties:
+        realtime_start:
+          type: string
+          format: date
+          example: '2026-05-28'
+        realtime_end:
+          type: string
+          format: date
+          example: '2026-05-28'
+        order_by:
+          type: string
+          example: example
+        sort_order:
+          type: string
+          example: example
+        count:
+          type: integer
+          example: 1
+        offset:
+          type: integer
+          example: 0
+        limit:
+          type: integer
+          example: 1000
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+      required:
+      - sources
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

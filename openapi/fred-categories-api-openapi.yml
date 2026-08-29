@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: FRED Maps API (GeoFRED) Categories API
   version: '1.0'
@@ -342,74 +342,44 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    Forbidden:
-      description: Forbidden — API key missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad Request — required parameter missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   parameters:
-    RealtimeStart:
-      name: realtime_start
+    TagNames:
+      name: tag_names
       in: query
       required: false
-      description: Start of the real-time period (YYYY-MM-DD). Defaults to today.
+      description: Semicolon-separated list of tag names to require.
+      schema:
+        type: string
+      example: monthly;usa
+    RealtimeEnd:
+      name: realtime_end
+      in: query
+      required: false
+      description: End of the real-time period (YYYY-MM-DD). Defaults to today.
       schema:
         type: string
         format: date
       example: '2026-05-28'
-    Offset:
-      name: offset
+    ExcludeTagNames:
+      name: exclude_tag_names
       in: query
       required: false
-      description: Non-negative integer offset into the result set for pagination.
+      description: Semicolon-separated list of tag names to exclude.
       schema:
-        type: integer
-        minimum: 0
-        default: 0
-      example: 0
-    SortOrder:
-      name: sort_order
+        type: string
+      example: discontinued
+    FilterVariable:
+      name: filter_variable
       in: query
       required: false
-      description: Sort order. asc (ascending, default) or desc (descending).
+      description: Attribute to filter series results by.
       schema:
         type: string
         enum:
-        - asc
-        - desc
-        default: asc
-      example: asc
-    OrderByTags:
-      name: order_by
-      in: query
-      required: false
-      description: Field to order tag results by.
-      schema:
-        type: string
-        enum:
-        - series_count
-        - popularity
-        - created
-        - name
-        - group_id
-        default: series_count
-      example: series_count
-    SearchText:
-      name: search_text
-      in: query
-      required: false
-      description: Words to match against tag names and descriptions.
-      schema:
-        type: string
-      example: monetary aggregates
+        - frequency
+        - units
+        - seasonal_adjustment
+      example: frequency
     FileType:
       name: file_type
       in: query
@@ -425,39 +395,33 @@ components:
         - txt
         default: xml
       example: json
-    FilterValue:
-      name: filter_value
+    SearchText:
+      name: search_text
       in: query
       required: false
-      description: Value of the filter_variable attribute to match.
+      description: Words to match against tag names and descriptions.
       schema:
         type: string
-      example: monthly
-    RealtimeEnd:
-      name: realtime_end
+      example: monetary aggregates
+    ApiKey:
+      name: api_key
+      in: query
+      required: true
+      description: 32-character lower-case alphanumeric FRED API key.
+      schema:
+        type: string
+        pattern: ^[0-9a-f]{32}$
+      example: abcdef0123456789abcdef0123456789
+    Offset:
+      name: offset
       in: query
       required: false
-      description: End of the real-time period (YYYY-MM-DD). Defaults to today.
+      description: Non-negative integer offset into the result set for pagination.
       schema:
-        type: string
-        format: date
-      example: '2026-05-28'
-    TagGroupId:
-      name: tag_group_id
-      in: query
-      required: false
-      description: Group identifier for tags — freq, gen, geo, geot, rls, seas, src.
-      schema:
-        type: string
-        enum:
-        - freq
-        - gen
-        - geo
-        - geot
-        - rls
-        - seas
-        - src
-      example: freq
+        type: integer
+        minimum: 0
+        default: 0
+      example: 0
     OrderBySeries:
       name: order_by
       in: query
@@ -479,6 +443,31 @@ components:
         - popularity
         - group_popularity
       example: series_count
+    RealtimeStart:
+      name: realtime_start
+      in: query
+      required: false
+      description: Start of the real-time period (YYYY-MM-DD). Defaults to today.
+      schema:
+        type: string
+        format: date
+      example: '2026-05-28'
+    TagGroupId:
+      name: tag_group_id
+      in: query
+      required: false
+      description: Group identifier for tags — freq, gen, geo, geot, rls, seas, src.
+      schema:
+        type: string
+        enum:
+        - freq
+        - gen
+        - geo
+        - geot
+        - rls
+        - seas
+        - src
+      example: freq
     Limit1000:
       name: limit
       in: query
@@ -490,43 +479,41 @@ components:
         maximum: 1000
         default: 1000
       example: 100
-    ExcludeTagNames:
-      name: exclude_tag_names
+    OrderByTags:
+      name: order_by
       in: query
       required: false
-      description: Semicolon-separated list of tag names to exclude.
-      schema:
-        type: string
-      example: discontinued
-    FilterVariable:
-      name: filter_variable
-      in: query
-      required: false
-      description: Attribute to filter series results by.
+      description: Field to order tag results by.
       schema:
         type: string
         enum:
-        - frequency
-        - units
-        - seasonal_adjustment
-      example: frequency
-    TagNames:
-      name: tag_names
+        - series_count
+        - popularity
+        - created
+        - name
+        - group_id
+        default: series_count
+      example: series_count
+    FilterValue:
+      name: filter_value
       in: query
       required: false
-      description: Semicolon-separated list of tag names to require.
+      description: Value of the filter_variable attribute to match.
       schema:
         type: string
-      example: monthly;usa
-    ApiKey:
-      name: api_key
+      example: monthly
+    SortOrder:
+      name: sort_order
       in: query
-      required: true
-      description: 32-character lower-case alphanumeric FRED API key.
+      required: false
+      description: Sort order. asc (ascending, default) or desc (descending).
       schema:
         type: string
-        pattern: ^[0-9a-f]{32}$
-      example: abcdef0123456789abcdef0123456789
+        enum:
+        - asc
+        - desc
+        default: asc
+      example: asc
   schemas:
     Tag:
       type: object
@@ -565,16 +552,6 @@ components:
       required:
       - name
       - group_id
-    CategoryList:
-      type: object
-      description: A list of FRED categories.
-      properties:
-        categories:
-          type: array
-          items:
-            $ref: '#/components/schemas/Category'
-      required:
-      - categories
     TagList:
       type: object
       description: A list of FRED tags.
@@ -608,6 +585,21 @@ components:
             $ref: '#/components/schemas/Tag'
       required:
       - tags
+    ErrorResponse:
+      type: object
+      description: FRED error response.
+      properties:
+        error_code:
+          type: integer
+          description: Numeric error code returned by FRED.
+          example: 400
+        error_message:
+          type: string
+          description: Human-readable error message.
+          example: example
+      required:
+      - error_code
+      - error_message
     SeriesList:
       type: object
       description: A list of FRED series.
@@ -666,21 +658,16 @@ components:
       - id
       - name
       - parent_id
-    ErrorResponse:
+    CategoryList:
       type: object
-      description: FRED error response.
+      description: A list of FRED categories.
       properties:
-        error_code:
-          type: integer
-          description: Numeric error code returned by FRED.
-          example: 400
-        error_message:
-          type: string
-          description: Human-readable error message.
-          example: example
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
       required:
-      - error_code
-      - error_message
+      - categories
     Series:
       type: object
       description: A FRED economic data series and its metadata.
@@ -763,6 +750,19 @@ components:
       required:
       - id
       - title
+  responses:
+    BadRequest:
+      description: Bad Request — required parameter missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Forbidden — API key missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

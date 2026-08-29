@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: FRED Maps API (GeoFRED) Categories Sources API
   version: '1.0'
@@ -177,15 +177,6 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
-    RealtimeStart:
-      name: realtime_start
-      in: query
-      required: false
-      description: Start of the real-time period (YYYY-MM-DD). Defaults to today.
-      schema:
-        type: string
-        format: date
-      example: '2026-05-28'
     Offset:
       name: offset
       in: query
@@ -196,47 +187,20 @@ components:
         minimum: 0
         default: 0
       example: 0
-    FileType:
-      name: file_type
-      in: query
-      required: false
-      description: Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.
-      schema:
-        type: string
-        enum:
-        - xml
-        - json
-        - xlsx
-        - csv
-        - txt
-        default: xml
-      example: json
-    ApiKey:
-      name: api_key
-      in: query
-      required: true
-      description: 32-character lower-case alphanumeric FRED API key.
-      schema:
-        type: string
-        pattern: ^[0-9a-f]{32}$
-      example: abcdef0123456789abcdef0123456789
-    SortOrder:
-      name: sort_order
-      in: query
-      required: false
-      description: Sort order. asc (ascending, default) or desc (descending).
-      schema:
-        type: string
-        enum:
-        - asc
-        - desc
-        default: asc
-      example: asc
     RealtimeEnd:
       name: realtime_end
       in: query
       required: false
       description: End of the real-time period (YYYY-MM-DD). Defaults to today.
+      schema:
+        type: string
+        format: date
+      example: '2026-05-28'
+    RealtimeStart:
+      name: realtime_start
+      in: query
+      required: false
+      description: Start of the real-time period (YYYY-MM-DD). Defaults to today.
       schema:
         type: string
         format: date
@@ -255,6 +219,18 @@ components:
         - realtime_start
         - realtime_end
       example: series_count
+    SortOrder:
+      name: sort_order
+      in: query
+      required: false
+      description: Sort order. asc (ascending, default) or desc (descending).
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+        default: asc
+      example: asc
     Limit1000:
       name: limit
       in: query
@@ -266,7 +242,67 @@ components:
         maximum: 1000
         default: 1000
       example: 100
+    ApiKey:
+      name: api_key
+      in: query
+      required: true
+      description: 32-character lower-case alphanumeric FRED API key.
+      schema:
+        type: string
+        pattern: ^[0-9a-f]{32}$
+      example: abcdef0123456789abcdef0123456789
+    FileType:
+      name: file_type
+      in: query
+      required: false
+      description: Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.
+      schema:
+        type: string
+        enum:
+        - xml
+        - json
+        - xlsx
+        - csv
+        - txt
+        default: xml
+      example: json
   schemas:
+    Release:
+      type: object
+      description: A FRED release of economic data.
+      properties:
+        id:
+          type: integer
+          description: Numeric release ID.
+          example: 1
+        realtime_start:
+          type: string
+          format: date
+          example: '2026-05-28'
+        realtime_end:
+          type: string
+          format: date
+          example: '2026-05-28'
+        name:
+          type: string
+          description: Display name of the release.
+          example: Unemployment Rate
+        press_release:
+          type: boolean
+          description: True if this release is also a press release.
+          example: false
+        link:
+          type: string
+          format: uri
+          description: Provider link for the release.
+          example: https://fred.stlouisfed.org/
+        notes:
+          type: string
+          description: Editorial notes.
+          example: Editorial notes.
+      required:
+      - id
+      - name
     Source:
       type: object
       description: An originating source of FRED economic data.
@@ -329,42 +365,6 @@ components:
             $ref: '#/components/schemas/Release'
       required:
       - releases
-    Release:
-      type: object
-      description: A FRED release of economic data.
-      properties:
-        id:
-          type: integer
-          description: Numeric release ID.
-          example: 1
-        realtime_start:
-          type: string
-          format: date
-          example: '2026-05-28'
-        realtime_end:
-          type: string
-          format: date
-          example: '2026-05-28'
-        name:
-          type: string
-          description: Display name of the release.
-          example: Unemployment Rate
-        press_release:
-          type: boolean
-          description: True if this release is also a press release.
-          example: false
-        link:
-          type: string
-          format: uri
-          description: Provider link for the release.
-          example: https://fred.stlouisfed.org/
-        notes:
-          type: string
-          description: Editorial notes.
-          example: Editorial notes.
-      required:
-      - id
-      - name
     SourceList:
       type: object
       description: A list of FRED sources.

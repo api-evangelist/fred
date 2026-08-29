@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: FRED Maps API (GeoFRED) Categories Shapes API
   version: '1.0'
@@ -75,6 +75,20 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ShapeCollection:
+      type: object
+      description: A collection of shapes for a geographic type.
+      properties:
+        shape:
+          type: string
+          description: The geographic type that was requested.
+          example: example
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/Shape'
+      required:
+      - features
     Shape:
       type: object
       description: A single GeoJSON-style shape feature.
@@ -100,20 +114,6 @@ components:
       required:
       - name
       - code
-    ShapeCollection:
-      type: object
-      description: A collection of shapes for a geographic type.
-      properties:
-        shape:
-          type: string
-          description: The geographic type that was requested.
-          example: example
-        features:
-          type: array
-          items:
-            $ref: '#/components/schemas/Shape'
-      required:
-      - features
   parameters:
     ApiKey:
       name: api_key

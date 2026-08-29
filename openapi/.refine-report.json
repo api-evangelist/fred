@@ -27,6 +27,18 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "fred-categories-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "fred-observations-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "fred-regional-data-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "fred-releases-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "fred-series-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "fred-series-data-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "fred-series-group-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "fred-shapes-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "fred-sources-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "fred-tags-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }
