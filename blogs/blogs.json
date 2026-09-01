@@ -6,7 +6,9 @@
       "feed_url": "https://fredblog.stlouisfed.org/feed/",
       "title": "",
       "saved": 0,
-      "method": "feed"
+      "method": "feed",
+      "nature": "undetermined",
+      "nature_basis": null
     },
     {
       "source": "https://github.com/public-apis/public-apis",
@@ -17,5 +19,8 @@
     }
   ],
   "post_count": 26,
-  "fetched": "2026-08-30T22:33:40Z"
+  "fetched": "2026-08-30T22:33:40Z",
+  "feed_nature": "undetermined",
+  "feed_nature_basis": null,
+  "feed_nature_note": "Whether these posts are the vendor publishing or its support community, decided on the URL path grammar of the saved posts -- not the hostname, which carries both on Khoros, and not author diversity, which flags large vendor blogs as forums. 'undetermined' means undetermined."
 }
