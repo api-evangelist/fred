@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: FRED Maps API (GeoFRED) Categories Series Data API
+  title: FRED Maps API (GeoFRED) Series Data API
   version: '1.0'
   description: GeoFRED (the FRED Maps API) exposes geographic / regional views of FRED economic data. Series-group metadata, regional-data lookups across geographies (state, county, MSA, country, census tract, etc.), and GeoJSON shape files for cartographic rendering of FRED indicators.
   contact:
@@ -84,28 +84,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    FileType:
-      name: file_type
-      in: query
-      required: false
-      description: Response format — json or xml.
-      schema:
-        type: string
-        enum:
-        - json
-        - xml
-        default: json
-      example: json
-    ApiKey:
-      name: api_key
-      in: query
-      required: true
-      description: 32-character lower-case alphanumeric FRED API key.
-      schema:
-        type: string
-        pattern: ^[0-9a-f]{32}$
-      example: abcdef0123456789abcdef0123456789
   schemas:
     RegionalDataResult:
       type: object
@@ -158,6 +136,28 @@ components:
       required:
       - region
       - value
+  parameters:
+    FileType:
+      name: file_type
+      in: query
+      required: false
+      description: Response format — json or xml.
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        default: json
+      example: json
+    ApiKey:
+      name: api_key
+      in: query
+      required: true
+      description: 32-character lower-case alphanumeric FRED API key.
+      schema:
+        type: string
+        pattern: ^[0-9a-f]{32}$
+      example: abcdef0123456789abcdef0123456789
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

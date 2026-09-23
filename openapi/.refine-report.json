@@ -1,26 +1,18 @@
 {
   "provider": "fred",
   "sources": [
-    "fred-categories-api-openapi.yml",
-    "fred-observations-api-openapi.yml",
-    "fred-regional-data-api-openapi.yml",
-    "fred-releases-api-openapi.yml",
-    "fred-series-api-openapi.yml",
-    "fred-series-data-api-openapi.yml",
-    "fred-series-group-api-openapi.yml",
-    "fred-shapes-api-openapi.yml",
-    "fred-sources-api-openapi.yml",
-    "fred-tags-api-openapi.yml"
+    "_ae-authored/fred-geofred-openapi.yml",
+    "_ae-authored/fred-openapi.yml"
   ],
   "outputs": [
-    "fred-categories-api-openapi.yml",
-    "fred-observations-api-openapi.yml",
     "fred-regional-data-api-openapi.yml",
-    "fred-releases-api-openapi.yml",
-    "fred-series-api-openapi.yml",
     "fred-series-data-api-openapi.yml",
     "fred-series-group-api-openapi.yml",
     "fred-shapes-api-openapi.yml",
+    "fred-categories-api-openapi.yml",
+    "fred-observations-api-openapi.yml",
+    "fred-releases-api-openapi.yml",
+    "fred-series-api-openapi.yml",
     "fred-sources-api-openapi.yml",
     "fred-tags-api-openapi.yml"
   ],
@@ -28,17 +20,21 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "fred-categories-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "fred-observations-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "fred-regional-data-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "fred-releases-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "fred-series-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "fred-series-data-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "fred-series-group-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "fred-shapes-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "fred-sources-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "fred-tags-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "fred-geofred-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "fred-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "fred-categories-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "fred-observations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "fred-regional-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "fred-releases-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "fred-series-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "fred-series-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "fred-series-group-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "fred-shapes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "fred-sources-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "fred-tags-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

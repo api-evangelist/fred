@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: FRED Maps API (GeoFRED) Categories Shapes API
+  title: FRED Maps API (GeoFRED) Shapes API
   version: '1.0'
   description: GeoFRED (the FRED Maps API) exposes geographic / regional views of FRED economic data. Series-group metadata, regional-data lookups across geographies (state, county, MSA, country, census tract, etc.), and GeoJSON shape files for cartographic rendering of FRED indicators.
   contact:
@@ -75,20 +75,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ShapeCollection:
-      type: object
-      description: A collection of shapes for a geographic type.
-      properties:
-        shape:
-          type: string
-          description: The geographic type that was requested.
-          example: example
-        features:
-          type: array
-          items:
-            $ref: '#/components/schemas/Shape'
-      required:
-      - features
     Shape:
       type: object
       description: A single GeoJSON-style shape feature.
@@ -114,16 +100,21 @@ components:
       required:
       - name
       - code
+    ShapeCollection:
+      type: object
+      description: A collection of shapes for a geographic type.
+      properties:
+        shape:
+          type: string
+          description: The geographic type that was requested.
+          example: example
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/Shape'
+      required:
+      - features
   parameters:
-    ApiKey:
-      name: api_key
-      in: query
-      required: true
-      description: 32-character lower-case alphanumeric FRED API key.
-      schema:
-        type: string
-        pattern: ^[0-9a-f]{32}$
-      example: abcdef0123456789abcdef0123456789
     FileType:
       name: file_type
       in: query
@@ -136,6 +127,15 @@ components:
         - xml
         default: json
       example: json
+    ApiKey:
+      name: api_key
+      in: query
+      required: true
+      description: 32-character lower-case alphanumeric FRED API key.
+      schema:
+        type: string
+        pattern: ^[0-9a-f]{32}$
+      example: abcdef0123456789abcdef0123456789
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

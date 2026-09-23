@@ -1,0 +1,27 @@
+# Front Door AI Index — fred — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: fred
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: fred.stlouisfed.org
+  final_host: fred.stlouisfed.org
+  ownership: own
+  owner: fred
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 4
+  host_score: 4
+  density: 6.98
+  words: 573
+  tiers:
+    agentic: 0
+    core: 4
+    model: 0
+  ambiguous: 2
+  top_terms:
+    AI: 2
+    artificial intelligence: 2
+    intelligence: 2
