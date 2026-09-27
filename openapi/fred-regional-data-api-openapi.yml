@@ -167,6 +167,31 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    RegionalDatum:
+      type: object
+      description: A single regional data value.
+      properties:
+        region:
+          type: string
+          description: Region display name.
+          example: example
+        code:
+          type: string
+          description: Region code (FIPS
+          ISO: null
+          etc.).: null
+          example: example
+        value:
+          type: number
+          description: Indicator value.
+          example: 4.0
+        series_id:
+          type: string
+          description: Underlying FRED series ID.
+          example: UNRATE
+      required:
+      - region
+      - value
     RegionalDataResult:
       type: object
       description: A regional-data result wrapped by date.
@@ -193,31 +218,6 @@ components:
               description: Date-keyed map of regional values.
       required:
       - meta
-    RegionalDatum:
-      type: object
-      description: A single regional data value.
-      properties:
-        region:
-          type: string
-          description: Region display name.
-          example: example
-        code:
-          type: string
-          description: Region code (FIPS
-          ISO: null
-          etc.).: null
-          example: example
-        value:
-          type: number
-          description: Indicator value.
-          example: 4.0
-        series_id:
-          type: string
-          description: Underlying FRED series ID.
-          example: UNRATE
-      required:
-      - region
-      - value
   parameters:
     FileType:
       name: file_type

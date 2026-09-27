@@ -53,6 +53,7 @@ tags:
   - Time Series
   - Open Data
   - Public APIs
+  - Government Data
 apis:
 - aid: fred:fred-categories-api
   name: FRED Categories API
