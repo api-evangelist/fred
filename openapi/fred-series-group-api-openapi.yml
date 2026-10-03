@@ -106,6 +106,15 @@ components:
       - series_group
       - region_type
   parameters:
+    ApiKey:
+      name: api_key
+      in: query
+      required: true
+      description: 32-character lower-case alphanumeric FRED API key.
+      schema:
+        type: string
+        pattern: ^[0-9a-f]{32}$
+      example: abcdef0123456789abcdef0123456789
     FileType:
       name: file_type
       in: query
@@ -118,15 +127,6 @@ components:
         - xml
         default: json
       example: json
-    ApiKey:
-      name: api_key
-      in: query
-      required: true
-      description: 32-character lower-case alphanumeric FRED API key.
-      schema:
-        type: string
-        pattern: ^[0-9a-f]{32}$
-      example: abcdef0123456789abcdef0123456789
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
