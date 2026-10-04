@@ -186,15 +186,6 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
-    ApiKey:
-      name: api_key
-      in: query
-      required: true
-      description: 32-character lower-case alphanumeric FRED API key.
-      schema:
-        type: string
-        pattern: ^[0-9a-f]{32}$
-      example: abcdef0123456789abcdef0123456789
     Limit100000:
       name: limit
       in: query
@@ -206,6 +197,39 @@ components:
         maximum: 100000
         default: 100000
       example: 100
+    RealtimeEnd:
+      name: realtime_end
+      in: query
+      required: false
+      description: End of the real-time period (YYYY-MM-DD). Defaults to today.
+      schema:
+        type: string
+        format: date
+      example: '2026-05-28'
+    ApiKey:
+      name: api_key
+      in: query
+      required: true
+      description: 32-character lower-case alphanumeric FRED API key.
+      schema:
+        type: string
+        pattern: ^[0-9a-f]{32}$
+      example: abcdef0123456789abcdef0123456789
+    FileType:
+      name: file_type
+      in: query
+      required: false
+      description: Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.
+      schema:
+        type: string
+        enum:
+        - xml
+        - json
+        - xlsx
+        - csv
+        - txt
+        default: xml
+      example: json
     Offset:
       name: offset
       in: query
@@ -225,31 +249,31 @@ components:
         type: string
         format: date
       example: '2026-05-28'
-    FileType:
-      name: file_type
-      in: query
-      required: false
-      description: Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.
-      schema:
-        type: string
-        enum:
-        - xml
-        - json
-        - xlsx
-        - csv
-        - txt
-        default: xml
-      example: json
-    RealtimeEnd:
-      name: realtime_end
-      in: query
-      required: false
-      description: End of the real-time period (YYYY-MM-DD). Defaults to today.
-      schema:
-        type: string
-        format: date
-      example: '2026-05-28'
   schemas:
+    Observation:
+      type: object
+      description: A single time-series observation.
+      properties:
+        realtime_start:
+          type: string
+          format: date
+          example: '2026-05-28'
+        realtime_end:
+          type: string
+          format: date
+          example: '2026-05-28'
+        date:
+          type: string
+          format: date
+          description: Observation date.
+          example: '2026-05-28'
+        value:
+          type: string
+          description: Observation value (string to preserve "." for missing values).
+          example: '4.0'
+      required:
+      - date
+      - value
     ObservationList:
       type: object
       description: A list of observations for a series.
@@ -300,30 +324,6 @@ components:
             $ref: '#/components/schemas/Observation'
       required:
       - observations
-    Observation:
-      type: object
-      description: A single time-series observation.
-      properties:
-        realtime_start:
-          type: string
-          format: date
-          example: '2026-05-28'
-        realtime_end:
-          type: string
-          format: date
-          example: '2026-05-28'
-        date:
-          type: string
-          format: date
-          description: Observation date.
-          example: '2026-05-28'
-        value:
-          type: string
-          description: Observation value (string to preserve "." for missing values).
-          example: '4.0'
-      required:
-      - date
-      - value
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

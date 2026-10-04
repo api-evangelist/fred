@@ -75,15 +75,6 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
-    ApiKey:
-      name: api_key
-      in: query
-      required: true
-      description: 32-character lower-case alphanumeric FRED API key.
-      schema:
-        type: string
-        pattern: ^[0-9a-f]{32}$
-      example: abcdef0123456789abcdef0123456789
     FileType:
       name: file_type
       in: query
@@ -96,7 +87,30 @@ components:
         - xml
         default: json
       example: json
+    ApiKey:
+      name: api_key
+      in: query
+      required: true
+      description: 32-character lower-case alphanumeric FRED API key.
+      schema:
+        type: string
+        pattern: ^[0-9a-f]{32}$
+      example: abcdef0123456789abcdef0123456789
   schemas:
+    ShapeCollection:
+      type: object
+      description: A collection of shapes for a geographic type.
+      properties:
+        shape:
+          type: string
+          description: The geographic type that was requested.
+          example: example
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/Shape'
+      required:
+      - features
     Shape:
       type: object
       description: A single GeoJSON-style shape feature.
@@ -122,20 +136,6 @@ components:
       required:
       - name
       - code
-    ShapeCollection:
-      type: object
-      description: A collection of shapes for a geographic type.
-      properties:
-        shape:
-          type: string
-          description: The geographic type that was requested.
-          example: example
-        features:
-          type: array
-          items:
-            $ref: '#/components/schemas/Shape'
-      required:
-      - features
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
