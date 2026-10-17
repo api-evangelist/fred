@@ -186,35 +186,6 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
-    Limit100000:
-      name: limit
-      in: query
-      required: false
-      description: Maximum number of observations to return (1–100000).
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100000
-        default: 100000
-      example: 100
-    RealtimeEnd:
-      name: realtime_end
-      in: query
-      required: false
-      description: End of the real-time period (YYYY-MM-DD). Defaults to today.
-      schema:
-        type: string
-        format: date
-      example: '2026-05-28'
-    ApiKey:
-      name: api_key
-      in: query
-      required: true
-      description: 32-character lower-case alphanumeric FRED API key.
-      schema:
-        type: string
-        pattern: ^[0-9a-f]{32}$
-      example: abcdef0123456789abcdef0123456789
     FileType:
       name: file_type
       in: query
@@ -230,6 +201,35 @@ components:
         - txt
         default: xml
       example: json
+    RealtimeEnd:
+      name: realtime_end
+      in: query
+      required: false
+      description: End of the real-time period (YYYY-MM-DD). Defaults to today.
+      schema:
+        type: string
+        format: date
+      example: '2026-05-28'
+    RealtimeStart:
+      name: realtime_start
+      in: query
+      required: false
+      description: Start of the real-time period (YYYY-MM-DD). Defaults to today.
+      schema:
+        type: string
+        format: date
+      example: '2026-05-28'
+    Limit100000:
+      name: limit
+      in: query
+      required: false
+      description: Maximum number of observations to return (1–100000).
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100000
+        default: 100000
+      example: 100
     Offset:
       name: offset
       in: query
@@ -240,15 +240,15 @@ components:
         minimum: 0
         default: 0
       example: 0
-    RealtimeStart:
-      name: realtime_start
+    ApiKey:
+      name: api_key
       in: query
-      required: false
-      description: Start of the real-time period (YYYY-MM-DD). Defaults to today.
+      required: true
+      description: 32-character lower-case alphanumeric FRED API key.
       schema:
         type: string
-        format: date
-      example: '2026-05-28'
+        pattern: ^[0-9a-f]{32}$
+      example: abcdef0123456789abcdef0123456789
   schemas:
     Observation:
       type: object
