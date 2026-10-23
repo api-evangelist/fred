@@ -299,6 +299,8 @@ apis:
   - type: Documentation
     url: https://fred.stlouisfed.org/docs/api/geofred/
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/fred/overview
   - type: AgenticAccess
     url: agentic-access/fred-agentic-access.yml
   - type: DomainSecurity
