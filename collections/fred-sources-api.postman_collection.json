@@ -1,473 +1,479 @@
 {
+  "info": {
+    "_postman_id": "87c08f3f-dd0e-4b47-bfb8-80d6cda1db6b",
+    "name": "FRED Sources API",
+    "description": "Federal Reserve Economic Data (FRED) API \u2014 the public web service operated by the Research Division of the Federal Reserve Bank of St.\n\nContact Support:\n Name: Federal Reserve Bank of St. Louis \u2014 Research Division",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:30:16.000Z",
+    "updatedAt": "2026-10-22T02:30:17.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-87c08f3f-dd0e-4b47-bfb8-80d6cda1db6b"
+  },
   "item": [
     {
-      "id": "59c6d613-741f-45be-88a3-251e1a486acb",
-      "name": "Sources",
-      "description": {
-        "content": "Originating institutions for FRED series (BLS, BEA, OECD, etc.) and the releases they publish.",
-        "type": "text/plain"
-      },
+      "name": "sources",
       "item": [
         {
-          "id": "0d60a914-b49f-4afc-855a-bc937461531f",
           "name": "FRED Get All Sources of Economic Data",
+          "id": "8b300657-6a95-41e5-bf1a-60757e71aeaa",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "FRED Get All Sources of Economic Data",
-            "description": {
-              "content": "Get all sources of economic data.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "sources"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "api_key",
-                  "value": "<string>",
-                  "description": "(Required) 32-character lower-case alphanumeric FRED API key."
-                },
-                {
-                  "disabled": false,
-                  "key": "file_type",
-                  "value": "xml",
-                  "description": "Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv."
-                },
-                {
-                  "disabled": false,
-                  "key": "realtime_start",
-                  "value": "<date>",
-                  "description": "Start of the real-time period (YYYY-MM-DD). Defaults to today."
-                },
-                {
-                  "disabled": false,
-                  "key": "realtime_end",
-                  "value": "<date>",
-                  "description": "End of the real-time period (YYYY-MM-DD). Defaults to today."
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "1000",
-                  "description": "Maximum number of results to return (1–1000)."
-                },
-                {
-                  "disabled": false,
-                  "key": "offset",
-                  "value": "0",
-                  "description": "Non-negative integer offset into the result set for pagination."
-                },
-                {
-                  "disabled": false,
-                  "key": "order_by",
-                  "value": "source_id",
-                  "description": "Ordering field."
-                },
-                {
-                  "disabled": false,
-                  "key": "sort_order",
-                  "value": "asc",
-                  "description": "Sort order. asc (ascending, default) or desc (descending)."
-                }
-              ],
-              "variable": []
-            },
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
+            "url": {
+              "raw": "{{baseUrl}}/sources?api_key=ed72e94b56713d451ba01e263cbc30a0&file_type=xml&realtime_start=<date>&realtime_end=<date>&limit=1000&offset=0&order_by=source_id&sort_order=asc",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sources"
+              ],
+              "query": [
+                {
+                  "description": "(Required) 32-character lower-case alphanumeric FRED API key.",
+                  "key": "api_key",
+                  "value": "ed72e94b56713d451ba01e263cbc30a0"
+                },
+                {
+                  "description": "Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.",
+                  "key": "file_type",
+                  "value": "xml"
+                },
+                {
+                  "description": "Start of the real-time period (YYYY-MM-DD). Defaults to today.",
+                  "key": "realtime_start",
+                  "value": "<date>"
+                },
+                {
+                  "description": "End of the real-time period (YYYY-MM-DD). Defaults to today.",
+                  "key": "realtime_end",
+                  "value": "<date>"
+                },
+                {
+                  "description": "Maximum number of results to return (1\u20131000).",
+                  "key": "limit",
+                  "value": "1000"
+                },
+                {
+                  "description": "Non-negative integer offset into the result set for pagination.",
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "description": "Ordering field.",
+                  "key": "order_by",
+                  "value": "source_id"
+                },
+                {
+                  "description": "Sort order. asc (ascending, default) or desc (descending).",
+                  "key": "sort_order",
+                  "value": "asc"
+                }
+              ]
+            },
+            "description": "Get all sources of economic data."
           },
           "response": [
             {
-              "id": "b07b3eae-5252-4298-afca-2f3aefd6b5ac",
+              "id": "a35cbc2f-8bf0-4a74-b207-79bcfac68826",
               "name": "All sources.",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "sources"
-                  ],
+                  "raw": "{{baseUrl}}/sources?api_key=<API Key>&file_type=xml&realtime_start=<date>&realtime_end=<date>&limit=1000&offset=0&order_by=source_id&sort_order=asc",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "sources"
+                  ],
                   "query": [
                     {
+                      "description": "(Required) 32-character lower-case alphanumeric FRED API key.",
                       "key": "api_key",
-                      "value": "abcdef0123456789abcdef0123456789"
+                      "value": "<API Key>"
                     },
                     {
+                      "description": "Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.",
                       "key": "file_type",
-                      "value": "json"
+                      "value": "xml"
                     },
                     {
+                      "description": "Start of the real-time period (YYYY-MM-DD). Defaults to today.",
                       "key": "realtime_start",
-                      "value": "2026-05-28"
+                      "value": "<date>"
                     },
                     {
+                      "description": "End of the real-time period (YYYY-MM-DD). Defaults to today.",
                       "key": "realtime_end",
-                      "value": "2026-05-28"
+                      "value": "<date>"
                     },
                     {
+                      "description": "Maximum number of results to return (1\u20131000).",
                       "key": "limit",
-                      "value": "100"
+                      "value": "1000"
                     },
                     {
+                      "description": "Non-negative integer offset into the result set for pagination.",
                       "key": "offset",
                       "value": "0"
                     },
                     {
+                      "description": "Ordering field.",
                       "key": "order_by",
                       "value": "source_id"
                     },
                     {
+                      "description": "Sort order. asc (ascending, default) or desc (descending).",
                       "key": "sort_order",
                       "value": "asc"
-                    },
-                    {
-                      "key": "api_key",
-                      "value": "<API Key>"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"realtime_start\": \"2026-05-28\",\n  \"realtime_end\": \"2026-05-28\",\n  \"order_by\": \"source_id\",\n  \"sort_order\": \"asc\",\n  \"count\": 1,\n  \"offset\": 0,\n  \"limit\": 1000,\n  \"sources\": [\n    {\n      \"id\": 1,\n      \"realtime_start\": \"2026-05-28\",\n      \"realtime_end\": \"2026-05-28\",\n      \"name\": \"Board of Governors of the Federal Reserve System (US)\",\n      \"link\": \"http://www.federalreserve.gov/\"\n    }\n  ]\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"sources\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"realtime_start\": \"<date>\",\n      \"realtime_end\": \"<date>\",\n      \"link\": \"<uri>\",\n      \"notes\": \"<string>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"realtime_start\": \"<date>\",\n      \"realtime_end\": \"<date>\",\n      \"link\": \"<uri>\",\n      \"notes\": \"<string>\"\n    }\n  ],\n  \"realtime_start\": \"<date>\",\n  \"realtime_end\": \"<date>\",\n  \"order_by\": \"<string>\",\n  \"sort_order\": \"<string>\",\n  \"count\": \"<integer>\",\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\"\n}",
+              "createdAt": "2026-10-22T02:30:16.000Z",
+              "updatedAt": "2026-10-22T02:30:16.000Z",
+              "uid": "35240-a35cbc2f-8bf0-4a74-b207-79bcfac68826"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
+          "createdAt": "2026-10-22T02:30:16.000Z",
+          "updatedAt": "2026-10-22T02:30:16.000Z",
+          "uid": "35240-8b300657-6a95-41e5-bf1a-60757e71aeaa"
+        }
+      ],
+      "id": "00a0eb4b-c6bf-4b2c-824d-0d3129b84d13",
+      "createdAt": "2026-10-22T02:30:16.000Z",
+      "updatedAt": "2026-10-22T02:30:16.000Z",
+      "uid": "35240-00a0eb4b-c6bf-4b2c-824d-0d3129b84d13"
+    },
+    {
+      "name": "source",
+      "item": [
         {
-          "id": "dd1539d5-aae5-48f0-8df4-b6fd354b7e4c",
-          "name": "FRED Get a Source of Economic Data",
-          "request": {
-            "name": "FRED Get a Source of Economic Data",
-            "description": {
-              "content": "Get a source of economic data by ID.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "source"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "api_key",
-                  "value": "<string>",
-                  "description": "(Required) 32-character lower-case alphanumeric FRED API key."
-                },
-                {
-                  "disabled": false,
-                  "key": "file_type",
-                  "value": "xml",
-                  "description": "Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv."
-                },
-                {
-                  "disabled": false,
-                  "key": "source_id",
-                  "value": "<integer>",
-                  "description": "(Required) Numeric source ID."
-                },
-                {
-                  "disabled": false,
-                  "key": "realtime_start",
-                  "value": "<date>",
-                  "description": "Start of the real-time period (YYYY-MM-DD). Defaults to today."
-                },
-                {
-                  "disabled": false,
-                  "key": "realtime_end",
-                  "value": "<date>",
-                  "description": "End of the real-time period (YYYY-MM-DD). Defaults to today."
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "releases",
+          "item": [
             {
-              "id": "3c4b8bfd-246a-4ec4-9a36-6a6830430b28",
-              "name": "A single source.",
-              "originalRequest": {
+              "name": "FRED Get the Releases for a Source",
+              "id": "985f0df9-0343-419d-a4ce-14a48a627843",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "source"
-                  ],
+                  "raw": "{{baseUrl}}/source/releases?api_key=ed72e94b56713d451ba01e263cbc30a0&file_type=xml&source_id=<integer>&realtime_start=<date>&realtime_end=<date>&limit=1000&offset=0&order_by=press_release&sort_order=asc",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [
-                    {
-                      "key": "api_key",
-                      "value": "abcdef0123456789abcdef0123456789"
-                    },
-                    {
-                      "key": "file_type",
-                      "value": "json"
-                    },
-                    {
-                      "key": "source_id",
-                      "value": "1"
-                    },
-                    {
-                      "key": "realtime_start",
-                      "value": "2026-05-28"
-                    },
-                    {
-                      "key": "realtime_end",
-                      "value": "2026-05-28"
-                    },
-                    {
-                      "key": "api_key",
-                      "value": "<API Key>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"realtime_start\": \"2026-05-28\",\n  \"realtime_end\": \"2026-05-28\",\n  \"order_by\": \"source_id\",\n  \"sort_order\": \"asc\",\n  \"count\": 1,\n  \"offset\": 0,\n  \"limit\": 1000,\n  \"sources\": [\n    {\n      \"id\": 1,\n      \"realtime_start\": \"2026-05-28\",\n      \"realtime_end\": \"2026-05-28\",\n      \"name\": \"Board of Governors of the Federal Reserve System (US)\",\n      \"link\": \"http://www.federalreserve.gov/\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "8aee7605-68a9-435d-b8f3-f9d23befe0c0",
-          "name": "FRED Get the Releases for a Source",
-          "request": {
-            "name": "FRED Get the Releases for a Source",
-            "description": {
-              "content": "Get the releases for a source.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "source",
-                "releases"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "api_key",
-                  "value": "<string>",
-                  "description": "(Required) 32-character lower-case alphanumeric FRED API key."
-                },
-                {
-                  "disabled": false,
-                  "key": "file_type",
-                  "value": "xml",
-                  "description": "Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv."
-                },
-                {
-                  "disabled": false,
-                  "key": "source_id",
-                  "value": "<integer>",
-                  "description": "(Required) Numeric source ID."
-                },
-                {
-                  "disabled": false,
-                  "key": "realtime_start",
-                  "value": "<date>",
-                  "description": "Start of the real-time period (YYYY-MM-DD). Defaults to today."
-                },
-                {
-                  "disabled": false,
-                  "key": "realtime_end",
-                  "value": "<date>",
-                  "description": "End of the real-time period (YYYY-MM-DD). Defaults to today."
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "1000",
-                  "description": "Maximum number of results to return (1–1000)."
-                },
-                {
-                  "disabled": false,
-                  "key": "offset",
-                  "value": "0",
-                  "description": "Non-negative integer offset into the result set for pagination."
-                },
-                {
-                  "disabled": false,
-                  "key": "order_by",
-                  "value": "<string>",
-                  "description": "Field to order release results by."
-                },
-                {
-                  "disabled": false,
-                  "key": "sort_order",
-                  "value": "asc",
-                  "description": "Sort order. asc (ascending, default) or desc (descending)."
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "a3001e4f-5950-42a6-a6bc-365d7c0e4613",
-              "name": "Releases for the source.",
-              "originalRequest": {
-                "url": {
                   "path": [
                     "source",
                     "releases"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
                   "query": [
                     {
+                      "description": "(Required) 32-character lower-case alphanumeric FRED API key.",
                       "key": "api_key",
-                      "value": "abcdef0123456789abcdef0123456789"
+                      "value": "ed72e94b56713d451ba01e263cbc30a0"
                     },
                     {
+                      "description": "Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.",
                       "key": "file_type",
-                      "value": "json"
+                      "value": "xml"
                     },
                     {
+                      "description": "(Required) Numeric source ID.",
                       "key": "source_id",
-                      "value": "1"
+                      "value": "<integer>"
                     },
                     {
+                      "description": "Start of the real-time period (YYYY-MM-DD). Defaults to today.",
                       "key": "realtime_start",
-                      "value": "2026-05-28"
+                      "value": "<date>"
                     },
                     {
+                      "description": "End of the real-time period (YYYY-MM-DD). Defaults to today.",
                       "key": "realtime_end",
-                      "value": "2026-05-28"
+                      "value": "<date>"
                     },
                     {
+                      "description": "Maximum number of results to return (1\u20131000).",
                       "key": "limit",
-                      "value": "100"
+                      "value": "1000"
                     },
                     {
+                      "description": "Non-negative integer offset into the result set for pagination.",
                       "key": "offset",
                       "value": "0"
                     },
                     {
+                      "description": "Field to order release results by.",
                       "key": "order_by",
-                      "value": "<string>"
+                      "value": "press_release"
                     },
                     {
+                      "description": "Sort order. asc (ascending, default) or desc (descending).",
                       "key": "sort_order",
                       "value": "asc"
-                    },
+                    }
+                  ]
+                },
+                "description": "Get the releases for a source."
+              },
+              "response": [
+                {
+                  "id": "f791a6b2-7bec-46b7-9c3f-c1e72df03e60",
+                  "name": "Releases for the source.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/source/releases?api_key=<API Key>&file_type=xml&source_id=<integer>&realtime_start=<date>&realtime_end=<date>&limit=1000&offset=0&order_by=press_release&sort_order=asc",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "source",
+                        "releases"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) 32-character lower-case alphanumeric FRED API key.",
+                          "key": "api_key",
+                          "value": "<API Key>"
+                        },
+                        {
+                          "description": "Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.",
+                          "key": "file_type",
+                          "value": "xml"
+                        },
+                        {
+                          "description": "(Required) Numeric source ID.",
+                          "key": "source_id",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Start of the real-time period (YYYY-MM-DD). Defaults to today.",
+                          "key": "realtime_start",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "End of the real-time period (YYYY-MM-DD). Defaults to today.",
+                          "key": "realtime_end",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "Maximum number of results to return (1\u20131000).",
+                          "key": "limit",
+                          "value": "1000"
+                        },
+                        {
+                          "description": "Non-negative integer offset into the result set for pagination.",
+                          "key": "offset",
+                          "value": "0"
+                        },
+                        {
+                          "description": "Field to order release results by.",
+                          "key": "order_by",
+                          "value": "press_release"
+                        },
+                        {
+                          "description": "Sort order. asc (ascending, default) or desc (descending).",
+                          "key": "sort_order",
+                          "value": "asc"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
                     {
-                      "key": "api_key",
-                      "value": "<API Key>"
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
                   ],
-                  "variable": []
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"releases\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"realtime_start\": \"<date>\",\n      \"realtime_end\": \"<date>\",\n      \"press_release\": \"<boolean>\",\n      \"link\": \"<uri>\",\n      \"notes\": \"<string>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"realtime_start\": \"<date>\",\n      \"realtime_end\": \"<date>\",\n      \"press_release\": \"<boolean>\",\n      \"link\": \"<uri>\",\n      \"notes\": \"<string>\"\n    }\n  ],\n  \"realtime_start\": \"<date>\",\n  \"realtime_end\": \"<date>\",\n  \"order_by\": \"<string>\",\n  \"sort_order\": \"<string>\",\n  \"count\": \"<integer>\",\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T02:30:16.000Z",
+                  "updatedAt": "2026-10-22T02:30:16.000Z",
+                  "uid": "35240-f791a6b2-7bec-46b7-9c3f-c1e72df03e60"
+                }
+              ],
+              "createdAt": "2026-10-22T02:30:16.000Z",
+              "updatedAt": "2026-10-22T02:30:16.000Z",
+              "uid": "35240-985f0df9-0343-419d-a4ce-14a48a627843"
+            }
+          ],
+          "id": "cc499fa2-55f3-4353-9180-2741a4bdbdaf",
+          "createdAt": "2026-10-22T02:30:16.000Z",
+          "updatedAt": "2026-10-22T02:30:16.000Z",
+          "uid": "35240-cc499fa2-55f3-4353-9180-2741a4bdbdaf"
+        },
+        {
+          "name": "FRED Get a Source of Economic Data",
+          "id": "3f4f5147-aaa0-4229-9930-a4abc68cee44",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/source?api_key=ed72e94b56713d451ba01e263cbc30a0&file_type=xml&source_id=<integer>&realtime_start=<date>&realtime_end=<date>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "source"
+              ],
+              "query": [
+                {
+                  "description": "(Required) 32-character lower-case alphanumeric FRED API key.",
+                  "key": "api_key",
+                  "value": "ed72e94b56713d451ba01e263cbc30a0"
                 },
+                {
+                  "description": "Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.",
+                  "key": "file_type",
+                  "value": "xml"
+                },
+                {
+                  "description": "(Required) Numeric source ID.",
+                  "key": "source_id",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Start of the real-time period (YYYY-MM-DD). Defaults to today.",
+                  "key": "realtime_start",
+                  "value": "<date>"
+                },
+                {
+                  "description": "End of the real-time period (YYYY-MM-DD). Defaults to today.",
+                  "key": "realtime_end",
+                  "value": "<date>"
+                }
+              ]
+            },
+            "description": "Get a source of economic data by ID."
+          },
+          "response": [
+            {
+              "id": "5f9873b7-4fe4-4329-b655-cb48a72b3d3d",
+              "name": "A single source.",
+              "originalRequest": {
+                "method": "GET",
                 "header": [
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/source?api_key=<API Key>&file_type=xml&source_id=<integer>&realtime_start=<date>&realtime_end=<date>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "source"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) 32-character lower-case alphanumeric FRED API key.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.",
+                      "key": "file_type",
+                      "value": "xml"
+                    },
+                    {
+                      "description": "(Required) Numeric source ID.",
+                      "key": "source_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Start of the real-time period (YYYY-MM-DD). Defaults to today.",
+                      "key": "realtime_start",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "End of the real-time period (YYYY-MM-DD). Defaults to today.",
+                      "key": "realtime_end",
+                      "value": "<date>"
+                    }
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"realtime_start\": \"2026-05-28\",\n  \"realtime_end\": \"2026-05-28\",\n  \"order_by\": \"release_id\",\n  \"sort_order\": \"asc\",\n  \"count\": 326,\n  \"offset\": 0,\n  \"limit\": 1000,\n  \"releases\": [\n    {\n      \"id\": 9,\n      \"realtime_start\": \"2026-05-28\",\n      \"realtime_end\": \"2026-05-28\",\n      \"name\": \"Advance Monthly Sales for Retail and Food Services\",\n      \"press_release\": true,\n      \"link\": \"http://www.census.gov/retail/\"\n    }\n  ]\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"sources\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"realtime_start\": \"<date>\",\n      \"realtime_end\": \"<date>\",\n      \"link\": \"<uri>\",\n      \"notes\": \"<string>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"realtime_start\": \"<date>\",\n      \"realtime_end\": \"<date>\",\n      \"link\": \"<uri>\",\n      \"notes\": \"<string>\"\n    }\n  ],\n  \"realtime_start\": \"<date>\",\n  \"realtime_end\": \"<date>\",\n  \"order_by\": \"<string>\",\n  \"sort_order\": \"<string>\",\n  \"count\": \"<integer>\",\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\"\n}",
+              "createdAt": "2026-10-22T02:30:16.000Z",
+              "updatedAt": "2026-10-22T02:30:16.000Z",
+              "uid": "35240-5f9873b7-4fe4-4329-b655-cb48a72b3d3d"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T02:30:16.000Z",
+          "updatedAt": "2026-10-22T02:30:16.000Z",
+          "uid": "35240-3f4f5147-aaa0-4229-9930-a4abc68cee44"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.stlouisfed.org/geofred",
-      "key": "baseUrl"
+      "id": "94de138b-b3e8-4d6c-b08e-fa111d9f7858",
+      "createdAt": "2026-10-22T02:30:16.000Z",
+      "updatedAt": "2026-10-22T02:30:16.000Z",
+      "uid": "35240-94de138b-b3e8-4d6c-b08e-fa111d9f7858"
     }
   ],
   "auth": {
@@ -475,25 +481,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "api_key"
+        "value": "api_key",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "query"
+        "value": "query",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "e10c8355-e4fa-4884-968d-cc6a8a9aab09",
-    "name": "FRED Maps API (GeoFRED) Categories Sources API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "GeoFRED (the FRED Maps API) exposes geographic / regional views of FRED economic data. Series-group metadata, regional-data lookups across geographies (state, county, MSA, country, census tract, etc.), and GeoJSON shape files for cartographic rendering of FRED indicators.\n\nContact Support:\n Name: Federal Reserve Bank of St. Louis — Research Division",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.stlouisfed.org/fred"
     }
-  }
+  ]
 }

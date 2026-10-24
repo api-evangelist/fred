@@ -1,151 +1,156 @@
 {
+  "info": {
+    "_postman_id": "e1327d39-f8bb-435b-80fd-1f39767f35b7",
+    "name": "FRED Maps API (GeoFRED) Series Data API",
+    "description": "GeoFRED (the FRED Maps API) exposes geographic / regional views of FRED economic data. Series-group metadata, regional-data lookups across geographies (state, county, MSA, country, census tract, etc.), and GeoJSON shape files for cartographic rendering of FRED indicators.\n\nContact Support:\n Name: Federal Reserve Bank of St. Louis \u2014 Research Division",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:29:56.000Z",
+    "updatedAt": "2026-10-22T02:29:57.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e1327d39-f8bb-435b-80fd-1f39767f35b7"
+  },
   "item": [
     {
-      "id": "d5fe8225-98c0-4238-aa53-111c74fb1cfd",
-      "name": "Series Data",
-      "description": {
-        "content": "Regional data values attached to a specific FRED series.",
-        "type": "text/plain"
-      },
+      "name": "series",
       "item": [
         {
-          "id": "969e73af-4bc1-48d4-afd0-d3a15402ae62",
-          "name": "FRED Get Regional Data Values for a Series",
-          "request": {
-            "name": "FRED Get Regional Data Values for a Series",
-            "description": {
-              "content": "Get regional data values attached to a specific FRED series.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "series",
-                "data"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "api_key",
-                  "value": "<string>",
-                  "description": "(Required) 32-character lower-case alphanumeric FRED API key."
-                },
-                {
-                  "disabled": false,
-                  "key": "file_type",
-                  "value": "json",
-                  "description": "Response format — json or xml."
-                },
-                {
-                  "disabled": false,
-                  "key": "series_id",
-                  "value": "<string>",
-                  "description": "(Required) The FRED series ID."
-                },
-                {
-                  "disabled": false,
-                  "key": "date",
-                  "value": "<date>",
-                  "description": "Date for the data values (YYYY-MM-DD). Defaults to the most recent."
-                },
-                {
-                  "disabled": false,
-                  "key": "start_date",
-                  "value": "<date>",
-                  "description": "Optional start date for a range query."
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "data",
+          "item": [
             {
-              "id": "103e663f-7442-4cf3-af1e-a92c8641d21d",
-              "name": "Regional data values for the series.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "series",
-                    "data"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "api_key",
-                      "value": "abcdef0123456789abcdef0123456789"
-                    },
-                    {
-                      "key": "file_type",
-                      "value": "json"
-                    },
-                    {
-                      "key": "series_id",
-                      "value": "UNRATE"
-                    },
-                    {
-                      "key": "date",
-                      "value": "2026-04-01"
-                    },
-                    {
-                      "key": "start_date",
-                      "value": "2026-01-01"
-                    },
-                    {
-                      "key": "api_key",
-                      "value": "<API Key>"
-                    }
-                  ],
-                  "variable": []
-                },
+              "name": "FRED Get Regional Data Values for a Series",
+              "id": "d143b89d-7cf7-43fe-9e5f-3bcc2683425b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
                 "header": [
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/series/data?api_key=0b42760727c5a94b586caa00c8de8ae0&file_type=json&series_id=<string>&date=<date>&start_date=<date>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "series",
+                    "data"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) 32-character lower-case alphanumeric FRED API key.",
+                      "key": "api_key",
+                      "value": "0b42760727c5a94b586caa00c8de8ae0"
+                    },
+                    {
+                      "description": "Response format \u2014 json or xml.",
+                      "key": "file_type",
+                      "value": "json"
+                    },
+                    {
+                      "description": "(Required) The FRED series ID.",
+                      "key": "series_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Date for the data values (YYYY-MM-DD). Defaults to the most recent.",
+                      "key": "date",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Optional start date for a range query.",
+                      "key": "start_date",
+                      "value": "<date>"
+                    }
+                  ]
+                },
+                "description": "Get regional data values attached to a specific FRED series."
               },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "d6113d22-47e6-48ae-bb53-35c2f0a5ebe7",
+                  "name": "Regional data values for the series.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/series/data?api_key=<API Key>&file_type=json&series_id=<string>&date=<date>&start_date=<date>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "series",
+                        "data"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) 32-character lower-case alphanumeric FRED API key.",
+                          "key": "api_key",
+                          "value": "<API Key>"
+                        },
+                        {
+                          "description": "Response format \u2014 json or xml.",
+                          "key": "file_type",
+                          "value": "json"
+                        },
+                        {
+                          "description": "(Required) The FRED series ID.",
+                          "key": "series_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Date for the data values (YYYY-MM-DD). Defaults to the most recent.",
+                          "key": "date",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "Optional start date for a range query.",
+                          "key": "start_date",
+                          "value": "<date>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"meta\": {\n    \"title\": \"<string>\",\n    \"region\": \"<string>\",\n    \"seasonality\": \"<string>\",\n    \"units\": \"<string>\",\n    \"frequency\": \"<string>\",\n    \"data\": {\n      \"quis2\": [\n        {\n          \"region\": \"<string>\",\n          \"value\": \"<number>\",\n          \"code\": \"<string>\",\n          \"series_id\": \"<string>\"\n        },\n        {\n          \"region\": \"<string>\",\n          \"value\": \"<number>\",\n          \"code\": \"<string>\",\n          \"series_id\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                  "createdAt": "2026-10-22T02:29:57.000Z",
+                  "updatedAt": "2026-10-22T02:29:57.000Z",
+                  "uid": "35240-d6113d22-47e6-48ae-bb53-35c2f0a5ebe7"
                 }
               ],
-              "body": "{\n  \"meta\": {\n    \"title\": \"All Employees: Total Nonfarm\",\n    \"region\": \"state\",\n    \"seasonality\": \"Seasonally Adjusted\",\n    \"units\": \"Thousands of Persons\",\n    \"frequency\": \"Monthly\",\n    \"data\": {\n      \"2026-04-01\": [\n        {\n          \"region\": \"California\",\n          \"code\": \"06\",\n          \"value\": 17920.5,\n          \"series_id\": \"CANA\"\n        },\n        {\n          \"region\": \"Missouri\",\n          \"code\": \"29\",\n          \"value\": 2960.1,\n          \"series_id\": \"MONA\"\n        }\n      ]\n    }\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-22T02:29:57.000Z",
+              "updatedAt": "2026-10-22T02:29:57.000Z",
+              "uid": "35240-d143b89d-7cf7-43fe-9e5f-3bcc2683425b"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "4ada4988-ea64-4103-b21a-77bad605de23",
+          "createdAt": "2026-10-22T02:29:57.000Z",
+          "updatedAt": "2026-10-22T02:29:57.000Z",
+          "uid": "35240-4ada4988-ea64-4103-b21a-77bad605de23"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.stlouisfed.org/geofred",
-      "key": "baseUrl"
+      "id": "6f827368-6bea-483d-8635-c79fdc307bd7",
+      "createdAt": "2026-10-22T02:29:57.000Z",
+      "updatedAt": "2026-10-22T02:29:57.000Z",
+      "uid": "35240-6f827368-6bea-483d-8635-c79fdc307bd7"
     }
   ],
   "auth": {
@@ -153,25 +158,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "api_key"
+        "value": "api_key",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "query"
+        "value": "query",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "0fa24e45-e32d-4aae-85e1-cba550140d2a",
-    "name": "FRED Maps API (GeoFRED) Categories Series Data API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "GeoFRED (the FRED Maps API) exposes geographic / regional views of FRED economic data. Series-group metadata, regional-data lookups across geographies (state, county, MSA, country, census tract, etc.), and GeoJSON shape files for cartographic rendering of FRED indicators.\n\nContact Support:\n Name: Federal Reserve Bank of St. Louis — Research Division",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.stlouisfed.org/geofred"
     }
-  }
+  ]
 }

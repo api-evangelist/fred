@@ -1,583 +1,589 @@
 {
+  "info": {
+    "_postman_id": "c941a74a-cbe3-42b4-80ac-971e7a91c69e",
+    "name": "FRED Tags API",
+    "description": "Federal Reserve Economic Data (FRED) API \u2014 the public web service operated by the Research Division of the Federal Reserve Bank of St.\n\nContact Support:\n Name: Federal Reserve Bank of St. Louis \u2014 Research Division",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:30:23.000Z",
+    "updatedAt": "2026-10-22T02:30:23.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c941a74a-cbe3-42b4-80ac-971e7a91c69e"
+  },
   "item": [
     {
-      "id": "44b72c6a-553e-4cba-aada-81b62b3f879c",
-      "name": "Tags",
-      "description": {
-        "content": "Faceted classification across FRED — tag listings, related tags, and tag-matched series.",
-        "type": "text/plain"
-      },
+      "name": "tags",
       "item": [
         {
-          "id": "b2494039-fe4c-4dbe-aa37-e9082d926ab1",
-          "name": "FRED Get FRED Tags",
-          "request": {
-            "name": "FRED Get FRED Tags",
-            "description": {
-              "content": "Get FRED tags. Optionally filtered by tag names, group_id, or search text.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "tags"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "api_key",
-                  "value": "<string>",
-                  "description": "(Required) 32-character lower-case alphanumeric FRED API key."
-                },
-                {
-                  "disabled": false,
-                  "key": "file_type",
-                  "value": "xml",
-                  "description": "Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv."
-                },
-                {
-                  "disabled": false,
-                  "key": "realtime_start",
-                  "value": "<date>",
-                  "description": "Start of the real-time period (YYYY-MM-DD). Defaults to today."
-                },
-                {
-                  "disabled": false,
-                  "key": "realtime_end",
-                  "value": "<date>",
-                  "description": "End of the real-time period (YYYY-MM-DD). Defaults to today."
-                },
-                {
-                  "disabled": false,
-                  "key": "tag_names",
-                  "value": "<string>",
-                  "description": "Semicolon-separated list of tag names to require."
-                },
-                {
-                  "disabled": false,
-                  "key": "tag_group_id",
-                  "value": "<string>",
-                  "description": "Group identifier for tags — freq, gen, geo, geot, rls, seas, src."
-                },
-                {
-                  "disabled": false,
-                  "key": "search_text",
-                  "value": "<string>",
-                  "description": "Words to match against tag names and descriptions."
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "1000",
-                  "description": "Maximum number of results to return (1–1000)."
-                },
-                {
-                  "disabled": false,
-                  "key": "offset",
-                  "value": "0",
-                  "description": "Non-negative integer offset into the result set for pagination."
-                },
-                {
-                  "disabled": false,
-                  "key": "order_by",
-                  "value": "series_count",
-                  "description": "Field to order tag results by."
-                },
-                {
-                  "disabled": false,
-                  "key": "sort_order",
-                  "value": "asc",
-                  "description": "Sort order. asc (ascending, default) or desc (descending)."
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "series",
+          "item": [
             {
-              "id": "11ca4065-6cf5-4bab-b29d-841a5ca6994f",
-              "name": "List of tags.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "tags"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "api_key",
-                      "value": "abcdef0123456789abcdef0123456789"
-                    },
-                    {
-                      "key": "file_type",
-                      "value": "json"
-                    },
-                    {
-                      "key": "realtime_start",
-                      "value": "2026-05-28"
-                    },
-                    {
-                      "key": "realtime_end",
-                      "value": "2026-05-28"
-                    },
-                    {
-                      "key": "tag_names",
-                      "value": "monthly;usa"
-                    },
-                    {
-                      "key": "tag_group_id",
-                      "value": "freq"
-                    },
-                    {
-                      "key": "search_text",
-                      "value": "monetary aggregates"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "100"
-                    },
-                    {
-                      "key": "offset",
-                      "value": "0"
-                    },
-                    {
-                      "key": "order_by",
-                      "value": "series_count"
-                    },
-                    {
-                      "key": "sort_order",
-                      "value": "asc"
-                    },
-                    {
-                      "key": "api_key",
-                      "value": "<API Key>"
-                    }
-                  ],
-                  "variable": []
-                },
+              "name": "FRED Get the Series Matching All Tags",
+              "id": "f4aee49b-1585-427d-ba41-afb71fb9642d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
                 "header": [
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"realtime_start\": \"2026-05-28\",\n  \"realtime_end\": \"2026-05-28\",\n  \"order_by\": \"series_count\",\n  \"sort_order\": \"desc\",\n  \"count\": 2,\n  \"offset\": 0,\n  \"limit\": 1000,\n  \"tags\": [\n    {\n      \"name\": \"monthly\",\n      \"group_id\": \"freq\",\n      \"notes\": \"\",\n      \"created\": \"2012-02-27 10:18:19-06\",\n      \"popularity\": 100,\n      \"series_count\": 380000\n    },\n    {\n      \"name\": \"nation\",\n      \"group_id\": \"geot\",\n      \"notes\": \"\",\n      \"created\": \"2012-02-27 10:18:19-06\",\n      \"popularity\": 99,\n      \"series_count\": 110000\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "ca8f7dd8-71b2-48c4-b5ca-d9948798a885",
-          "name": "FRED Get the Related FRED Tags for One or More FRED Tags",
-          "request": {
-            "name": "FRED Get the Related FRED Tags for One or More FRED Tags",
-            "description": {
-              "content": "Get the related FRED tags for one or more FRED tags. Related tags are tags assigned to series that also have all of the tag_names tags.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "related_tags"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "api_key",
-                  "value": "<string>",
-                  "description": "(Required) 32-character lower-case alphanumeric FRED API key."
-                },
-                {
-                  "disabled": false,
-                  "key": "file_type",
-                  "value": "xml",
-                  "description": "Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv."
-                },
-                {
-                  "disabled": false,
-                  "key": "realtime_start",
-                  "value": "<date>",
-                  "description": "Start of the real-time period (YYYY-MM-DD). Defaults to today."
-                },
-                {
-                  "disabled": false,
-                  "key": "realtime_end",
-                  "value": "<date>",
-                  "description": "End of the real-time period (YYYY-MM-DD). Defaults to today."
-                },
-                {
-                  "disabled": false,
-                  "key": "tag_names",
-                  "value": "<string>",
-                  "description": "Semicolon-separated list of tag names to require."
-                },
-                {
-                  "disabled": false,
-                  "key": "exclude_tag_names",
-                  "value": "<string>",
-                  "description": "Semicolon-separated list of tag names to exclude."
-                },
-                {
-                  "disabled": false,
-                  "key": "tag_group_id",
-                  "value": "<string>",
-                  "description": "Group identifier for tags — freq, gen, geo, geot, rls, seas, src."
-                },
-                {
-                  "disabled": false,
-                  "key": "search_text",
-                  "value": "<string>",
-                  "description": "Words to match against tag names and descriptions."
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "1000",
-                  "description": "Maximum number of results to return (1–1000)."
-                },
-                {
-                  "disabled": false,
-                  "key": "offset",
-                  "value": "0",
-                  "description": "Non-negative integer offset into the result set for pagination."
-                },
-                {
-                  "disabled": false,
-                  "key": "order_by",
-                  "value": "series_count",
-                  "description": "Field to order tag results by."
-                },
-                {
-                  "disabled": false,
-                  "key": "sort_order",
-                  "value": "asc",
-                  "description": "Sort order. asc (ascending, default) or desc (descending)."
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "b838f55a-01e9-42a8-be92-d95d04e5ba17",
-              "name": "Related tags.",
-              "originalRequest": {
                 "url": {
-                  "path": [
-                    "related_tags"
-                  ],
+                  "raw": "{{baseUrl}}/tags/series?api_key=6ac5bd3b04ea0746f7793d0b45d2c467&file_type=xml&tag_names=<string>&exclude_tag_names=<string>&realtime_start=<date>&realtime_end=<date>&limit=1000&offset=0&order_by=observation_start&sort_order=asc",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [
-                    {
-                      "key": "api_key",
-                      "value": "abcdef0123456789abcdef0123456789"
-                    },
-                    {
-                      "key": "file_type",
-                      "value": "json"
-                    },
-                    {
-                      "key": "realtime_start",
-                      "value": "2026-05-28"
-                    },
-                    {
-                      "key": "realtime_end",
-                      "value": "2026-05-28"
-                    },
-                    {
-                      "key": "tag_names",
-                      "value": "monthly;usa"
-                    },
-                    {
-                      "key": "exclude_tag_names",
-                      "value": "discontinued"
-                    },
-                    {
-                      "key": "tag_group_id",
-                      "value": "freq"
-                    },
-                    {
-                      "key": "search_text",
-                      "value": "monetary aggregates"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "100"
-                    },
-                    {
-                      "key": "offset",
-                      "value": "0"
-                    },
-                    {
-                      "key": "order_by",
-                      "value": "series_count"
-                    },
-                    {
-                      "key": "sort_order",
-                      "value": "asc"
-                    },
-                    {
-                      "key": "api_key",
-                      "value": "<API Key>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"realtime_start\": \"2026-05-28\",\n  \"realtime_end\": \"2026-05-28\",\n  \"order_by\": \"series_count\",\n  \"sort_order\": \"desc\",\n  \"count\": 2,\n  \"offset\": 0,\n  \"limit\": 1000,\n  \"tags\": [\n    {\n      \"name\": \"monthly\",\n      \"group_id\": \"freq\",\n      \"notes\": \"\",\n      \"created\": \"2012-02-27 10:18:19-06\",\n      \"popularity\": 100,\n      \"series_count\": 380000\n    },\n    {\n      \"name\": \"nation\",\n      \"group_id\": \"geot\",\n      \"notes\": \"\",\n      \"created\": \"2012-02-27 10:18:19-06\",\n      \"popularity\": 99,\n      \"series_count\": 110000\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "a3a20969-cb70-4825-84a8-84de07006710",
-          "name": "FRED Get the Series Matching All Tags",
-          "request": {
-            "name": "FRED Get the Series Matching All Tags",
-            "description": {
-              "content": "Get the series matching all of the supplied tags.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "tags",
-                "series"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "api_key",
-                  "value": "<string>",
-                  "description": "(Required) 32-character lower-case alphanumeric FRED API key."
-                },
-                {
-                  "disabled": false,
-                  "key": "file_type",
-                  "value": "xml",
-                  "description": "Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv."
-                },
-                {
-                  "disabled": false,
-                  "key": "tag_names",
-                  "value": "<string>",
-                  "description": "Semicolon-separated list of tag names to require."
-                },
-                {
-                  "disabled": false,
-                  "key": "exclude_tag_names",
-                  "value": "<string>",
-                  "description": "Semicolon-separated list of tag names to exclude."
-                },
-                {
-                  "disabled": false,
-                  "key": "realtime_start",
-                  "value": "<date>",
-                  "description": "Start of the real-time period (YYYY-MM-DD). Defaults to today."
-                },
-                {
-                  "disabled": false,
-                  "key": "realtime_end",
-                  "value": "<date>",
-                  "description": "End of the real-time period (YYYY-MM-DD). Defaults to today."
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "1000",
-                  "description": "Maximum number of results to return (1–1000)."
-                },
-                {
-                  "disabled": false,
-                  "key": "offset",
-                  "value": "0",
-                  "description": "Non-negative integer offset into the result set for pagination."
-                },
-                {
-                  "disabled": false,
-                  "key": "order_by",
-                  "value": "<string>",
-                  "description": "Field to order series results by."
-                },
-                {
-                  "disabled": false,
-                  "key": "sort_order",
-                  "value": "asc",
-                  "description": "Sort order. asc (ascending, default) or desc (descending)."
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "f39dfb31-1e5a-4ab1-b1f4-fd3ac8c561d4",
-              "name": "Series matching the tags.",
-              "originalRequest": {
-                "url": {
                   "path": [
                     "tags",
                     "series"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
                   "query": [
                     {
+                      "description": "(Required) 32-character lower-case alphanumeric FRED API key.",
                       "key": "api_key",
-                      "value": "abcdef0123456789abcdef0123456789"
+                      "value": "6ac5bd3b04ea0746f7793d0b45d2c467"
                     },
                     {
+                      "description": "Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.",
                       "key": "file_type",
-                      "value": "json"
+                      "value": "xml"
                     },
                     {
+                      "description": "Semicolon-separated list of tag names to require.",
                       "key": "tag_names",
-                      "value": "monthly;usa"
+                      "value": "<string>"
                     },
                     {
+                      "description": "Semicolon-separated list of tag names to exclude.",
                       "key": "exclude_tag_names",
-                      "value": "discontinued"
+                      "value": "<string>"
                     },
                     {
+                      "description": "Start of the real-time period (YYYY-MM-DD). Defaults to today.",
                       "key": "realtime_start",
-                      "value": "2026-05-28"
+                      "value": "<date>"
                     },
                     {
+                      "description": "End of the real-time period (YYYY-MM-DD). Defaults to today.",
                       "key": "realtime_end",
-                      "value": "2026-05-28"
+                      "value": "<date>"
                     },
                     {
+                      "description": "Maximum number of results to return (1\u20131000).",
                       "key": "limit",
-                      "value": "100"
+                      "value": "1000"
                     },
                     {
+                      "description": "Non-negative integer offset into the result set for pagination.",
                       "key": "offset",
                       "value": "0"
                     },
                     {
+                      "description": "Field to order series results by.",
                       "key": "order_by",
-                      "value": "<string>"
+                      "value": "observation_start"
                     },
                     {
+                      "description": "Sort order. asc (ascending, default) or desc (descending).",
                       "key": "sort_order",
                       "value": "asc"
-                    },
+                    }
+                  ]
+                },
+                "description": "Get the series matching all of the supplied tags."
+              },
+              "response": [
+                {
+                  "id": "c72981ea-9e3f-4a78-b1d0-01773b24f9f2",
+                  "name": "Series matching the tags.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tags/series?api_key=<API Key>&file_type=xml&tag_names=<string>&exclude_tag_names=<string>&realtime_start=<date>&realtime_end=<date>&limit=1000&offset=0&order_by=observation_start&sort_order=asc",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tags",
+                        "series"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) 32-character lower-case alphanumeric FRED API key.",
+                          "key": "api_key",
+                          "value": "<API Key>"
+                        },
+                        {
+                          "description": "Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.",
+                          "key": "file_type",
+                          "value": "xml"
+                        },
+                        {
+                          "description": "Semicolon-separated list of tag names to require.",
+                          "key": "tag_names",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Semicolon-separated list of tag names to exclude.",
+                          "key": "exclude_tag_names",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Start of the real-time period (YYYY-MM-DD). Defaults to today.",
+                          "key": "realtime_start",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "End of the real-time period (YYYY-MM-DD). Defaults to today.",
+                          "key": "realtime_end",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "Maximum number of results to return (1\u20131000).",
+                          "key": "limit",
+                          "value": "1000"
+                        },
+                        {
+                          "description": "Non-negative integer offset into the result set for pagination.",
+                          "key": "offset",
+                          "value": "0"
+                        },
+                        {
+                          "description": "Field to order series results by.",
+                          "key": "order_by",
+                          "value": "observation_start"
+                        },
+                        {
+                          "description": "Sort order. asc (ascending, default) or desc (descending).",
+                          "key": "sort_order",
+                          "value": "asc"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
                     {
-                      "key": "api_key",
-                      "value": "<API Key>"
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
                   ],
-                  "variable": []
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"seriess\": [\n    {\n      \"id\": \"<string>\",\n      \"title\": \"<string>\",\n      \"realtime_start\": \"<date>\",\n      \"realtime_end\": \"<date>\",\n      \"observation_start\": \"<date>\",\n      \"observation_end\": \"<date>\",\n      \"frequency\": \"<string>\",\n      \"frequency_short\": \"<string>\",\n      \"units\": \"<string>\",\n      \"units_short\": \"<string>\",\n      \"seasonal_adjustment\": \"<string>\",\n      \"seasonal_adjustment_short\": \"<string>\",\n      \"last_updated\": \"<string>\",\n      \"popularity\": \"<integer>\",\n      \"group_popularity\": \"<integer>\",\n      \"notes\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"title\": \"<string>\",\n      \"realtime_start\": \"<date>\",\n      \"realtime_end\": \"<date>\",\n      \"observation_start\": \"<date>\",\n      \"observation_end\": \"<date>\",\n      \"frequency\": \"<string>\",\n      \"frequency_short\": \"<string>\",\n      \"units\": \"<string>\",\n      \"units_short\": \"<string>\",\n      \"seasonal_adjustment\": \"<string>\",\n      \"seasonal_adjustment_short\": \"<string>\",\n      \"last_updated\": \"<string>\",\n      \"popularity\": \"<integer>\",\n      \"group_popularity\": \"<integer>\",\n      \"notes\": \"<string>\"\n    }\n  ],\n  \"realtime_start\": \"<date>\",\n  \"realtime_end\": \"<date>\",\n  \"order_by\": \"<string>\",\n  \"sort_order\": \"<string>\",\n  \"count\": \"<integer>\",\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T02:30:23.000Z",
+                  "updatedAt": "2026-10-22T02:30:23.000Z",
+                  "uid": "35240-c72981ea-9e3f-4a78-b1d0-01773b24f9f2"
+                }
+              ],
+              "createdAt": "2026-10-22T02:30:23.000Z",
+              "updatedAt": "2026-10-22T02:30:23.000Z",
+              "uid": "35240-f4aee49b-1585-427d-ba41-afb71fb9642d"
+            }
+          ],
+          "id": "3fbed871-71d7-4148-a173-c3c93a1d70d2",
+          "createdAt": "2026-10-22T02:30:23.000Z",
+          "updatedAt": "2026-10-22T02:30:23.000Z",
+          "uid": "35240-3fbed871-71d7-4148-a173-c3c93a1d70d2"
+        },
+        {
+          "name": "FRED Get FRED Tags",
+          "id": "59c8a174-bb9d-4a74-91d9-65a042d65f8d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/tags?api_key=6ac5bd3b04ea0746f7793d0b45d2c467&file_type=xml&realtime_start=<date>&realtime_end=<date>&tag_names=<string>&tag_group_id=geo&search_text=<string>&limit=1000&offset=0&order_by=series_count&sort_order=asc",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "tags"
+              ],
+              "query": [
+                {
+                  "description": "(Required) 32-character lower-case alphanumeric FRED API key.",
+                  "key": "api_key",
+                  "value": "6ac5bd3b04ea0746f7793d0b45d2c467"
                 },
+                {
+                  "description": "Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.",
+                  "key": "file_type",
+                  "value": "xml"
+                },
+                {
+                  "description": "Start of the real-time period (YYYY-MM-DD). Defaults to today.",
+                  "key": "realtime_start",
+                  "value": "<date>"
+                },
+                {
+                  "description": "End of the real-time period (YYYY-MM-DD). Defaults to today.",
+                  "key": "realtime_end",
+                  "value": "<date>"
+                },
+                {
+                  "description": "Semicolon-separated list of tag names to require.",
+                  "key": "tag_names",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Group identifier for tags \u2014 freq, gen, geo, geot, rls, seas, src.",
+                  "key": "tag_group_id",
+                  "value": "geo"
+                },
+                {
+                  "description": "Words to match against tag names and descriptions.",
+                  "key": "search_text",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Maximum number of results to return (1\u20131000).",
+                  "key": "limit",
+                  "value": "1000"
+                },
+                {
+                  "description": "Non-negative integer offset into the result set for pagination.",
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "description": "Field to order tag results by.",
+                  "key": "order_by",
+                  "value": "series_count"
+                },
+                {
+                  "description": "Sort order. asc (ascending, default) or desc (descending).",
+                  "key": "sort_order",
+                  "value": "asc"
+                }
+              ]
+            },
+            "description": "Get FRED tags. Optionally filtered by tag names, group_id, or search text."
+          },
+          "response": [
+            {
+              "id": "c8370808-06ed-4a94-a2d3-bd42a6be0ac3",
+              "name": "List of tags.",
+              "originalRequest": {
+                "method": "GET",
                 "header": [
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/tags?api_key=<API Key>&file_type=xml&realtime_start=<date>&realtime_end=<date>&tag_names=<string>&tag_group_id=geo&search_text=<string>&limit=1000&offset=0&order_by=series_count&sort_order=asc",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tags"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) 32-character lower-case alphanumeric FRED API key.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.",
+                      "key": "file_type",
+                      "value": "xml"
+                    },
+                    {
+                      "description": "Start of the real-time period (YYYY-MM-DD). Defaults to today.",
+                      "key": "realtime_start",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "End of the real-time period (YYYY-MM-DD). Defaults to today.",
+                      "key": "realtime_end",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Semicolon-separated list of tag names to require.",
+                      "key": "tag_names",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Group identifier for tags \u2014 freq, gen, geo, geot, rls, seas, src.",
+                      "key": "tag_group_id",
+                      "value": "geo"
+                    },
+                    {
+                      "description": "Words to match against tag names and descriptions.",
+                      "key": "search_text",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of results to return (1\u20131000).",
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "description": "Non-negative integer offset into the result set for pagination.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Field to order tag results by.",
+                      "key": "order_by",
+                      "value": "series_count"
+                    },
+                    {
+                      "description": "Sort order. asc (ascending, default) or desc (descending).",
+                      "key": "sort_order",
+                      "value": "asc"
+                    }
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"realtime_start\": \"2026-05-28\",\n  \"realtime_end\": \"2026-05-28\",\n  \"order_by\": \"series_id\",\n  \"sort_order\": \"asc\",\n  \"count\": 1,\n  \"offset\": 0,\n  \"limit\": 1000,\n  \"seriess\": [\n    {\n      \"id\": \"UNRATE\",\n      \"realtime_start\": \"2026-05-28\",\n      \"realtime_end\": \"2026-05-28\",\n      \"title\": \"Unemployment Rate\",\n      \"observation_start\": \"1948-01-01\",\n      \"observation_end\": \"2026-04-01\",\n      \"frequency\": \"Monthly\",\n      \"frequency_short\": \"M\",\n      \"units\": \"Percent\",\n      \"units_short\": \"%\",\n      \"seasonal_adjustment\": \"Seasonally Adjusted\",\n      \"seasonal_adjustment_short\": \"SA\",\n      \"last_updated\": \"2026-05-02 07:46:10-05\",\n      \"popularity\": 95,\n      \"group_popularity\": 95,\n      \"notes\": \"The unemployment rate represents the number of unemployed as a percentage of the labor force.\"\n    }\n  ]\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"tags\": [\n    {\n      \"name\": \"<string>\",\n      \"group_id\": \"<string>\",\n      \"notes\": \"<string>\",\n      \"created\": \"<string>\",\n      \"popularity\": \"<integer>\",\n      \"series_count\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"group_id\": \"<string>\",\n      \"notes\": \"<string>\",\n      \"created\": \"<string>\",\n      \"popularity\": \"<integer>\",\n      \"series_count\": \"<integer>\"\n    }\n  ],\n  \"realtime_start\": \"<date>\",\n  \"realtime_end\": \"<date>\",\n  \"order_by\": \"<string>\",\n  \"sort_order\": \"<string>\",\n  \"count\": \"<integer>\",\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\"\n}",
+              "createdAt": "2026-10-22T02:30:23.000Z",
+              "updatedAt": "2026-10-22T02:30:23.000Z",
+              "uid": "35240-c8370808-06ed-4a94-a2d3-bd42a6be0ac3"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T02:30:23.000Z",
+          "updatedAt": "2026-10-22T02:30:23.000Z",
+          "uid": "35240-59c8a174-bb9d-4a74-91d9-65a042d65f8d"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
+      "id": "8044a302-750e-4705-875d-e9de2ec6bff2",
+      "createdAt": "2026-10-22T02:30:23.000Z",
+      "updatedAt": "2026-10-22T02:30:23.000Z",
+      "uid": "35240-8044a302-750e-4705-875d-e9de2ec6bff2"
+    },
     {
-      "type": "string",
-      "value": "https://api.stlouisfed.org/geofred",
-      "key": "baseUrl"
+      "name": "related_tags",
+      "item": [
+        {
+          "name": "FRED Get the Related FRED Tags for One or More FRED Tags",
+          "id": "9c9f292a-1061-414e-94ff-1ce7dd2bfb23",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/related_tags?api_key=6ac5bd3b04ea0746f7793d0b45d2c467&file_type=xml&realtime_start=<date>&realtime_end=<date>&tag_names=<string>&exclude_tag_names=<string>&tag_group_id=geo&search_text=<string>&limit=1000&offset=0&order_by=series_count&sort_order=asc",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "related_tags"
+              ],
+              "query": [
+                {
+                  "description": "(Required) 32-character lower-case alphanumeric FRED API key.",
+                  "key": "api_key",
+                  "value": "6ac5bd3b04ea0746f7793d0b45d2c467"
+                },
+                {
+                  "description": "Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.",
+                  "key": "file_type",
+                  "value": "xml"
+                },
+                {
+                  "description": "Start of the real-time period (YYYY-MM-DD). Defaults to today.",
+                  "key": "realtime_start",
+                  "value": "<date>"
+                },
+                {
+                  "description": "End of the real-time period (YYYY-MM-DD). Defaults to today.",
+                  "key": "realtime_end",
+                  "value": "<date>"
+                },
+                {
+                  "description": "Semicolon-separated list of tag names to require.",
+                  "key": "tag_names",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Semicolon-separated list of tag names to exclude.",
+                  "key": "exclude_tag_names",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Group identifier for tags \u2014 freq, gen, geo, geot, rls, seas, src.",
+                  "key": "tag_group_id",
+                  "value": "geo"
+                },
+                {
+                  "description": "Words to match against tag names and descriptions.",
+                  "key": "search_text",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Maximum number of results to return (1\u20131000).",
+                  "key": "limit",
+                  "value": "1000"
+                },
+                {
+                  "description": "Non-negative integer offset into the result set for pagination.",
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "description": "Field to order tag results by.",
+                  "key": "order_by",
+                  "value": "series_count"
+                },
+                {
+                  "description": "Sort order. asc (ascending, default) or desc (descending).",
+                  "key": "sort_order",
+                  "value": "asc"
+                }
+              ]
+            },
+            "description": "Get the related FRED tags for one or more FRED tags. Related tags are tags assigned to series that also have all of the tag_names tags."
+          },
+          "response": [
+            {
+              "id": "2f17c757-17cb-4e80-9305-e686d162c4c7",
+              "name": "Related tags.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/related_tags?api_key=<API Key>&file_type=xml&realtime_start=<date>&realtime_end=<date>&tag_names=<string>&exclude_tag_names=<string>&tag_group_id=geo&search_text=<string>&limit=1000&offset=0&order_by=series_count&sort_order=asc",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "related_tags"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) 32-character lower-case alphanumeric FRED API key.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "Response format. xml (default) or json. The observations endpoint additionally accepts xlsx and csv.",
+                      "key": "file_type",
+                      "value": "xml"
+                    },
+                    {
+                      "description": "Start of the real-time period (YYYY-MM-DD). Defaults to today.",
+                      "key": "realtime_start",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "End of the real-time period (YYYY-MM-DD). Defaults to today.",
+                      "key": "realtime_end",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Semicolon-separated list of tag names to require.",
+                      "key": "tag_names",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Semicolon-separated list of tag names to exclude.",
+                      "key": "exclude_tag_names",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Group identifier for tags \u2014 freq, gen, geo, geot, rls, seas, src.",
+                      "key": "tag_group_id",
+                      "value": "geo"
+                    },
+                    {
+                      "description": "Words to match against tag names and descriptions.",
+                      "key": "search_text",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of results to return (1\u20131000).",
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "description": "Non-negative integer offset into the result set for pagination.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Field to order tag results by.",
+                      "key": "order_by",
+                      "value": "series_count"
+                    },
+                    {
+                      "description": "Sort order. asc (ascending, default) or desc (descending).",
+                      "key": "sort_order",
+                      "value": "asc"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"tags\": [\n    {\n      \"name\": \"<string>\",\n      \"group_id\": \"<string>\",\n      \"notes\": \"<string>\",\n      \"created\": \"<string>\",\n      \"popularity\": \"<integer>\",\n      \"series_count\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"group_id\": \"<string>\",\n      \"notes\": \"<string>\",\n      \"created\": \"<string>\",\n      \"popularity\": \"<integer>\",\n      \"series_count\": \"<integer>\"\n    }\n  ],\n  \"realtime_start\": \"<date>\",\n  \"realtime_end\": \"<date>\",\n  \"order_by\": \"<string>\",\n  \"sort_order\": \"<string>\",\n  \"count\": \"<integer>\",\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\"\n}",
+              "createdAt": "2026-10-22T02:30:23.000Z",
+              "updatedAt": "2026-10-22T02:30:23.000Z",
+              "uid": "35240-2f17c757-17cb-4e80-9305-e686d162c4c7"
+            }
+          ],
+          "createdAt": "2026-10-22T02:30:23.000Z",
+          "updatedAt": "2026-10-22T02:30:23.000Z",
+          "uid": "35240-9c9f292a-1061-414e-94ff-1ce7dd2bfb23"
+        }
+      ],
+      "id": "d99c751b-54fa-4dd1-a9ab-c24327b063d4",
+      "createdAt": "2026-10-22T02:30:23.000Z",
+      "updatedAt": "2026-10-22T02:30:23.000Z",
+      "uid": "35240-d99c751b-54fa-4dd1-a9ab-c24327b063d4"
     }
   ],
   "auth": {
@@ -585,25 +591,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "api_key"
+        "value": "api_key",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "query"
+        "value": "query",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "d99848ee-57fb-47f5-9b5c-d0501dfa20c8",
-    "name": "FRED Maps API (GeoFRED) Categories Tags API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "GeoFRED (the FRED Maps API) exposes geographic / regional views of FRED economic data. Series-group metadata, regional-data lookups across geographies (state, county, MSA, country, census tract, etc.), and GeoJSON shape files for cartographic rendering of FRED indicators.\n\nContact Support:\n Name: Federal Reserve Bank of St. Louis — Research Division",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.stlouisfed.org/fred"
     }
-  }
+  ]
 }
